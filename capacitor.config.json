@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Anikultura",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

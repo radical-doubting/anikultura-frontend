@@ -1,0 +1,7 @@
+{
+  "name": "Anikultura",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
