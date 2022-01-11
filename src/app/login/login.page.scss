@@ -1,0 +1,43 @@
+#ani-wrapper{
+    display:flex; 
+    justify-content: center; 
+    height:100%;
+    align-items: center;
+    margin: 10px;
+}
+
+#ani-title{
+    color: #293d26; 
+    font-weight:bold;
+    font-size: 2rem;
+}
+
+#ani-loginContainer{
+    width: 700px; 
+    text-align: center; 
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px; 
+}
+
+ion-content {
+    --background: none;
+    background-image: url('https://i.imgur.com/mtRUSRM.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#ani-login-banner{
+    height:250px;
+    width:100%;
+    background-image:url('https://i.imgur.com/jiJEYjS.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+ion-button{
+    --background: none;
+    background-color: #293d26
+}
