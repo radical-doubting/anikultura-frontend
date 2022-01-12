@@ -50,3 +50,5 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 }
+
+export class LoginPageModule {}
