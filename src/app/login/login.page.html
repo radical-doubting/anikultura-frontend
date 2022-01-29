@@ -1,18 +1,33 @@
-<!-- dummy login page -->
-<ion-content class="ion-padding ion-text-center">
-
-  <div class="logo">
-    <img src='https://www.graphicsprings.com/filestorage/stencils/f2e14a87e3a9fd5f13f3beeb05b3f6b3.png?width=300&height=300'>
+<ion-content>
+  <div id="ani-wrapper">
+    <ion-card style="width: 500px"> 
+      <div id="ani-login-banner">
+      </div>
+        <ion-card-content style="padding: 10px">
+        <form style="text-align: center;" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm" novalidate>
+          <h2 id="ani-title">Anikultura</h2>
+          <ion-item lines="full">
+            <ion-label position="floating">Username</ion-label>
+            <ion-input type="text" name="username" [(ngModel)]="form.username" required
+            #username="ngModel"></ion-input>
+          </ion-item>
+  
+          <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" name="password" [(ngModel)]="form.password" minlength="6"
+            #password="ngModel"required></ion-input>
+          </ion-item>
+  
+          <ion-row>
+            <ion-col style="display:flex;justify-content: center;">
+              <ion-button type="submit" color="primary" expand="block"
+              style="height: 40px; width: 250px;">Sign In</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
 
-  <ion-item lines="none">
-    <ion-input placeholder='Enter email'></ion-input>
-  </ion-item>
-
-  <ion-item lines="none">
-    <ion-input placeholder='Password' type='password'></ion-input>
-  </ion-item>
-
-  <ion-button color='dark' expand='block'>This is a test</ion-button>
-  
 </ion-content>
