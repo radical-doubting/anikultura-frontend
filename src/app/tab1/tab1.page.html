@@ -1,20 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Dashboard
+      Anikultura
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
-  <ion-card>
-    <img src="https://cdn.theculturetrip.com/wp-content/uploads/2018/02/madison-1809576_1280.jpg" />
-      <ion-card-header>
-        <ion-card-subtitle>Destination</ion-card-subtitle>
-        <ion-card-title>Madison, WI</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+<ion-content>
+  <div id="ani-wrapper">
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px"> 
+      <ion-card-content style="padding: 10px; text-align: center;">
+        <ion-item>
+          <ion-select style="color: #242424; font-size: 2rem; font-weight: bold">
+            <ion-select-option value="brown" selected>Tibay Community Farm</ion-select-option>
+            <ion-select-option value="blonde">Masagana High School</ion-select-option>
+            <ion-select-option value="black">Marquez Farmlalnd</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <img src="https://i.imgur.com/yuFV3uX.png" />
+        <button id="aniButton">Nakuha ko na ang starter kit</button>
       </ion-card-content>
-  </ion-card>
+    </ion-card>
+  </div>
+  <div id="ani-wrapper" style="margin-top:-10px">
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;"> 
+      <ion-card-content style="padding: 10px">
+        <h1>Mga ginawa</h1> 
+        <ion-grid style="background-color: #cfcfcf;border-radius: 50px;padding: 10px; margin-bottom: 10px">
+          <ion-row>
+            <ion-col style="color:#494949;font-weight: bold;">
+              0. Wala pa siyang ginagawa haha wtf
+            </ion-col>
+            <ion-col style="text-align: right">
+              Wala pa nga, 2022<br>6:09AM
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+  
