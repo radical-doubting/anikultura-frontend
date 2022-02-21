@@ -5,9 +5,9 @@ import { TokenStorageService } from '../_services/token-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.css']
+  styleUrls: ['./login.page.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginPage implements OnInit {
   form: any = {
     username: null,
     password: null
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(public authService: AuthService, private tokenStorage: TokenStorageService) {} // add user service here gab
+  // constructor(private authService: AuthService, ) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {

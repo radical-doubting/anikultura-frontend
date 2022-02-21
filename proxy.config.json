@@ -1,8 +1,8 @@
 {
-    "/api/":{
-        "target": "https://ani-be-stg.herokuapp.com/api/",
-        "secure": false,
-        "changeOrigin": true 
+  "/api/":{
+      "target": "https://ani-be-stg.herokuapp.com/api/",
+      "secure": false,
+      "changeOrigin": true
 
-    }
+  }
 }
