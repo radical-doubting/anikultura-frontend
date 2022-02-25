@@ -17,8 +17,9 @@ export class LoginPage implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(public authService: AuthService, private tokenStorage: TokenStorageService) {} // add user service here gab
-  // constructor(private authService: AuthService, ) { }
+  constructor(
+    public authService: AuthService,
+    private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
