@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   private farmlands: Farmland[];
   private currentFarmland: Farmland;
   private currentSeedStage: SeedStage;
+  private nextSeedStage: SeedStage | null;
   private currentSeedStageImagePath: string;
 
   private submittedFarmerReports: FarmerReport[];
@@ -43,17 +44,19 @@ export class HomePage implements OnInit {
       farmland: ['', Validators.required],
     });
 
-    this.cropService.getCurrentSeedStage().subscribe((data) => {
-      this.currentSeedStage = data;
-      this.currentSeedStageImagePath = this.cropService.getSeedStageImagePath(
-        this.currentSeedStage
-      );
-    });
+    this.farmerReportForm
+      .get('farmland')
+      .valueChanges.subscribe((selectedFarmlandId) => {
+        const selectedFarmland = this.getFarmland(selectedFarmlandId);
+        this.retrieveSeedStage(selectedFarmland);
+      });
 
     this.farmlandService.getFarmlands().subscribe((data) => {
       const firstFarmland = data[0];
       this.farmlands = data;
       this.currentFarmland = firstFarmland;
+
+      this.retrieveSeedStage(firstFarmland);
 
       this.farmerReportForm.patchValue({
         farmland: firstFarmland.id,
@@ -70,6 +73,7 @@ export class HomePage implements OnInit {
 
   public onFarmlandSelectChange(selectedFarmland: Farmland) {
     this.currentFarmland = selectedFarmland;
+    this.retrieveSeedStage(selectedFarmland);
   }
 
   public addPhotoToGallery() {
@@ -78,6 +82,10 @@ export class HomePage implements OnInit {
 
   public hasPlantedFarmerReport(): boolean {
     return this.plantedFarmerReport !== null;
+  }
+
+  public getFarmland(id: number): Farmland {
+    return this.farmlands.find((farmland) => farmland.id === id);
   }
 
   public getPlantedFarmerReport(
@@ -89,6 +97,29 @@ export class HomePage implements OnInit {
       }
     }
     return null;
+  }
+
+  public getTranslatedCurrentSeedStageName(): string {
+    return this.cropService.translateSeedStagePastTense(this.currentSeedStage);
+  }
+
+  public getTranslatedNextSeedStageName(): string {
+    return this.cropService.translateSeedStageFutureTense(this.nextSeedStage);
+  }
+
+  private retrieveSeedStage(farmland: Farmland) {
+    this.cropService.getCurrentSeedStage(farmland).subscribe((data) => {
+      this.currentSeedStage = data;
+      this.currentSeedStageImagePath =
+        this.cropService.getSeedStageImagePath(data);
+      this.retrieveNextSeedStage(data);
+    });
+  }
+
+  private retrieveNextSeedStage(currentSeedStage: SeedStage) {
+    this.cropService.getNextSeedStage(currentSeedStage).subscribe((data) => {
+      this.nextSeedStage = data;
+    });
   }
 
   private computeEstimates(): void {
