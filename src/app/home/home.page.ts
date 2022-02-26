@@ -96,15 +96,16 @@ export class HomePage implements OnInit {
       return;
     }
     const {
+      estimatedProfit,
+      estimatedYieldAmount,
       estimatedYieldDateEarliest,
       estimatedYieldDateLatest,
-      estimatedYieldAmount,
     } = this.plantedFarmerReport;
 
+    this.estimatedProfit = estimatedProfit;
+    this.estimatedYieldAmount = estimatedYieldAmount;
     this.estimatedYieldDateEarliest = estimatedYieldDateEarliest;
     this.estimatedYieldDateLatest = estimatedYieldDateLatest;
-    this.estimatedProfit = 0;
-    this.estimatedYieldAmount = estimatedYieldAmount;
 
     this.estimatedYieldDayEarliest = this.getDaysFromNowToDate(
       new Date(estimatedYieldDateEarliest)

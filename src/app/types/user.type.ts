@@ -9,9 +9,11 @@ export class User {
 }
 
 export class UserProfile {
+  isTutorialDone: boolean;
   gender: string;
   birthday: string;
   age: number;
   affiliatedOrganization: string;
   tesdaTrainingJoined: string;
+  joinedAt: string;
 }

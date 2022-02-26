@@ -12,6 +12,7 @@ export class FarmerReport {
   id: number;
   isVerified: boolean;
   verifier?: Verifier;
+  estimatedProfit?: number;
   estimatedYieldAmount?: number;
   estimatedYieldDateEarliest?: string;
   estimatedYieldDateLatest?: string;
