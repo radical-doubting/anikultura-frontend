@@ -1,28 +1,26 @@
 <ion-content>
   <div id="ani-wrapper">
-    <ion-card style="width: 500px"> 
+    <ion-card style="width: 500px">
       <div id="ani-login-banner">
       </div>
-        <ion-card-content style="padding: 10px">
-        <form style="text-align: center;" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm" novalidate>
+      <ion-card-content style="padding: 10px">
+        <form style="text-align: center;" [formGroup]="loginForm" (submit)="onSubmit(loginBtn)">
           <h2 id="ani-title">Anikultura</h2>
           <ion-item lines="full">
             <ion-label position="floating">Username</ion-label>
-            <ion-input type="text" name="username" [(ngModel)]="form.username" required
-            #username="ngModel"></ion-input>
+            <ion-input type="text" name="username" formControlName="username"></ion-input>
           </ion-item>
-  
+
           <ion-item lines="full">
             <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" name="password" [(ngModel)]="form.password" minlength="6"
-            #password="ngModel"required></ion-input>
+            <ion-input type="password" name="password" formControlName="password"></ion-input>
           </ion-item>
-  
+
           <ion-row>
             <ion-col style="display:flex;justify-content: center;">
-              <ion-button type="submit" color="primary" expand="block"
-              style="height: 40px; width: 250px;">Sign In</ion-button>
+              <ion-button #loginBtn type="submit" color="primary" expand="block" style="height: 40px; width: 250px;">
+                Sign In
+              </ion-button>
             </ion-col>
           </ion-row>
         </form>

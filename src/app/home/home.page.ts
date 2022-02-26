@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PhotoService } from '../_services/photo.service';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-home',

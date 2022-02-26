@@ -1,55 +1,71 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { first } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { LoginBody } from '../types/auth-payload.type';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
+  private loginForm: FormGroup;
+  private isSubmitted: boolean;
+  private returnUrl = '/dashboard/home';
 
   constructor(
-    public authService: AuthService,
-    private tokenStorage: TokenStorageService) {}
+    private router: Router,
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private toastController: ToastController
+  ) {}
 
-  ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
-  }
+  public ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
 
-  onSubmit(): void {
-    const { username, password } = this.form;
-
-    this.authService.login(username, password).subscribe({
-      next: data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
+    this.authService.isLoggedIn().subscribe(async (value) => {
+      if (value) {
+        await this.toast('You are already logged in!');
+        this.router.navigateByUrl(this.returnUrl);
       }
     });
   }
 
-  reloadPage(): void {
-    window.location.reload();
+  public onSubmit(loginButton: HTMLButtonElement): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    loginButton.disabled = true;
+
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(first())
+      .subscribe(
+        async (data) => {
+          this.router.navigateByUrl(this.returnUrl);
+          await this.toast('Successfully logged in!');
+        },
+        async (error) => {
+          loginButton.disabled = false;
+          await this.toast('Failed to login!');
+        }
+      );
+  }
+
+  private async toast(message: string, duration = 2000): Promise<void> {
+    const toast = await this.toastController.create({
+      message,
+      duration,
+    });
+
+    await toast.present();
   }
 }
 
