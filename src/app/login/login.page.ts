@@ -37,8 +37,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-  public onSubmit(loginButton: HTMLButtonElement): void {
+  public async onSubmit(loginButton: HTMLButtonElement): Promise<void> {
     if (this.loginForm.invalid) {
+      await this.toast('Login page missing some fields!');
       return;
     }
 

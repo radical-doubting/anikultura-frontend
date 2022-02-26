@@ -5,4 +5,13 @@ export class User {
   middleName: string;
   lastName: string;
   contactNumber?: string;
+  profile: UserProfile;
+}
+
+export class UserProfile {
+  gender: string;
+  birthday: string;
+  age: number;
+  affiliatedOrganization: string;
+  tesdaTrainingJoined: string;
 }

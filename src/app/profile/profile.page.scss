@@ -1,0 +1,61 @@
+#ani-wrapper {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    margin: 10px;
+}
+
+#ani-loginContainer {
+    width: 700px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+ion-content {
+    background-color: #e5e5e5;
+}
+
+h1 {
+    margin: 10px;
+    color: #293d26;
+    font-weight: bold;
+}
+
+#ani-avatar {
+    background-image:url("../../assets/icon/farmer-profile-icon.png");
+    background-position: center;
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    margin-top: -70px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+#ani-cover {
+    width: 100%;
+    height: 100px;
+    background-color: #293d26;
+    z-index: -1;
+}
+
+#ani-profile-header-info{
+    text-align: center;
+}
+
+#aniButton {
+    background-color: #293d26; /* Green */
+    border-radius: 50px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

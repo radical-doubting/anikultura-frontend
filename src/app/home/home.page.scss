@@ -1,25 +1,25 @@
-#ani-wrapper{
-    display: flex; 
-    justify-content: center; 
-    height:fit-content;
+#ani-wrapper {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
     margin: 10px;
 }
 
-#ani-loginContainer{
-    width: 700px; 
-    text-align: center; 
+#ani-loginContainer {
+    width: 700px;
+    text-align: center;
     padding: 10px;
     background-color: #fff;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
 
-ion-content{
+ion-content {
     background-color: #e5e5e5;
 }
 
 #aniButton {
     background-color: #293d26; /* Green */
-    border-radius:50px;
+    border-radius: 50px;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -30,8 +30,13 @@ ion-content{
     margin-bottom: 10px;
 }
 
-h1{
+h1 {
     margin: 10px;
     color: #293d26;
     font-weight: bold;
+}
+
+ion-select-option {
+    width: 500px !important;
+    max-width: 600px !important;
 }
