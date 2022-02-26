@@ -31,7 +31,7 @@
     </ion-card>
   </div>
 
-  <div id="ani-wrapper" style="margin-top:-10px">
+  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasPlantedFarmerReport()">
     <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
       <ion-card-content style="padding: 10px">
         <h1>Mga inaasahan</h1>
@@ -39,7 +39,8 @@
         </ion-item-divider>
 
         <div class="ani-content" style="text-align: center; margin-bottom: 2em;">
-          <h1 style="font-size:50px; line-height: 50px; color:#242424">48 - 72 na araw</h1>
+          <h1 style="font-size:50px; line-height: 50px; color:#242424">{{ estimatedYieldDayEarliest }} - {{
+            estimatedYieldDayLatest }} na araw</h1>
           <p>Bago mamunga ang iyong mga pananim</p>
         </div>
 
@@ -48,13 +49,13 @@
             <ion-col>
               <ion-chip>
                 <ion-icon name="cart" color="primary"></ion-icon>
-                <ion-label>Inaasahang kita: ₱42,069</ion-label>
+                <ion-label>Inaasahang kita: {{ estimatedProfit | currency:'PHP'}}</ion-label>
               </ion-chip>
             </ion-col>
             <ion-col style="text-align: right">
               <ion-chip>
                 <ion-icon name="speedometer" color="primary"></ion-icon>
-                <ion-label>Inaasahang bunga: 72 kg</ion-label>
+                <ion-label>Inaasahang bunga: {{ estimatedYieldAmount | number:'1.0':'en-US' }} kg</ion-label>
               </ion-chip>
             </ion-col>
           </ion-row>
@@ -73,7 +74,8 @@
           <ion-row *ngFor="let farmerReport of submittedFarmerReports; let i = index">
             <ion-col style="color:#202020;font-weight: bold;">
               <div *ngIf="farmerReport.isVerified; else unverified">
-                <span class="text">
+                <span class="text"
+                  title="{{ 'Ang itong report ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}">
                   {{ i + 1 }}.
                   {{ farmerReport.seedStage.name }}
                   <ion-icon name="checkmark-circle" color="primary"></ion-icon>
@@ -81,7 +83,7 @@
               </div>
 
               <ng-template #unverified>
-                <span class="text">
+                <span class="text" title="Ang itong report ay hindi pa nasusuri">
                   {{ i + 1 }}.
                   {{ farmerReport.seedStage.name }}
                   <ion-icon title="unverified" name="checkmark-circle-outline" color="primary"></ion-icon>

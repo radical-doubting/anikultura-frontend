@@ -13,6 +13,10 @@
     border-radius: 20px;
 }
 
+ion-icon {
+    pointer-events: none;
+}
+
 ion-content {
     background-color: #e5e5e5;
 }

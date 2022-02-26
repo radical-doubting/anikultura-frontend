@@ -21,6 +21,14 @@ export class HomePage implements OnInit {
   private currentSeedStageImagePath: string;
 
   private submittedFarmerReports: FarmerReport[];
+  private plantedFarmerReport: FarmerReport;
+
+  private estimatedYieldDateEarliest: string;
+  private estimatedYieldDateLatest: string;
+  private estimatedYieldDayEarliest: number;
+  private estimatedYieldDayLatest: number;
+  private estimatedProfit: number;
+  private estimatedYieldAmount: number;
 
   constructor(
     private photoService: PhotoService,
@@ -54,15 +62,22 @@ export class HomePage implements OnInit {
 
     this.farmerReportService.getFarmerReports().subscribe((data) => {
       this.submittedFarmerReports = data;
+      this.plantedFarmerReport = this.getPlantedFarmerReport(data);
+
+      this.computeEstimates();
     });
   }
 
-  public onSelectChange(selectedFarmland: Farmland) {
+  public onFarmlandSelectChange(selectedFarmland: Farmland) {
     this.currentFarmland = selectedFarmland;
   }
 
   public addPhotoToGallery() {
     this.photoService.addNewToGallery();
+  }
+
+  public hasPlantedFarmerReport(): boolean {
+    return this.plantedFarmerReport !== null;
   }
 
   public getPlantedFarmerReport(
@@ -74,5 +89,45 @@ export class HomePage implements OnInit {
       }
     }
     return null;
+  }
+
+  private computeEstimates(): void {
+    if (!this.hasPlantedFarmerReport()) {
+      return;
+    }
+    const {
+      estimatedYieldDateEarliest,
+      estimatedYieldDateLatest,
+      estimatedYieldAmount,
+    } = this.plantedFarmerReport;
+
+    this.estimatedYieldDateEarliest = estimatedYieldDateEarliest;
+    this.estimatedYieldDateLatest = estimatedYieldDateLatest;
+    this.estimatedProfit = 0;
+    this.estimatedYieldAmount = estimatedYieldAmount;
+
+    this.estimatedYieldDayEarliest = this.getDaysFromNowToDate(
+      new Date(estimatedYieldDateEarliest)
+    );
+
+    this.estimatedYieldDayLatest = this.getDaysFromNowToDate(
+      new Date(estimatedYieldDateLatest)
+    );
+  }
+
+  private getDaysFromNowToDate(date: Date): number {
+    const currentDate = new Date();
+
+    const diff = Math.floor(
+      (Date.UTC(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate()
+      ) -
+        Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) /
+        (1000 * 60 * 60 * 24)
+    );
+
+    return Math.abs(diff);
   }
 }
