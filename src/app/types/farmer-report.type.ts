@@ -8,6 +8,11 @@ export class Verifier {
   lastName: string;
 }
 
+export class FarmerReportPhoto {
+  filePath: string;
+  webviewPath: string;
+}
+
 export class FarmerReport {
   id: number;
   isVerified: boolean;
@@ -25,6 +30,6 @@ export class FarmerReportBody {
   farmerReport: {
     farmlandId: number;
     cropId: number;
-    volumeKg: number;
+    volumeKg?: number;
   };
 }

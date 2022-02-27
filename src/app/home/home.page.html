@@ -27,9 +27,9 @@
         <img [src]="currentSeedStageImagePath"
           style="max-height: 320px; padding-left: 2em; padding-right: 2em; padding-bottom: 1em;" />
 
-        <p style="margin-bottom: 0.75em">Ang susunod na hakbang ay</p>
+        <p style="margin-bottom: 0.75em">Maari kang magpatuloy kung</p>
 
-        <button *ngIf="nextSeedStage" id="aniButton" (click)="addPhotoToGallery()">
+        <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()">
           {{ getTranslatedNextSeedStageName() }}
         </button>
 

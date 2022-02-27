@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { HomeRoutingModule } from './home-routing.module';
+import { SubmitReportModalPage } from './modal/submit-report-modal.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, SubmitReportModalPage],
 })
 export class HomeModule {}

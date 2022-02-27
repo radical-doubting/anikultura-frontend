@@ -43,9 +43,9 @@ export class CropService {
   public translateSeedStagePastTense({ slug }: SeedStage): string {
     switch (slug) {
       case 'starter-kit-received':
-        return 'Nakuha ko na ang Starter Kit';
+        return 'Nakuha na ang Starter Kit';
       case 'seeds-planted':
-        return 'Natanim ko na ang mga buto';
+        return 'Natanim na ang mga buto';
       case 'seeds-established':
         return 'Nailipat na ang mga buto sa lupang tataniman';
       case 'seeds-vegetative':
@@ -53,32 +53,11 @@ export class CropService {
       case 'yield-formating-stage':
         return 'Namumulaklak at unti-unting nagbubunga ang tanim';
       case 'ripening-stage':
-        return 'Nagbunga na ang mga tanim at malapit na anihin';
+        return 'Namunga na ang mga tanim at malapit na anihin';
       case 'crops-harvested':
         return 'Naani ko na ang aking mga tanim';
       case 'marketable':
-        return 'Maari mo na ibenta ang iyong pananim!';
-    }
-  }
-
-  public translateSeedStageFutureTense({ slug }: SeedStage): string {
-    switch (slug) {
-      case 'starter-kit-received':
-        return 'Kuhain ang Starter Kit';
-      case 'seeds-planted':
-        return 'Itanim ang mga buto';
-      case 'seeds-established':
-        return 'Ilipat ang mga buto sa lupang tataniman';
-      case 'seeds-vegetative':
-        return 'Malalago at malapit na magbunga ang tanim';
-      case 'yield-formating-stage':
-        return 'Namumulaklak at unti-unting nagbubunga ang tanim';
-      case 'ripening-stage':
-        return 'Nagbunga na ang mga tanim at malapit na anihin';
-      case 'crops-harvested':
-        return 'Anihin ang aking mga tanim';
-      case 'marketable':
-        return 'Maari mo na ibenta ang iyong pananim!';
+        return 'Maaring ibenta ang mga pananim!';
     }
   }
 

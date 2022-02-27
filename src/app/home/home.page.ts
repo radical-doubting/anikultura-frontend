@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { CropService } from '../services/crop.service';
 import { FarmerReportService } from '../services/farmer-report.service';
 import { FarmlandService } from '../services/farmland.service';
@@ -7,6 +8,7 @@ import { PhotoService } from '../services/photo.service';
 import { SeedStage } from '../types/crop.type';
 import { FarmerReport } from '../types/farmer-report.type';
 import { Farmland } from '../types/farmland.type';
+import { SubmitReportModalPage } from './modal/submit-report-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -32,43 +34,17 @@ export class HomePage implements OnInit {
   private estimatedYieldAmount: number;
 
   constructor(
-    private photoService: PhotoService,
     private cropService: CropService,
     private farmlandService: FarmlandService,
     private farmerReportService: FarmerReportService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalController: ModalController
   ) {}
 
   public ngOnInit(): void {
-    this.farmerReportForm = this.formBuilder.group({
-      farmland: ['', Validators.required],
-    });
-
-    this.farmerReportForm
-      .get('farmland')
-      .valueChanges.subscribe((selectedFarmlandId) => {
-        const selectedFarmland = this.getFarmland(selectedFarmlandId);
-        this.retrieveSeedStage(selectedFarmland);
-      });
-
-    this.farmlandService.getFarmlands().subscribe((data) => {
-      const firstFarmland = data[0];
-      this.farmlands = data;
-      this.currentFarmland = firstFarmland;
-
-      this.retrieveSeedStage(firstFarmland);
-
-      this.farmerReportForm.patchValue({
-        farmland: firstFarmland.id,
-      });
-    });
-
-    this.farmerReportService.getFarmerReports().subscribe((data) => {
-      this.submittedFarmerReports = data;
-      this.plantedFarmerReport = this.getPlantedFarmerReport(data);
-
-      this.computeEstimates();
-    });
+    this.setupForm();
+    this.setupFarmlandHooks();
+    this.setupFarmerReportHooks();
   }
 
   public onFarmlandSelectChange(selectedFarmland: Farmland) {
@@ -76,8 +52,13 @@ export class HomePage implements OnInit {
     this.retrieveSeedStage(selectedFarmland);
   }
 
-  public addPhotoToGallery() {
-    this.photoService.addNewToGallery();
+  public async onBeginSubmitFarmerReport() {
+    const modal = await this.modalController.create({
+      component: SubmitReportModalPage,
+      cssClass: 'my-custom-class',
+    });
+
+    return await modal.present();
   }
 
   public hasPlantedFarmerReport(): boolean {
@@ -104,7 +85,43 @@ export class HomePage implements OnInit {
   }
 
   public getTranslatedNextSeedStageName(): string {
-    return this.cropService.translateSeedStageFutureTense(this.nextSeedStage);
+    return this.cropService.translateSeedStagePastTense(this.nextSeedStage);
+  }
+
+  private setupForm() {
+    this.farmerReportForm = this.formBuilder.group({
+      farmland: ['', Validators.required],
+    });
+
+    this.farmerReportForm
+      .get('farmland')
+      .valueChanges.subscribe((selectedFarmlandId) => {
+        const selectedFarmland = this.getFarmland(selectedFarmlandId);
+        this.retrieveSeedStage(selectedFarmland);
+      });
+  }
+
+  private setupFarmlandHooks() {
+    this.farmlandService.getFarmlands().subscribe((data) => {
+      const firstFarmland = data[0];
+      this.farmlands = data;
+      this.currentFarmland = firstFarmland;
+
+      this.retrieveSeedStage(firstFarmland);
+
+      this.farmerReportForm.patchValue({
+        farmland: firstFarmland.id,
+      });
+    });
+  }
+
+  private setupFarmerReportHooks() {
+    this.farmerReportService.getFarmerReports().subscribe((data) => {
+      this.submittedFarmerReports = data;
+      this.plantedFarmerReport = this.getPlantedFarmerReport(data);
+
+      this.computeEstimates();
+    });
   }
 
   private retrieveSeedStage(farmland: Farmland) {

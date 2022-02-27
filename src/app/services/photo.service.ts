@@ -7,18 +7,37 @@ import {
 } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Storage } from '@capacitor/storage';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FarmerReportPhoto } from '../types/farmer-report.type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhotoService {
+  private currentPhoto = new BehaviorSubject<FarmerReportPhoto>(null);
+
   constructor() {}
-  public async addNewToGallery() {
-    // Take a photo
+
+  public getCurrentPhoto(): Observable<FarmerReportPhoto> {
+    return this.currentPhoto.asObservable();
+  }
+
+  public async takeNewPhoto() {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 100,
     });
+
+    this.clearPhoto();
+
+    this.currentPhoto.next({
+      filePath: null,
+      webviewPath: capturedPhoto.webPath,
+    });
+  }
+
+  public clearPhoto() {
+    this.currentPhoto.next(null);
   }
 }

@@ -1,0 +1,33 @@
+<ion-content>
+    <div style="padding: 0.5em">
+        <h1>Magsumite ng report</h1>
+        <ion-item-divider class="divider"></ion-item-divider>
+
+        <div id="ani-wrapper">
+            <button id="aniButton" (click)="takePhoto()">
+                Kumuha ng litrato ng iyong patunay
+            </button>
+        </div>
+
+        <p class="helper">Bubuksan nito ang iyong camera</p>
+
+
+        <div *ngIf="hasPhoto()">
+
+            <div id="ani-wrapper">
+                <ion-img class="taken-img" [src]="currentPhoto.webviewPath"></ion-img>
+            </div>
+
+            <ion-item-divider class="divider"></ion-item-divider>
+        </div>
+
+        <div *ngIf="hasPhoto()">
+            <div id="ani-wrapper">
+                <button id="aniButton" (click)="takePhoto()">
+                    Isumite ang report
+                </button>
+            </div>
+            <p class="helper">Ang iyong report ay susuriin pa ng iyong tagapamahala</p>
+        </div>
+    </div>
+</ion-content>

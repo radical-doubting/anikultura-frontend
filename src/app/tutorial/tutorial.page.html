@@ -1,0 +1,27 @@
+<ion-content>
+    <ion-slides class="ani-tutorial" #slides pager="true" [options]="slideOpts">
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1>Maligayang pagdating sa Anikultura!</h1>
+                <p>Pindutin ang 'susunod' o i-swipe ang
+                screen para pumunta sa susunod na pahina.</p>
+                <button id="aniButton" (click)="slides.slideNext()">
+                    Susunod
+                </button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1>Una, paano mag-login?</h1>
+                <button id="aniButton" (click)="slides.slideNext()">
+                    Susunod
+                </button>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1>Slide 3</h1>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
