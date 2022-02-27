@@ -27,13 +27,15 @@ export class AuthService {
     this.loggedInUserSubject.next(JSON.parse(user));
   }
 
-  public login(body: LoginBody): Observable<void> {
+  public login(body: LoginBody): Observable<User> {
     return this.http.post<AuthPayload>('/api/auth/login', body).pipe(
       map((data) => {
         const user = data.user;
         this.isLoggedInSubject.next(true);
         this.loggedInUserSubject.next(user);
         localStorage.setItem(this.userLocalStorageKey, JSON.stringify(user));
+
+        return data.user;
       })
     );
   }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SeedAllocation, SeedStage } from '../types/crop.type';
+import { Crop, SeedAllocation, SeedStage } from '../types/crop.type';
 import { Farmland } from '../types/farmland.type';
 
 @Injectable({
@@ -10,6 +10,10 @@ import { Farmland } from '../types/farmland.type';
 })
 export class CropService {
   constructor(private http: HttpClient) {}
+
+  public getCrops(): Observable<Crop[]> {
+    return this.http.get<Crop[]>('/api/crops').pipe(map((data) => data));
+  }
 
   public getSeedAllocations(): Observable<SeedAllocation[]> {
     return this.http
@@ -21,14 +25,6 @@ export class CropService {
     const body = { farmlandId: id };
     return this.http
       .post<SeedStage>('/api/crops/current-seed-stage', body)
-      .pipe(map((data) => data));
-  }
-
-  public getNextSeedStage({ id }: SeedStage): Observable<SeedStage | null> {
-    const body = { currentSeedStageId: id };
-
-    return this.http
-      .post<SeedStage | null>('/api/crops/next-seed-stage', body)
       .pipe(
         map((data) => {
           if (Object.keys(data).length === 0) {
@@ -38,6 +34,20 @@ export class CropService {
           return data;
         })
       );
+  }
+
+  public getNextSeedStage({ id }: Farmland): Observable<SeedStage> {
+    const body = { farmlandId: id };
+
+    return this.http.post<SeedStage>('/api/crops/next-seed-stage', body).pipe(
+      map((data) => {
+        if (Object.keys(data).length === 0) {
+          return null;
+        }
+
+        return data;
+      })
+    );
   }
 
   public translateSeedStagePastTense({ slug }: SeedStage): string {
@@ -50,7 +60,7 @@ export class CropService {
         return 'Nailipat na ang mga buto sa lupang tataniman';
       case 'seeds-vegetative':
         return 'Malalago at malapit na magbunga ang tanim';
-      case 'yield-formating-stage':
+      case 'yield-formation-stage':
         return 'Namumulaklak at unti-unting nagbubunga ang tanim';
       case 'ripening-stage':
         return 'Namunga na ang mga tanim at malapit na anihin';
@@ -62,6 +72,10 @@ export class CropService {
   }
 
   public getSeedStageImagePath(seedStage: SeedStage): string {
-    return `../assets/stages/stage${seedStage.id}.png`;
+    if (seedStage === null) {
+      return `../assets/stages/stage1.png`;
+    } else {
+      return `../assets/stages/stage${seedStage.id}.png`;
+    }
   }
 }

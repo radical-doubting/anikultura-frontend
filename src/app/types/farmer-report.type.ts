@@ -10,7 +10,7 @@ export class Verifier {
 
 export class FarmerReportPhoto {
   filePath: string;
-  webviewPath: string;
+  dataUrl: string;
 }
 
 export class FarmerReport {

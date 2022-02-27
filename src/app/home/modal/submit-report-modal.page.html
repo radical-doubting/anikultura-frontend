@@ -13,21 +13,38 @@
 
 
         <div *ngIf="hasPhoto()">
-
             <div id="ani-wrapper">
-                <ion-img class="taken-img" [src]="currentPhoto.webviewPath"></ion-img>
+                <img class="taken-img" [src]="currentPhoto.dataUrl" />
             </div>
-
-            <ion-item-divider class="divider"></ion-item-divider>
         </div>
 
-        <div *ngIf="hasPhoto()">
-            <div id="ani-wrapper">
-                <button id="aniButton" (click)="takePhoto()">
-                    Isumite ang report
-                </button>
+        <form [formGroup]="farmerReportForm" (submit)="submitReport(loginBtn)">
+            <div *ngIf="isFirstTimeToReport() && hasPhoto()">
+                <ion-item lines="full">
+                    <ion-label position="floating">Ano ang iyong itatanim?</ion-label>
+                    <ion-select type="input" name="cropId" formControlName="cropId">
+                        <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
+                            {{ crop.name }}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
             </div>
-            <p class="helper">Ang iyong report ay susuriin pa ng iyong tagapamahala</p>
-        </div>
+
+            <div *ngIf="isMarketable() && hasPhoto()">
+                <ion-item lines="full">
+                    <ion-label position="floating">Ilan ang iyong aktwal na nakilong bunga?</ion-label>
+                    <ion-input type="text" name="volumeKg" formControlName="volumeKg"></ion-input>
+                </ion-item>
+            </div>
+
+            <div *ngIf="hasPhoto()" style="margin-top: 1em">
+                <div id="ani-wrapper">
+                    <button #loginBtn type="submit" id="aniButton">
+                        Isumite ang report
+                    </button>
+                </div>
+                <p class="helper">Ang iyong report ay susuriin pa ng iyong tagapamahala</p>
+            </div>
+        </form>
     </div>
 </ion-content>

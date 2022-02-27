@@ -5,7 +5,7 @@ import { CropService } from '../services/crop.service';
 import { FarmerReportService } from '../services/farmer-report.service';
 import { FarmlandService } from '../services/farmland.service';
 import { PhotoService } from '../services/photo.service';
-import { SeedStage } from '../types/crop.type';
+import { Crop, SeedStage } from '../types/crop.type';
 import { FarmerReport } from '../types/farmer-report.type';
 import { Farmland } from '../types/farmland.type';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
@@ -16,14 +16,14 @@ import { SubmitReportModalPage } from './modal/submit-report-modal.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  private farmerReportForm: FormGroup;
+  private farmlandSelectionForm: FormGroup;
   private farmlands: Farmland[];
   private currentFarmland: Farmland;
   private currentSeedStage: SeedStage;
-  private nextSeedStage: SeedStage | null;
+  private nextSeedStage: SeedStage;
   private currentSeedStageImagePath: string;
 
-  private submittedFarmerReports: FarmerReport[];
+  private submittedFarmerReports: FarmerReport[] = [];
   private plantedFarmerReport: FarmerReport;
 
   private estimatedYieldDateEarliest: string;
@@ -45,12 +45,6 @@ export class HomePage implements OnInit {
   public ngOnInit(): void {
     this.setupForm();
     this.setupFarmlandHooks();
-    this.setupFarmerReportHooks();
-  }
-
-  public onFarmlandSelectChange(selectedFarmland: Farmland) {
-    this.currentFarmland = selectedFarmland;
-    this.retrieveSeedStage(selectedFarmland);
   }
 
   public async onBeginSubmitFarmerReport() {
@@ -58,8 +52,9 @@ export class HomePage implements OnInit {
       component: SubmitReportModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        farmlandId: this.currentFarmland.id,
-        cropId: null,
+        currentFarmland: this.currentFarmland,
+        currentCrop: this.getExistingCrop(),
+        currentSeedStage: this.currentSeedStage,
       },
     });
 
@@ -68,6 +63,10 @@ export class HomePage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  public hasSubmittedReports(): boolean {
+    return this.submittedFarmerReports.length > 0;
   }
 
   public hasPlantedFarmerReport(): boolean {
@@ -89,19 +88,28 @@ export class HomePage implements OnInit {
     return null;
   }
 
+  public getExistingCrop(): Crop {
+    if (this.hasSubmittedReports()) {
+      return this.submittedFarmerReports[0].crop;
+    }
+
+    return null;
+  }
+
   public translateSeedStage(seedStage: SeedStage): string {
     return this.cropService.translateSeedStagePastTense(seedStage);
   }
 
   private setupForm() {
-    this.farmerReportForm = this.formBuilder.group({
+    this.farmlandSelectionForm = this.formBuilder.group({
       farmland: ['', Validators.required],
     });
 
-    this.farmerReportForm
+    this.farmlandSelectionForm
       .get('farmland')
       .valueChanges.subscribe((selectedFarmlandId) => {
         const selectedFarmland = this.getFarmland(selectedFarmlandId);
+        this.setupFarmerReportHooks(selectedFarmland);
         this.retrieveSeedStage(selectedFarmland);
       });
   }
@@ -112,21 +120,24 @@ export class HomePage implements OnInit {
       this.farmlands = data;
       this.currentFarmland = firstFarmland;
 
+      this.setupFarmerReportHooks(firstFarmland);
       this.retrieveSeedStage(firstFarmland);
 
-      this.farmerReportForm.patchValue({
+      this.farmlandSelectionForm.patchValue({
         farmland: firstFarmland.id,
       });
     });
   }
 
-  private setupFarmerReportHooks() {
-    this.farmerReportService.getFarmerReports().subscribe((data) => {
-      this.submittedFarmerReports = data;
-      this.plantedFarmerReport = this.getPlantedFarmerReport(data);
+  private setupFarmerReportHooks(currentFarmland: Farmland) {
+    this.farmerReportService
+      .getFarmerReports(currentFarmland)
+      .subscribe((data) => {
+        this.submittedFarmerReports = data;
+        this.plantedFarmerReport = this.getPlantedFarmerReport(data);
 
-      this.computeEstimates();
-    });
+        this.computeEstimates();
+      });
   }
 
   private retrieveSeedStage(farmland: Farmland) {
@@ -134,12 +145,9 @@ export class HomePage implements OnInit {
       this.currentSeedStage = data;
       this.currentSeedStageImagePath =
         this.cropService.getSeedStageImagePath(data);
-      this.retrieveNextSeedStage(data);
     });
-  }
 
-  private retrieveNextSeedStage(currentSeedStage: SeedStage) {
-    this.cropService.getNextSeedStage(currentSeedStage).subscribe((data) => {
+    this.cropService.getNextSeedStage(farmland).subscribe((data) => {
       this.nextSeedStage = data;
     });
   }

@@ -10,7 +10,7 @@
   <div id="ani-wrapper">
     <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px">
       <ion-card-content style="padding: 10px; text-align: center;">
-        <form [formGroup]="farmerReportForm" (submit)="onSubmit(loginBtn)">
+        <form [formGroup]="farmlandSelectionForm" (submit)="onSubmit(loginBtn)">
 
           <ion-item>
             <ion-select type="input" name="farmland" formControlName="farmland"
@@ -22,7 +22,15 @@
           </ion-item>
         </form>
 
-        <h1 *ngIf="currentSeedStage" style="padding-top: 1em;">{{ translateSeedStage(currentSeedStage) }}</h1>
+        <h1 *ngIf="currentSeedStage; else noCurrentSeedStage" style="padding-top: 1em;">{{
+          translateSeedStage(currentSeedStage) }}</h1>
+        <ng-template #noCurrentSeedStage>
+          <h1 style="padding-top: 1em;">Simulan ang pagsumite ng report</h1>
+        </ng-template>
+
+        <p *ngIf="getExistingCrop()" style="margin-bottom: 2em; font-size: 16px;">
+          <ion-icon name="leaf" color="medium"></ion-icon> {{ getExistingCrop().name }}
+        </p>
 
         <img [src]="currentSeedStageImagePath"
           style="max-height: 320px; padding-left: 2em; padding-right: 2em; padding-bottom: 1em;" />
@@ -72,11 +80,12 @@
     </ion-card>
   </div>
 
-  <div id="ani-wrapper" style="margin-top:-10px">
+  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasSubmittedReports()">
     <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
       <ion-card-content style="padding: 10px">
         <h1>Mga nasumiteng report...</h1>
         <ion-item-divider style="margin-top: -25px; background: rgba(0,0,0,0.0);"></ion-item-divider><br>
+
         <ion-grid style="background-color: #e9e9e9;border-radius: 50px;padding: 20px; margin-bottom: 10px">
           <ion-row *ngFor="let farmerReport of submittedFarmerReports; let i = index">
             <ion-col size="9" style="color:#202020;font-weight: bold;">

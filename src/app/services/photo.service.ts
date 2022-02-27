@@ -24,7 +24,7 @@ export class PhotoService {
 
   public async takeNewPhoto() {
     const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
       quality: 100,
     });
@@ -33,7 +33,7 @@ export class PhotoService {
 
     this.currentPhoto.next({
       filePath: null,
-      webviewPath: capturedPhoto.webPath,
+      dataUrl: capturedPhoto.dataUrl,
     });
   }
 

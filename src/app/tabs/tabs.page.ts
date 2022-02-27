@@ -30,14 +30,11 @@ export class TabsPage {
         buttons: [
           {
             text: 'Hindi muna',
-            handler: () => {
-              console.log('I would like to stay');
-            },
+            handler: () => {},
           },
           {
             text: 'Oo, log-out na ako',
             handler: () => {
-              console.log('Whatever');
               this.authService.logout().subscribe((data) => {
                 this.router.navigate(['/']);
                 this.toast('Nakapag logged out ka na!');

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { LoginBody } from '../types/auth-payload.type';
+import { AuthPayload, LoginBody } from '../types/auth-payload.type';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,6 @@ import { LoginBody } from '../types/auth-payload.type';
 export class LoginPage implements OnInit {
   private loginForm: FormGroup;
   private isSubmitted: boolean;
-  private returnUrl = '/tutorial';
 
   constructor(
     private router: Router,
@@ -29,11 +28,14 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.authService.isLoggedIn().subscribe(async (value) => {
-      if (value) {
-        await this.toast('You are already logged in!');
-        this.router.navigateByUrl(this.returnUrl);
+    this.authService.getLoggedInUser().subscribe(async (user) => {
+      if (user?.profile?.isTutorialDone) {
+        this.router.navigate(['/dashboard/home']);
+      } else {
+        this.router.navigate(['/tutorial']);
       }
+
+      await this.toast('You are already logged in!');
     });
   }
 
@@ -50,12 +52,17 @@ export class LoginPage implements OnInit {
       .pipe(first())
       .subscribe(
         async (data) => {
-          this.router.navigateByUrl(this.returnUrl);
+          if (data.profile.isTutorialDone) {
+            this.router.navigate(['/dashboard/home']);
+          } else {
+            this.router.navigate(['/tutorial']);
+          }
+
           await this.toast('Successfully logged in!');
         },
         async (error) => {
           loginButton.disabled = false;
-          await this.toast('Failed to login!');
+          await this.toast(`Failed to login: ${error.message}`);
         }
       );
   }
