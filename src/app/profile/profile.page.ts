@@ -22,4 +22,15 @@ export class ProfilePage implements OnInit {
   public onReturn() {
     this.router.navigate(['/dashboard/home']);
   }
+
+  public getGender(genderRaw: string): string {
+    switch (genderRaw) {
+      case '1':
+        return 'Male';
+      case '2':
+        return 'Female';
+      default:
+        return 'Unspecified';
+    }
+  }
 }

@@ -1,23 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { FarmerService } from '../services/farmer.service';
+import { User } from '../types/user.type';
 
 @Component({
   selector: 'app-tutorial',
   templateUrl: 'tutorial.page.html',
   styleUrls: ['tutorial.page.scss'],
 })
-export class TutorialPage {
-  // Optional parameters to pass to the swiper instance.
-  // See http://idangero.us/swiper/api/ for valid options.
-
-  slideOpts = {
+export class TutorialPage implements OnInit {
+  public slideOpts = {
     initialSlide: 0,
     speed: 400,
   };
 
-  constructor(private router: Router) {}
+  private homeRoute = '/dashboard/home';
+
+  constructor(private router: Router, private farmerService: FarmerService) {}
+
+  ngOnInit(): void {
+    this.farmerService.isTutorialDone().subscribe((data) => {
+      if (data) {
+        this.router.navigate([this.homeRoute]);
+      }
+    });
+  }
 
   public onFinish() {
-    this.router.navigate(['/dashboard/home']);
+    this.farmerService.updateTutorialState(true).subscribe((data) => {
+      this.router.navigate([this.homeRoute]);
+    });
+  }
+
+  public resetTutorial() {
+    this.router.navigate(['/tutorial']);
   }
 }

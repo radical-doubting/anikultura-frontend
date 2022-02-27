@@ -14,7 +14,7 @@ import { LoginBody } from '../types/auth-payload.type';
 export class LoginPage implements OnInit {
   private loginForm: FormGroup;
   private isSubmitted: boolean;
-  private returnUrl = '/dashboard/home';
+  private returnUrl = '/tutorial';
 
   constructor(
     private router: Router,

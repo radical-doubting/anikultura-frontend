@@ -34,6 +34,7 @@ export class HomePage implements OnInit {
   private estimatedYieldAmount: number;
 
   constructor(
+    private photoService: PhotoService,
     private cropService: CropService,
     private farmlandService: FarmlandService,
     private farmerReportService: FarmerReportService,
@@ -56,6 +57,14 @@ export class HomePage implements OnInit {
     const modal = await this.modalController.create({
       component: SubmitReportModalPage,
       cssClass: 'my-custom-class',
+      componentProps: {
+        farmlandId: this.currentFarmland.id,
+        cropId: null,
+      },
+    });
+
+    modal.onDidDismiss().then((data) => {
+      this.photoService.clearPhoto();
     });
 
     return await modal.present();
@@ -80,12 +89,8 @@ export class HomePage implements OnInit {
     return null;
   }
 
-  public getTranslatedCurrentSeedStageName(): string {
-    return this.cropService.translateSeedStagePastTense(this.currentSeedStage);
-  }
-
-  public getTranslatedNextSeedStageName(): string {
-    return this.cropService.translateSeedStagePastTense(this.nextSeedStage);
+  public translateSeedStage(seedStage: SeedStage): string {
+    return this.cropService.translateSeedStagePastTense(seedStage);
   }
 
   private setupForm() {

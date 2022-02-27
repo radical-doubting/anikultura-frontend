@@ -22,7 +22,7 @@
           </ion-item>
         </form>
 
-        <h1 *ngIf="currentSeedStage" style="padding-top: 1em;">{{ getTranslatedCurrentSeedStageName() }}</h1>
+        <h1 *ngIf="currentSeedStage" style="padding-top: 1em;">{{ translateSeedStage(currentSeedStage) }}</h1>
 
         <img [src]="currentSeedStageImagePath"
           style="max-height: 320px; padding-left: 2em; padding-right: 2em; padding-bottom: 1em;" />
@@ -30,7 +30,7 @@
         <p style="margin-bottom: 0.75em">Maari kang magpatuloy kung</p>
 
         <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()">
-          {{ getTranslatedNextSeedStageName() }}
+          {{ translateSeedStage(nextSeedStage) }}
         </button>
 
         <p style="margin-bottom: 2em">Kailangan kumuha ng litrato bago magsumite ng report</p>
@@ -79,26 +79,26 @@
         <ion-item-divider style="margin-top: -25px; background: rgba(0,0,0,0.0);"></ion-item-divider><br>
         <ion-grid style="background-color: #e9e9e9;border-radius: 50px;padding: 20px; margin-bottom: 10px">
           <ion-row *ngFor="let farmerReport of submittedFarmerReports; let i = index">
-            <ion-col style="color:#202020;font-weight: bold;">
+            <ion-col size="9" style="color:#202020;font-weight: bold;">
               <div *ngIf="farmerReport.isVerified; else unverified">
                 <span class="text"
                   title="{{ 'Ang itong report ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}">
-                  {{ i + 1 }}.
-                  {{ farmerReport.seedStage.name }}
+                  <!-- {{ i + 1 }}. -->
+                  {{ translateSeedStage(farmerReport.seedStage) }}
                   <ion-icon name="checkmark-circle" color="primary"></ion-icon>
                 </span>
               </div>
 
               <ng-template #unverified>
                 <span class="text" title="Ang itong report ay hindi pa nasusuri">
-                  {{ i + 1 }}.
-                  {{ farmerReport.seedStage.name }}
+                  <!-- {{ i + 1 }}. -->
+                  {{ translateSeedStage(farmerReport.seedStage) }}
                   <ion-icon title="unverified" name="checkmark-circle-outline" color="primary"></ion-icon>
                 </span>
               </ng-template>
             </ion-col>
 
-            <ion-col style="text-align: right">
+            <ion-col size="3" style="text-align: right">
               {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br>
               {{ farmerReport.createdAt | date: 'hh:mm aa'}}
             </ion-col>
