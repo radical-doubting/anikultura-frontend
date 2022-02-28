@@ -1,8 +1,10 @@
 {
-  "/api/":{
-      "target": "https://ani-be-stg.herokuapp.com/api/",
-      "secure": false,
-      "changeOrigin": true
-
+  "/api/*": {
+    "target": "http://localhost/api",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }

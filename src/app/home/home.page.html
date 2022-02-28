@@ -8,59 +8,108 @@
 
 <ion-content>
   <div id="ani-wrapper">
-    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px"> 
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px">
       <ion-card-content style="padding: 10px; text-align: center;">
-        <ion-item>
-          <ion-select style="color: #242424; font-size: 2rem; font-weight: bold">
-            <ion-select-option value="brown" selected>Tibay Community Farm</ion-select-option>
-            <ion-select-option value="blonde">Masagana High School</ion-select-option>
-            <ion-select-option value="black">Marquez Farmland</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <img src="../assets/stages/stage3.png" />
-        <button id="aniButton">Nailipat na ang buto sa lupang tataniman</button>
-        <ion-item-divider></ion-item-divider>
-        <div class="ani-content">
-          <h1 style="font-size:50px;color:#242424">12 araw</h1>
-            <p>Bago mag bunga ang iyong mga pananim</p>
-        </div>
+        <form [formGroup]="farmlandSelectionForm">
+
+          <ion-item>
+            <ion-select type="input" name="farmland" formControlName="farmland"
+              style="color: #242424; font-size: 2rem; font-weight: bold;">
+              <ion-select-option *ngFor="let farmland of farmlands" [value]="farmland.id"
+                style="width: 100% !important;">{{ farmland.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </form>
+
+        <h1 *ngIf="currentSeedStage; else noCurrentSeedStage" style="padding-top: 1em;">{{
+          translateSeedStage(currentSeedStage) }}</h1>
+        <ng-template #noCurrentSeedStage>
+          <h1 style="padding-top: 1em;">Simulan ang pagsumite ng report</h1>
+        </ng-template>
+
+        <p *ngIf="getExistingCrop()" style="margin-bottom: 2em; font-size: 16px;">
+          <ion-icon name="leaf" color="medium"></ion-icon> {{ getExistingCrop().name }}
+        </p>
+
+        <img [src]="currentSeedStageImagePath"
+          style="max-height: 320px; padding-left: 2em; padding-right: 2em; padding-bottom: 1em;" />
+
+        <p style="margin-bottom: 0.75em">Maari kang magpatuloy kung</p>
+
+        <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()">
+          {{ translateSeedStage(nextSeedStage) }}
+        </button>
+
+        <p style="margin-bottom: 2em">Kailangan kumuha ng litrato bago magsumite ng report</p>
       </ion-card-content>
     </ion-card>
   </div>
-  <div id="ani-wrapper" style="margin-top:-10px">
-    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;"> 
+
+  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasPlantedFarmerReport()">
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
       <ion-card-content style="padding: 10px">
-        <h1>Mga ginawa</h1> 
+        <h1>Inaasahang...</h1>
+        <ion-item-divider style="margin-top: -25px; margin-bottom: 1em; background: rgba(0,0,0,0.0);">
+        </ion-item-divider>
+
+        <div class="ani-content" style="text-align: center; margin-bottom: 2em;">
+          <h1 style="font-size:50px; line-height: 50px; color:#242424">{{ estimatedYieldDayEarliest }} - {{
+            estimatedYieldDayLatest }} na araw</h1>
+          <p>Ang aabutin bago mamunga ang iyong mga pananim</p>
+        </div>
+
         <ion-grid style="background-color: #e9e9e9;border-radius: 50px;padding: 10px; margin-bottom: 10px">
           <ion-row>
             <ion-col>
-              <ion-chip>
+              <ion-chip style="padding: 1.5em">
                 <ion-icon name="cart" color="primary"></ion-icon>
-                <ion-label>Inaasahang kita: ₱42,069</ion-label>
+                <ion-label>Maaaring kitain: <br>{{ estimatedProfit | currency:'PHP '}}</ion-label>
               </ion-chip>
             </ion-col>
             <ion-col style="text-align: right">
-              <ion-chip>
-                <ion-icon name="leaf" color="primary"></ion-icon>
-                <ion-label>Kilo ng bunga: 72kg</ion-label>
+              <ion-chip style="padding: 1.5em">
+                <ion-icon name="speedometer" color="primary"></ion-icon>
+                <ion-label>Maaaring bunga: <br>{{ estimatedYieldAmount | number:'1.0':'en-US' }} kg</ion-label>
               </ion-chip>
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-          <ion-fab-button (click)="addPhotoToGallery()">
-            <ion-icon name="camera"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasSubmittedReports()">
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
+      <ion-card-content style="padding: 10px">
+        <h1>Mga nasumiteng report...</h1>
         <ion-item-divider style="margin-top: -25px; background: rgba(0,0,0,0.0);"></ion-item-divider><br>
-        <ion-grid style="background-color: #cacaca;border-radius: 50px;padding: 10px; margin-bottom: 10px;
-        width: 95%">
-          <ion-row>
-            <ion-col style="color:#202020;font-weight: bold;">
-              3. Naitanim ko na ang mga buto
+
+        <ion-grid style="background-color: #e9e9e9;border-radius: 50px;padding: 20px; margin-bottom: 10px">
+          <ion-row *ngFor="let farmerReport of submittedFarmerReports; let i = index">
+            <ion-col size="9" style="color:#202020;font-weight: bold;">
+              <div *ngIf="farmerReport.isVerified; else unverified">
+                <span class="text"
+                  title="{{ 'Ang itong report ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}">
+                  <!-- {{ i + 1 }}. -->
+                  {{ translateSeedStage(farmerReport.seedStage) }}
+                  <ion-icon name="checkmark-circle" color="primary"></ion-icon>
+                </span>
+              </div>
+
+              <ng-template #unverified>
+                <span class="text" title="Ang itong report ay hindi pa nasusuri">
+                  <!-- {{ i + 1 }}. -->
+                  {{ translateSeedStage(farmerReport.seedStage) }}
+                  <ion-icon title="unverified" name="checkmark-circle-outline" color="primary"></ion-icon>
+                </span>
+              </ng-template>
             </ion-col>
-            <ion-col style="text-align: right">
-              Februrary 23, 2022<br>5:12AM
+
+            <ion-col size="3" style="text-align: right">
+              {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br>
+              {{ farmerReport.createdAt | date: 'hh:mm aa'}}
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -68,4 +117,3 @@
     </ion-card>
   </div>
 </ion-content>
-  

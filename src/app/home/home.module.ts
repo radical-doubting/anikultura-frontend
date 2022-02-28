@@ -1,11 +1,12 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab1PageRoutingModule } from './home-routing.module';
+import { HomeRoutingModule } from './home-routing.module';
+import { SubmitReportModalPage } from './modal/submit-report-modal.page';
 
 @NgModule({
   imports: [
@@ -13,8 +14,9 @@ import { Tab1PageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    HomeRoutingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, SubmitReportModalPage],
 })
-export class Tab1PageModule {}
+export class HomeModule {}
