@@ -73,7 +73,7 @@ export class CropService {
 
   public getSeedStageImagePath(seedStage: SeedStage): string {
     if (seedStage === null) {
-      return `../assets/stages/stage1.png`;
+      return `../assets/stages/stage0.png`;
     } else {
       return `../assets/stages/stage${seedStage.id}.png`;
     }

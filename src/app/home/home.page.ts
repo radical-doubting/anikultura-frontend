@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { getDaysFromNowToDate } from '../helpers/time.helper';
 import { CropService } from '../services/crop.service';
 import { FarmerReportService } from '../services/farmer-report.service';
 import { FarmlandService } from '../services/farmland.service';
@@ -15,7 +17,7 @@ import { SubmitReportModalPage } from './modal/submit-report-modal.page';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   private farmlandSelectionForm: FormGroup;
   private farmlands: Farmland[];
   private currentFarmland: Farmland;
@@ -33,6 +35,11 @@ export class HomePage implements OnInit {
   private estimatedProfit: number;
   private estimatedYieldAmount: number;
 
+  private farmlandSelectionSubscription: Subscription;
+  private farmlandHookSubscription: Subscription;
+  private farmerReportHookSubscription: Subscription;
+  private seedStageHookSubscriptions: Subscription;
+
   constructor(
     private photoService: PhotoService,
     private cropService: CropService,
@@ -47,6 +54,13 @@ export class HomePage implements OnInit {
     this.setupFarmlandHooks();
   }
 
+  public ngOnDestroy(): void {
+    this.farmlandSelectionSubscription.unsubscribe();
+    this.farmlandHookSubscription.unsubscribe();
+    this.farmerReportHookSubscription.unsubscribe();
+    this.seedStageHookSubscriptions.unsubscribe();
+  }
+
   public async onBeginSubmitFarmerReport() {
     const modal = await this.modalController.create({
       component: SubmitReportModalPage,
@@ -58,8 +72,13 @@ export class HomePage implements OnInit {
       },
     });
 
-    modal.onDidDismiss().then((data) => {
+    modal.onDidDismiss().then(({ data }) => {
       this.photoService.clearPhoto();
+
+      if (data?.success) {
+        console.log('called');
+        this.setupFarmlandHooks();
+      }
     });
 
     return await modal.present();
@@ -105,32 +124,48 @@ export class HomePage implements OnInit {
       farmland: ['', Validators.required],
     });
 
-    this.farmlandSelectionForm
+    this.farmlandSelectionSubscription = this.farmlandSelectionForm
       .get('farmland')
       .valueChanges.subscribe((selectedFarmlandId) => {
         const selectedFarmland = this.getFarmland(selectedFarmlandId);
+        this.currentFarmland = selectedFarmland;
         this.setupFarmerReportHooks(selectedFarmland);
         this.retrieveSeedStage(selectedFarmland);
       });
   }
 
   private setupFarmlandHooks() {
-    this.farmlandService.getFarmlands().subscribe((data) => {
-      const firstFarmland = data[0];
-      this.farmlands = data;
-      this.currentFarmland = firstFarmland;
+    if (this.farmlandHookSubscription) {
+      this.farmlandHookSubscription.unsubscribe();
+    }
 
-      this.setupFarmerReportHooks(firstFarmland);
-      this.retrieveSeedStage(firstFarmland);
+    this.farmlandHookSubscription = this.farmlandService
+      .getFarmlands()
+      .subscribe((farmlands) => {
+        this.farmlands = farmlands;
+        const firstFarmland = farmlands[0];
 
-      this.farmlandSelectionForm.patchValue({
-        farmland: firstFarmland.id,
+        if (!this.currentFarmland) {
+          this.currentFarmland = firstFarmland;
+        }
+
+        this.farmlandSelectionForm.patchValue({
+          farmland: this.currentFarmland.id,
+        });
+
+        this.setupFarmerReportHooks(this.currentFarmland);
+        this.retrieveSeedStage(this.currentFarmland);
+
+        console.log('called farmland hooks');
       });
-    });
   }
 
   private setupFarmerReportHooks(currentFarmland: Farmland) {
-    this.farmerReportService
+    if (this.farmerReportHookSubscription) {
+      this.farmerReportHookSubscription.unsubscribe();
+    }
+
+    this.farmerReportHookSubscription = this.farmerReportService
       .getFarmerReports(currentFarmland)
       .subscribe((data) => {
         this.submittedFarmerReports = data;
@@ -141,15 +176,25 @@ export class HomePage implements OnInit {
   }
 
   private retrieveSeedStage(farmland: Farmland) {
-    this.cropService.getCurrentSeedStage(farmland).subscribe((data) => {
-      this.currentSeedStage = data;
-      this.currentSeedStageImagePath =
-        this.cropService.getSeedStageImagePath(data);
-    });
+    if (this.seedStageHookSubscriptions) {
+      this.seedStageHookSubscriptions.unsubscribe();
+    }
 
-    this.cropService.getNextSeedStage(farmland).subscribe((data) => {
-      this.nextSeedStage = data;
-    });
+    this.seedStageHookSubscriptions = new Subscription();
+
+    this.seedStageHookSubscriptions.add(
+      this.cropService.getCurrentSeedStage(farmland).subscribe((data) => {
+        this.currentSeedStage = data;
+        this.currentSeedStageImagePath =
+          this.cropService.getSeedStageImagePath(data);
+      })
+    );
+
+    this.seedStageHookSubscriptions.add(
+      this.cropService.getNextSeedStage(farmland).subscribe((data) => {
+        this.nextSeedStage = data;
+      })
+    );
   }
 
   private computeEstimates(): void {
@@ -168,28 +213,12 @@ export class HomePage implements OnInit {
     this.estimatedYieldDateEarliest = estimatedYieldDateEarliest;
     this.estimatedYieldDateLatest = estimatedYieldDateLatest;
 
-    this.estimatedYieldDayEarliest = this.getDaysFromNowToDate(
+    this.estimatedYieldDayEarliest = getDaysFromNowToDate(
       new Date(estimatedYieldDateEarliest)
     );
 
-    this.estimatedYieldDayLatest = this.getDaysFromNowToDate(
+    this.estimatedYieldDayLatest = getDaysFromNowToDate(
       new Date(estimatedYieldDateLatest)
     );
-  }
-
-  private getDaysFromNowToDate(date: Date): number {
-    const currentDate = new Date();
-
-    const diff = Math.floor(
-      (Date.UTC(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        currentDate.getDate()
-      ) -
-        Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) /
-        (1000 * 60 * 60 * 24)
-    );
-
-    return Math.abs(diff);
   }
 }

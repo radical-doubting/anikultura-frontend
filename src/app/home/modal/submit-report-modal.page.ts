@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CropService } from 'src/app/services/crop.service';
 import { FarmerReportService } from 'src/app/services/farmer-report.service';
@@ -37,6 +37,7 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private photoService: PhotoService,
+    private modalController: ModalController,
     private toastController: ToastController,
     private farmerReportService: FarmerReportService,
     private cropService: CropService,
@@ -108,6 +109,7 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
         .uploadFarmerReportImage(farmerReport, this.currentPhoto)
         .subscribe(
           async (data) => {
+            this.modalController.dismiss({ success: true });
             await this.toast('Successfully submitted farmer report');
           },
           async (error) => {
