@@ -29,10 +29,11 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
   @Input()
   public currentSeedStage: SeedStage;
 
-  private farmerReportForm: FormGroup;
-  private currentPhoto: FarmerReportPhoto;
+  public farmerReportForm: FormGroup;
+  public currentPhoto: FarmerReportPhoto;
+  public crops: Crop[] = [];
+
   private subscriptions = new Subscription();
-  private crops: Crop[] = [];
 
   constructor(
     private router: Router,

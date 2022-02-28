@@ -9,7 +9,7 @@ import { User } from '../types/user.type';
   styleUrls: ['profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  private farmer: User;
+  public farmer: User;
 
   constructor(private router: Router, private authService: AuthService) {}
 

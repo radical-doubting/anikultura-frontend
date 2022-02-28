@@ -18,22 +18,21 @@ import { SubmitReportModalPage } from './modal/submit-report-modal.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
-  private farmlandSelectionForm: FormGroup;
-  private farmlands: Farmland[];
-  private currentFarmland: Farmland;
-  private currentSeedStage: SeedStage;
-  private nextSeedStage: SeedStage;
-  private currentSeedStageImagePath: string;
+  public farmlandSelectionForm: FormGroup;
+  public farmlands: Farmland[];
+  public currentFarmland: Farmland;
+  public currentSeedStage: SeedStage;
+  public nextSeedStage: SeedStage;
+  public currentSeedStageImagePath: string;
+  public submittedFarmerReports: FarmerReport[] = [];
+  public plantedFarmerReport: FarmerReport;
 
-  private submittedFarmerReports: FarmerReport[] = [];
-  private plantedFarmerReport: FarmerReport;
-
-  private estimatedYieldDateEarliest: string;
-  private estimatedYieldDateLatest: string;
-  private estimatedYieldDayEarliest: number;
-  private estimatedYieldDayLatest: number;
-  private estimatedProfit: number;
-  private estimatedYieldAmount: number;
+  public estimatedYieldDateEarliest: string;
+  public estimatedYieldDateLatest: string;
+  public estimatedYieldDayEarliest: number;
+  public estimatedYieldDayLatest: number;
+  public estimatedProfit: number;
+  public estimatedYieldAmount: number;
 
   private farmlandSelectionSubscription: Subscription;
   private farmlandHookSubscription: Subscription;

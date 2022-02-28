@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { IonButton, ToastController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { AuthPayload, LoginBody } from '../types/auth-payload.type';
@@ -12,8 +12,7 @@ import { AuthPayload, LoginBody } from '../types/auth-payload.type';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private loginForm: FormGroup;
-  private isSubmitted: boolean;
+  public loginForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -39,7 +38,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  public async onSubmit(loginButton: HTMLButtonElement): Promise<void> {
+  public async onSubmit(loginButton: IonButton): Promise<void> {
     if (this.loginForm.invalid) {
       await this.toast('Login page missing some fields!');
       return;

@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <form [formGroup]="farmerReportForm" (submit)="submitReport(loginBtn)">
+        <form [formGroup]="farmerReportForm" (submit)="submitReport()">
             <div *ngIf="isFirstTimeToReport() && hasPhoto()">
                 <ion-item lines="full">
                     <ion-label position="floating">Ano ang iyong itatanim?</ion-label>
