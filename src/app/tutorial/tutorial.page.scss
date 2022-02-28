@@ -1,0 +1,73 @@
+ion-content{
+    font-family: "OpenSans"!important;
+}
+ion-slides {
+    height: 100%;
+    margin: auto auto;
+}
+
+.ani-tutorial-container{
+    width: 100%;
+    padding: 10px;
+}
+
+.ani-tutorial {
+    background-color: white;
+    padding: 10px;
+    @media screen and (min-width: 900px) {
+        h1 {
+            color: #45a87e;
+            font-size: 5vw;
+        }
+        p{
+            color: #232224;
+            font-size: 1.5vw;
+        }
+        h2{
+            color: #45a87e;
+            text-align: left;
+            font-size: 3vw;
+        }
+
+        #aniButton {
+            background-color: #45a87e; /* Green */
+            border-radius: 50px;
+            color: white;
+            width: 10vw;
+            height: 6vh;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        h1 {
+            color: #45a87e;
+            font-size: 5vh;
+        }
+        p{
+            color: #232224;
+            font-size: 2vh;
+            text-align: justify;
+        }
+        h2{
+            color: #45a87e;
+            text-align: left;
+            font-size: 4vh;
+        }
+
+        #aniButton {
+            background-color: #45a87e; /* Green */
+            border-radius: 50px;
+            color: white;
+            width: 15vh;
+            height: 5.5vh;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+}

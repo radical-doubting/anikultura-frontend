@@ -1,0 +1,177 @@
+<ion-content>
+    <ion-slides class="ani-tutorial" #slides pager="true" [options]="slideOpts">
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1>Maligayang pagdating sa <b>Anikultura!</b></h1>
+                <p>Pindutin ang 'susunod' o i-swipe ang
+                screen para pumunta sa susunod na pahina.</p>
+                <button id="aniButton" (click)="slides.slideNext()">
+                    Susunod
+                </button>
+            </div>      
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1 style="color: #232224">Paano magamit ang Anikultura?</h1>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Paano magamit ang Anikultura?</h2>
+                <img src="../assets/tutorial/login-tutorial.png" style="width: 380px"/>
+                <p>Una, ibibigay ng lokal na tagapamahala ang mga detalye upang makapasok sa
+                    loob ng Anikultura. Gamitin at ingatan ang 'username' at 'password' upang makapag-login
+                    , huwag ipamahagi at kalimutan ito.</p>
+                    <div style="display:flex; justify-content: center;">
+                        <button  style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                            Bumalik
+                        </button>&nbsp;&nbsp;
+                        <button id="aniButton" (click)="slides.slideNext()">
+                            Susunod
+                        </button>
+                    </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1 style="color: #232224">Ano gagawin pagkatapos mag-login?</h1>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Ano gagawin pagkatapos mag-login?</h2>
+                <p>Pagkatapos pumasok o mag-login sa Anikultura, dadalhin ka nito sa pahina kung saan
+                    sa isang pindot lamang ay mai-isumite mo na ang iyong 'report' sa tagapamahala. Sa ilalim
+                    ay may pindutan upang pumunta sa iyong Profile, o mag Logout. Tignan ang litrato sa susunod.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Ano gagawin pagkatapos mag-login?</h2>
+                <img src="../assets/tutorial/farmer-submit-tutorial.png" style="width: 400px"/>
+                <p>Makikita rito ang kulay green na pindutan na nagsisilbing paraan upang magsumite
+                    ng progreso sa pagtatanim. Kapag pinindot ang button ay may inaasahang litrato bago 
+                    magpatuloy sa susunod na yugto.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Ano gagawin pagkatapos mag-login?</h2>
+                <img src="../assets/tutorial/navbar-tutorial.png" style="width: 500px"/>
+                <p>Ito ang makikita sa ilalim pagkatapos mong mag-login. P'wede ka na pumunta
+                    sa iyong Profile, mag-logout, o bumalik sa Dashboard kung saan makikita ang detalye
+                    ng kalahatang bilang ng iyong pagtatanim.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1 style="color: #232224">Ano pa ang kaya kong gawin maliban sa pagsumite ng report?</h1>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Ano pa ang kaya kong gawin?</h2>
+                <img src="../assets/tutorial/tanim-tutorial.png" style="width: 360px"/>
+                <p><b>Makikita ang mga inaasahan sa pagtanim.</b> Habang patuloy na sinusundan ang mga yugto na inaasahan ng tagapamahala, kapag ang
+                    yong progreso ay umabot na sa punto na naitanim mo na ang iyong mga pananim sa
+                    tamang taniman, magbibigay ang <b>Anikultura</b> ng inaasahang araw upang umusad sa susunod
+                    na yugto, mga inaasahang kita, at inaasahang bilang ng maaani.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h2>Ano pa ang kaya kong gawin?</h2>
+                <img src="../assets/tutorial/stats-tutorial.png" style="width: 360px"/>
+                <p><b>Makikita ang mga inaasahan sa pagtanim.</b>Ito ang halimbawa ng litrato kung saan makikita ang inaasahang kita o 
+                    bilang ng maani sa tinanim na prutas o gulay. Nakikita rin dito ang inaasahang araw
+                    ng tagapamahala bago magsumite ang magsasaka ng report.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()">
+                        Bumalik
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="slides.slideNext()">
+                        Susunod
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="ani-tutorial-container">
+                <h1>Handa ka na ba gamitin ang Anikultura?</h1>
+                <img src="../assets/stages/stage8.png" style="width: 700px"/>
+                <p>Pindutin ang <b>Handa na!</b> kapag gusto na lumiban sa tutorial, o pindutin ang
+                    <b>Ulitin</b> kung nais bumalik sa simula.
+                </p>
+                <div style="display:flex; justify-content: center;">
+                    <button id="aniButton" style="background-color: rgb(209, 83, 83)" (click)="slides.slideTo(1, 500)">
+                        Umulit
+                    </button>&nbsp;&nbsp;
+                    <button id="aniButton" (click)="onFinish()">
+                        Handa na!
+                    </button>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

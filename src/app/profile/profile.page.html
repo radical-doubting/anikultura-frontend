@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Farmer Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="ani-wrapper">
+    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
+      <ion-card-content style="padding: 0px">
+        <div id="ani-cover"></div>
+        <div id="ani-avatar"></div>
+        <h1 style="text-align:center">{{ farmer.firstName }} {{ farmer.middleName }} {{ farmer.lastName }}</h1>
+        <p style="color: #a5a5a5; font-size: 12px; font-weight: normal;text-align: center; margin-top: -10px">
+          {{ farmer.name }} | Sumali nung {{ farmer.profile.joinedAt | date: 'MMMM dd, YYYY' }}
+        </p>
+        <ion-grid style="padding: 20px; margin-bottom: 10px">
+          <ion-row>
+            <ion-col>
+              <ion-chip color="success">
+                <ion-icon name="sunny-outline"></ion-icon>
+                <ion-label>{{ farmer.profile.birthday | date: 'MMMM dd, YYYY' }}</ion-label>
+              </ion-chip>
+              <ion-chip color="tertiary">
+                <ion-icon name="happy-outline"></ion-icon>
+                <ion-label>{{ farmer.profile.age }} years old</ion-label>
+              </ion-chip>
+              <ion-chip color="success">
+                <ion-icon name="person-outline"></ion-icon>
+                <ion-label>{{ getGender(farmer.profile.gender) }}</ion-label>
+              </ion-chip>
+            </ion-col>
+            <ion-col style="text-align: right">
+              <p style="text-decoration: underline">Kabahaging Organisasyon</p>
+              Jacob-Cummings
+              <p style="text-decoration: underline; margin-top: 10px">Sinalihang TESDA Training</p>
+              Bradtake and Sons
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div style="text-align: center; margin-bottom: 20px">
+          <button id="aniButton" (click)="onReturn()">
+            Bumalik sa farmer dashboard
+          </button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
