@@ -1,5 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TabsPage } from './tabs.page';
 
@@ -12,6 +16,7 @@ describe('TabsPage', () => {
       TestBed.configureTestingModule({
         declarations: [TabsPage],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        imports: [RouterTestingModule, HttpClientTestingModule],
       }).compileComponents();
     }),
   );

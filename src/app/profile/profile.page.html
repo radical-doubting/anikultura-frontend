@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="ani-wrapper">
+  <div id="ani-wrapper" *ngIf="farmer">
     <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
       <ion-card-content style="padding: 0px">
         <div id="ani-cover"></div>
