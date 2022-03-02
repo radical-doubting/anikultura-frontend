@@ -1,8 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
-  "overrides": [
-    {
+  "overrides": [{
       "files": ["*.ts"],
       "parserOptions": {
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
@@ -11,7 +10,8 @@
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/component-class-suffix": [
@@ -35,7 +35,8 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "prettier/prettier": "error"
       }
     },
     {

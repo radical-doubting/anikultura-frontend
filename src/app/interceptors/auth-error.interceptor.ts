@@ -18,7 +18,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
 
   public intercept(
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
@@ -28,7 +28,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
 
         const error = httpErrorResponse.error || httpErrorResponse.statusText;
         return throwError(error);
-      })
+      }),
     );
   }
 }

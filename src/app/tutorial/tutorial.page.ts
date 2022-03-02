@@ -28,7 +28,7 @@ export class TutorialPage implements OnInit, OnDestroy {
         if (data) {
           this.router.navigate([this.homeRoute]);
         }
-      })
+      }),
     );
   }
 
@@ -40,7 +40,7 @@ export class TutorialPage implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.farmerService.updateTutorialState(true).subscribe((data) => {
         this.router.navigate([this.homeRoute]);
-      })
+      }),
     );
   }
 

@@ -17,6 +17,6 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     RouterModule.forChild([{ path: '', component: ProfilePage }]),
     ProfilePageRoutingModule,
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage],
 })
 export class ProfileModule {}

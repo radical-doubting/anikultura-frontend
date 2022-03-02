@@ -32,7 +32,7 @@ export class CropService {
           }
 
           return data;
-        })
+        }),
       );
   }
 
@@ -46,7 +46,7 @@ export class CropService {
         }
 
         return data;
-      })
+      }),
     );
   }
 

@@ -42,21 +42,21 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     private toastController: ToastController,
     private farmerReportService: FarmerReportService,
     private cropService: CropService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {}
 
   public ngOnInit(): void {
     this.subscriptions.add(
       this.photoService.getCurrentPhoto().subscribe((data) => {
         this.currentPhoto = data;
-      })
+      }),
     );
 
     if (this.isFirstTimeToReport()) {
       this.subscriptions.add(
         this.cropService.getCrops().subscribe((data) => {
           this.crops = data;
-        })
+        }),
       );
     }
 
@@ -99,8 +99,8 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
         },
         async (error) => {
           await this.toast('Failed to submit farmer report');
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -115,8 +115,8 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
           },
           async (error) => {
             await this.toast('Failed to upload image');
-          }
-        )
+          },
+        ),
     );
   }
 

@@ -36,7 +36,7 @@ export class AuthService {
         localStorage.setItem(this.userLocalStorageKey, JSON.stringify(user));
 
         return data.user;
-      })
+      }),
     );
   }
 
@@ -44,7 +44,7 @@ export class AuthService {
     return this.http.post<AuthPayload>('/api/auth/logout', {}).pipe(
       map((data) => {
         this.cleanup();
-      })
+      }),
     );
   }
 
