@@ -1,7 +1,7 @@
 import {
   ComponentFixture,
-  getTestBed,
   TestBed,
+  getTestBed,
   waitForAsync,
 } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';

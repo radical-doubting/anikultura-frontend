@@ -122,7 +122,9 @@
           },
           "configurations": {
             "ci": {
-              "progress": false,
+              "sourceMap": false,
+              "codeCoverage": true,
+              "browsers": "ChromeHeadless",
               "watch": false
             }
           }

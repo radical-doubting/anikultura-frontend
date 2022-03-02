@@ -1,14 +1,21 @@
-on: push
-name: Build Angular
+name: Build, test, and lint app
+
+on:
+  push:
+    branches: [master, staging]
+  pull_request:
+    branches: [master, staging]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Check out repository code
+        uses: actions/checkout@v1
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -17,16 +24,20 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Node ${{ matrix.node-version }}
+
+      - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and npm run build
-        run: |
-          npm i
-          npm run build:prod
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: 'dist/angular-githubaction/*'
-          token: ${{ secrets.TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Execute tests
+        run: npm run test -- --configuration ci
+
+      - name: Verify linting
+        run: npm run lint

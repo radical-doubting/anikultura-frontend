@@ -3,16 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { CropService } from 'src/app/services/crop.service';
-import { FarmerReportService } from 'src/app/services/farmer-report.service';
-import { PhotoService } from 'src/app/services/photo.service';
-import { Crop, SeedStage } from 'src/app/types/crop.type';
+import { CropService } from '../../services/crop.service';
+import { FarmerReportService } from '../../services/farmer-report.service';
+import { PhotoService } from '../../services/photo.service';
+import { Crop, SeedStage } from '../../types/crop.type';
 import {
+  FarmerReportPhoto,
   FarmerReport,
   FarmerReportBody,
-  FarmerReportPhoto,
-} from 'src/app/types/farmer-report.type';
-import { Farmland } from 'src/app/types/farmland.type';
+} from '../../types/farmer-report.type';
+import { Farmland } from '../../types/farmland.type';
 
 @Component({
   selector: 'app-submit-report-modal',
