@@ -1,6 +1,6 @@
 {
-  "name": "Anikultura",
-  "short_name": "ani",
+  "name": "Anikultura Farmer Dashboard",
+  "short_name": "Anikultura",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
