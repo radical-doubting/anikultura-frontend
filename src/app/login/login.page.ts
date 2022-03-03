@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) {}
 
   public ngOnInit(): void {
@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
         async (error) => {
           loginButton.disabled = false;
           await this.toast(`Failed to login: ${error.message}`);
-        }
+        },
       );
   }
 

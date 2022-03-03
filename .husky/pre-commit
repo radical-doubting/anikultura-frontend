@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+chmod 755 ./hooks/check-branch-naming && sh ./hooks/check-branch-naming

@@ -45,7 +45,7 @@ export class HomePage implements OnInit, OnDestroy {
     private farmlandService: FarmlandService,
     private farmerReportService: FarmerReportService,
     private formBuilder: FormBuilder,
-    private modalController: ModalController
+    private modalController: ModalController,
   ) {}
 
   public ngOnInit(): void {
@@ -96,7 +96,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public getPlantedFarmerReport(
-    farmerReports: FarmerReport[]
+    farmerReports: FarmerReport[],
   ): FarmerReport | null {
     for (const farmerReport of farmerReports) {
       if (farmerReport.seedStage.slug === 'seeds-planted') {
@@ -186,13 +186,13 @@ export class HomePage implements OnInit, OnDestroy {
         this.currentSeedStage = data;
         this.currentSeedStageImagePath =
           this.cropService.getSeedStageImagePath(data);
-      })
+      }),
     );
 
     this.seedStageHookSubscriptions.add(
       this.cropService.getNextSeedStage(farmland).subscribe((data) => {
         this.nextSeedStage = data;
-      })
+      }),
     );
   }
 
@@ -213,11 +213,11 @@ export class HomePage implements OnInit, OnDestroy {
     this.estimatedYieldDateLatest = estimatedYieldDateLatest;
 
     this.estimatedYieldDayEarliest = getDaysFromNowToDate(
-      new Date(estimatedYieldDateEarliest)
+      new Date(estimatedYieldDateEarliest),
     );
 
     this.estimatedYieldDayLatest = getDaysFromNowToDate(
-      new Date(estimatedYieldDateLatest)
+      new Date(estimatedYieldDateLatest),
     );
   }
 }

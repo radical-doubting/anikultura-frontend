@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
   HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
 
   public intercept(
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
@@ -28,7 +28,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
 
         const error = httpErrorResponse.error || httpErrorResponse.statusText;
         return throwError(error);
-      })
+      }),
     );
   }
 }

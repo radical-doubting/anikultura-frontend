@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CropService } from './crop.service';
@@ -6,7 +8,9 @@ describe('CropService', () => {
   let service: CropService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(CropService);
   });
 

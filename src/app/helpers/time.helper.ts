@@ -5,10 +5,10 @@ export const getDaysFromNowToDate = (date: Date): number => {
     (Date.UTC(
       currentDate.getFullYear(),
       currentDate.getMonth(),
-      currentDate.getDate()
+      currentDate.getDate(),
     ) -
       Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) /
-      (1000 * 60 * 60 * 24)
+      (1000 * 60 * 60 * 24),
   );
 
   return Math.abs(diff);

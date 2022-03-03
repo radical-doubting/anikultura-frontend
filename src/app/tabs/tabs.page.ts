@@ -17,7 +17,7 @@ export class TabsPage {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   public async showConfirm() {

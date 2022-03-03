@@ -18,19 +18,19 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) {}
 
   public canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): Promise<boolean> {
     return this.isAuthenticated();
   }
 
   public canActivateChild(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): Promise<boolean> {
     return this.isAuthenticated();
   }

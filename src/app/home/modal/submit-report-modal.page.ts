@@ -3,16 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { CropService } from 'src/app/services/crop.service';
-import { FarmerReportService } from 'src/app/services/farmer-report.service';
-import { PhotoService } from 'src/app/services/photo.service';
-import { Crop, SeedStage } from 'src/app/types/crop.type';
+import { CropService } from '../../services/crop.service';
+import { FarmerReportService } from '../../services/farmer-report.service';
+import { PhotoService } from '../../services/photo.service';
+import { Crop, SeedStage } from '../../types/crop.type';
 import {
+  FarmerReportPhoto,
   FarmerReport,
   FarmerReportBody,
-  FarmerReportPhoto,
-} from 'src/app/types/farmer-report.type';
-import { Farmland } from 'src/app/types/farmland.type';
+} from '../../types/farmer-report.type';
+import { Farmland } from '../../types/farmland.type';
 
 @Component({
   selector: 'app-submit-report-modal',
@@ -42,21 +42,21 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     private toastController: ToastController,
     private farmerReportService: FarmerReportService,
     private cropService: CropService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {}
 
   public ngOnInit(): void {
     this.subscriptions.add(
       this.photoService.getCurrentPhoto().subscribe((data) => {
         this.currentPhoto = data;
-      })
+      }),
     );
 
     if (this.isFirstTimeToReport()) {
       this.subscriptions.add(
         this.cropService.getCrops().subscribe((data) => {
           this.crops = data;
-        })
+        }),
       );
     }
 
@@ -99,8 +99,8 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
         },
         async (error) => {
           await this.toast('Failed to submit farmer report');
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -115,8 +115,8 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
           },
           async (error) => {
             await this.toast('Failed to upload image');
-          }
-        )
+          },
+        ),
     );
   }
 

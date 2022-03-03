@@ -23,7 +23,7 @@ export class FarmerReportService {
 
   public uploadFarmerReportImage(
     { id }: FarmerReport,
-    { dataUrl }: FarmerReportPhoto
+    { dataUrl }: FarmerReportPhoto,
   ): Observable<void> {
     const formData = new FormData();
     formData.append('image', this.dataURIToBlob(dataUrl));
