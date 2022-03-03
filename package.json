@@ -1,19 +1,25 @@
 {
-  "name": "anikultura",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "anikultura-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Radical Doubting",
+  "homepage": "https://github.com/Radical-Doubting/anikultura-frontend#readme",
+  "bugs": {
+    "url": "https://github.com/Radical-Doubting/anikultura-frontend/issues"
+  },
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "npx ionic serve --external",
     "build": "npx ionic build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
-    "e2e": "ng e2e",
-    "postinstall": "husky install"
+    "test": "npx ng test",
+    "lint": "npx ng lint",
+    "lint:fix": "npx ng lint --fix",
+    "e2e": "npx ng e2e",
+    "postinstall": "npx husky install"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "~12.1.1",
     "@angular/compiler": "~12.1.1",
@@ -76,9 +82,5 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"
-  },
-  "description": "An Ionic project",
-  "engines": {
-    "node": "16.x"
   }
 }
