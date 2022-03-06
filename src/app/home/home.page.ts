@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { getDaysFromNowToDate } from '../helpers/time.helper';
 import { CropService } from '../services/crop.service';
 import { FarmerReportService } from '../services/farmer-report.service';
@@ -39,6 +39,8 @@ export class HomePage implements OnInit, OnDestroy {
   private farmerReportHookSubscription: Subscription;
   private seedStageHookSubscriptions: Subscription;
 
+  private hasLoadedSubject = new BehaviorSubject<boolean>(false);
+
   constructor(
     private photoService: PhotoService,
     private cropService: CropService,
@@ -46,11 +48,16 @@ export class HomePage implements OnInit, OnDestroy {
     private farmerReportService: FarmerReportService,
     private formBuilder: FormBuilder,
     private modalController: ModalController,
+    private loadingController: LoadingController,
   ) {}
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     this.setupForm();
+
+    await this.showLoadingDialog();
+
     this.setupFarmlandHooks();
+    this.setupLoadingDialogDismiss();
   }
 
   public ngOnDestroy(): void {
@@ -75,7 +82,6 @@ export class HomePage implements OnInit, OnDestroy {
       this.photoService.clearPhoto();
 
       if (data?.success) {
-        console.log('called');
         this.setupFarmlandHooks();
       }
     });
@@ -125,9 +131,12 @@ export class HomePage implements OnInit, OnDestroy {
 
     this.farmlandSelectionSubscription = this.farmlandSelectionForm
       .get('farmland')
-      .valueChanges.subscribe((selectedFarmlandId) => {
+      .valueChanges.subscribe(async (selectedFarmlandId) => {
         const selectedFarmland = this.getFarmland(selectedFarmlandId);
         this.currentFarmland = selectedFarmland;
+
+        await this.showLoadingDialog();
+
         this.setupFarmerReportHooks(selectedFarmland);
         this.retrieveSeedStage(selectedFarmland);
       });
@@ -154,8 +163,6 @@ export class HomePage implements OnInit, OnDestroy {
 
         this.setupFarmerReportHooks(this.currentFarmland);
         this.retrieveSeedStage(this.currentFarmland);
-
-        console.log('called farmland hooks');
       });
   }
 
@@ -171,6 +178,7 @@ export class HomePage implements OnInit, OnDestroy {
         this.plantedFarmerReport = this.getPlantedFarmerReport(data);
 
         this.computeEstimates();
+        this.hasLoadedSubject.next(true);
       });
   }
 
@@ -182,7 +190,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.seedStageHookSubscriptions = new Subscription();
 
     this.seedStageHookSubscriptions.add(
-      this.cropService.getCurrentSeedStage(farmland).subscribe((data) => {
+      this.cropService.getCurrentSeedStage(farmland).subscribe(async (data) => {
         this.currentSeedStage = data;
         this.currentSeedStageImagePath =
           this.cropService.getSeedStageImagePath(data);
@@ -219,5 +227,35 @@ export class HomePage implements OnInit, OnDestroy {
     this.estimatedYieldDayLatest = getDaysFromNowToDate(
       new Date(estimatedYieldDateLatest),
     );
+  }
+
+  private async showLoadingDialog(): Promise<void> {
+    const existingDialog = await this.getExistingDialog();
+
+    if (existingDialog) {
+      return;
+    }
+
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Loading...',
+      spinner: 'dots',
+    });
+
+    await loading.present();
+  }
+
+  private setupLoadingDialogDismiss(): void {
+    this.hasLoadedSubject.asObservable().subscribe(async (hasLoaded) => {
+      const existingDialog = await this.getExistingDialog();
+
+      if (hasLoaded && existingDialog) {
+        await this.loadingController.dismiss();
+      }
+    });
+  }
+
+  private getExistingDialog(): Promise<HTMLIonLoadingElement> {
+    return this.loadingController.getTop();
   }
 }
