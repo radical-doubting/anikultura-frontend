@@ -26,6 +26,15 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @font-face {
-    font-family: "OpenSans";
-    src: local("OpenSans"), url(/assets/fonts/OpenSans/OpenSans-Regular.ttf) format("truetype");
-  }
+  font-family: "OpenSans";
+  src: local("OpenSans"), url(/assets/fonts/OpenSans/OpenSans-Regular.ttf) format("truetype");
+}
+
+:root {
+  --ion-color-secondary: #293d26;
+  --ion-color-secondary-rgb: 41, 61, 38;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #243621;
+  --ion-color-secondary-tint: #3e503c;
+}
