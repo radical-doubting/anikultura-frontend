@@ -6,7 +6,8 @@
         <form
           style="text-align: center"
           [formGroup]="loginForm"
-          (submit)="onSubmit(loginBtn)"
+          (keydown.enter)="onSubmit()"
+          (submit)="onSubmit()"
         >
           <h2 id="ani-title">Anikultura</h2>
           <ion-item lines="full">
@@ -30,7 +31,7 @@
           <ion-row>
             <ion-col style="display: flex; justify-content: center">
               <ion-button
-                #loginBtn
+                [disabled]="isSubmitted"
                 type="submit"
                 color="primary"
                 expand="block"

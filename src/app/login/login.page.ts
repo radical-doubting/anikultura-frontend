@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonButton, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
@@ -45,14 +45,13 @@ export class LoginPage implements OnInit {
       });
   }
 
-  public async onSubmit(loginButton: IonButton): Promise<void> {
+  public async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) {
       await this.toast('Login page missing some fields!');
       return;
     }
 
     this.isSubmitted = true;
-    loginButton.disabled = true;
 
     this.authService
       .login(this.loginForm.value)
@@ -69,7 +68,6 @@ export class LoginPage implements OnInit {
         },
         async (error) => {
           this.isSubmitted = false;
-          loginButton.disabled = false;
           await this.toast(`Failed to login: ${error.message}`);
         },
       );
