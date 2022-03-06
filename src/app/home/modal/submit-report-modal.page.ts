@@ -32,6 +32,7 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
   public farmerReportForm: FormGroup;
   public currentPhoto: FarmerReportPhoto;
   public crops: Crop[] = [];
+  public isSubmitted: boolean;
 
   private subscriptions = new Subscription();
 
@@ -82,7 +83,7 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     return this.currentCrop !== null;
   }
 
-  public async submitReport() {
+  public async submitReport(): Promise<void> {
     const body: FarmerReportBody = {
       farmerReport: this.farmerReportForm.value,
     };
@@ -92,12 +93,15 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
       return;
     }
 
+    this.isSubmitted = true;
+
     this.subscriptions.add(
       this.farmerReportService.submitFarmerReport(body).subscribe(
-        async (data) => {
+        (data) => {
           this.uploadPhoto(data);
         },
         async (error) => {
+          this.isSubmitted = false;
           await this.toast('Failed to submit farmer report');
         },
       ),

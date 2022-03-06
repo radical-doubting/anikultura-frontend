@@ -1,25 +1,49 @@
 <ion-content>
   <div id="ani-wrapper">
     <ion-card style="width: 500px">
-      <div id="ani-login-banner">
-      </div>
+      <div id="ani-login-banner"></div>
       <ion-card-content style="padding: 10px">
-        <form style="text-align: center;" [formGroup]="loginForm" (submit)="onSubmit(loginBtn)">
+        <form
+          style="text-align: center"
+          [formGroup]="loginForm"
+          (keydown.enter)="onSubmit()"
+          (submit)="onSubmit()"
+        >
           <h2 id="ani-title">Anikultura</h2>
           <ion-item lines="full">
             <ion-label position="floating">Username</ion-label>
-            <ion-input type="text" name="username" formControlName="username"></ion-input>
+            <ion-input
+              type="text"
+              name="username"
+              formControlName="username"
+            ></ion-input>
           </ion-item>
 
           <ion-item lines="full">
             <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" name="password" formControlName="password"></ion-input>
+            <ion-input
+              type="password"
+              name="password"
+              formControlName="password"
+            ></ion-input>
           </ion-item>
 
           <ion-row>
-            <ion-col style="display:flex;justify-content: center;">
-              <ion-button #loginBtn type="submit" color="primary" expand="block" style="height: 40px; width: 250px;">
-                Sign In
+            <ion-col style="display: flex; justify-content: center">
+              <ion-button
+                [disabled]="isSubmitted"
+                type="submit"
+                color="primary"
+                expand="block"
+                style="height: 40px; width: 250px"
+              >
+                <div
+                  *ngIf="!isSubmitted; then showSignIn else showLoading"
+                ></div>
+                <ng-template #showSignIn>Log In</ng-template>
+                <ng-template #showLoading>
+                  Logging In <ion-spinner name="dots"></ion-spinner>
+                </ng-template>
               </ion-button>
             </ion-col>
           </ion-row>

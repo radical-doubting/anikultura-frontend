@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonButton, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { AuthPayload, LoginBody } from '../types/auth-payload.type';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +12,7 @@ import { AuthPayload, LoginBody } from '../types/auth-payload.type';
 })
 export class LoginPage implements OnInit {
   public loginForm: FormGroup;
+  public isSubmitted: boolean;
 
   constructor(
     private router: Router,
@@ -27,24 +27,31 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.authService.getLoggedInUser().subscribe(async (user) => {
-      if (user?.profile?.isTutorialDone) {
-        this.router.navigate(['/dashboard/home']);
-      } else {
-        this.router.navigate(['/tutorial']);
-      }
+    this.authService
+      .getLoggedInUser()
+      .pipe(first())
+      .subscribe(async (user) => {
+        if (user === null) {
+          return;
+        }
 
-      await this.toast('You are already logged in!');
-    });
+        if (user?.profile?.isTutorialDone) {
+          this.router.navigate(['/dashboard/home']);
+        } else {
+          this.router.navigate(['/tutorial']);
+        }
+
+        await this.toast('You are already logged in!');
+      });
   }
 
-  public async onSubmit(loginButton: IonButton): Promise<void> {
+  public async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) {
       await this.toast('Login page missing some fields!');
       return;
     }
 
-    loginButton.disabled = true;
+    this.isSubmitted = true;
 
     this.authService
       .login(this.loginForm.value)
@@ -60,7 +67,7 @@ export class LoginPage implements OnInit {
           await this.toast('Successfully logged in!');
         },
         async (error) => {
-          loginButton.disabled = false;
+          this.isSubmitted = false;
           await this.toast(`Failed to login: ${error.message}`);
         },
       );

@@ -1,50 +1,63 @@
 <ion-content style="border-radius: 50px">
-    <div style="padding: 0.5em">
-        <h1>Magsumite ng report</h1>
-        <ion-item-divider class="divider"></ion-item-divider>
+  <div style="padding: 0.5em">
+    <h1>Magsumite ng report</h1>
+    <ion-item-divider class="divider"></ion-item-divider>
 
-        <div id="ani-wrapper">
-            <button id="aniButton" (click)="takePhoto()">
-                Kumuha ng litrato ng iyong patunay
-            </button>
-        </div>
-
-        <p class="helper">Bubuksan nito ang iyong camera</p>
-
-
-        <div *ngIf="hasPhoto()">
-            <div id="ani-wrapper">
-                <img class="taken-img" [src]="currentPhoto.dataUrl" />
-            </div>
-        </div>
-
-        <form [formGroup]="farmerReportForm" (submit)="submitReport()">
-            <div *ngIf="isFirstTimeToReport() && hasPhoto()">
-                <ion-item lines="full">
-                    <ion-label position="floating">Ano ang iyong itatanim?</ion-label>
-                    <ion-select type="input" name="cropId" formControlName="cropId">
-                        <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
-                            {{ crop.name }}
-                        </ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </div>
-
-            <div *ngIf="isMarketable() && hasPhoto()">
-                <ion-item lines="full">
-                    <ion-label position="floating">Ilan ang iyong aktwal na nakilong bunga?</ion-label>
-                    <ion-input type="text" name="volumeKg" formControlName="volumeKg"></ion-input>
-                </ion-item>
-            </div>
-
-            <div *ngIf="hasPhoto()" style="margin-top: 1em">
-                <div id="ani-wrapper">
-                    <button #loginBtn type="submit" id="aniButton">
-                        Isumite ang report
-                    </button>
-                </div>
-                <p class="helper">Ang iyong report ay susuriin pa ng iyong tagapamahala</p>
-            </div>
-        </form>
+    <div id="ani-wrapper">
+      <ion-button color="secondary" (click)="takePhoto()">
+        Kumuha ng litrato ng iyong patunay
+      </ion-button>
     </div>
+
+    <p class="helper">Bubuksan nito ang iyong camera</p>
+
+    <div *ngIf="hasPhoto()">
+      <div id="ani-wrapper">
+        <img class="taken-img" [src]="currentPhoto.dataUrl" />
+      </div>
+    </div>
+
+    <form [formGroup]="farmerReportForm" (submit)="submitReport()">
+      <div *ngIf="isFirstTimeToReport() && hasPhoto()">
+        <ion-item lines="full">
+          <ion-label position="floating">Ano ang iyong itatanim?</ion-label>
+          <ion-select type="input" name="cropId" formControlName="cropId">
+            <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
+              {{ crop.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div *ngIf="isMarketable() && hasPhoto()">
+        <ion-item lines="full">
+          <ion-label position="floating"
+            >Ilan ang iyong aktwal na nakilong bunga?</ion-label
+          >
+          <ion-input
+            type="text"
+            name="volumeKg"
+            formControlName="volumeKg"
+          ></ion-input>
+        </ion-item>
+      </div>
+
+      <div *ngIf="hasPhoto()" style="margin-top: 1em">
+        <div id="ani-wrapper">
+          <ion-button [disabled]="isSubmitted" type="submit" color="secondary">
+            <div *ngIf="!isSubmitted; then showSubmit else showLoading"></div>
+
+            <ng-template #showSubmit>Isumite ang report</ng-template>
+            <ng-template #showLoading>
+              Sinusumite ang report
+              <ion-spinner name="dots"></ion-spinner>
+            </ng-template>
+          </ion-button>
+        </div>
+        <p class="helper">
+          Ang iyong report ay susuriin pa ng iyong tagapamahala
+        </p>
+      </div>
+    </form>
+  </div>
 </ion-content>
