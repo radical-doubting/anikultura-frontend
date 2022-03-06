@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { IonButton, ToastController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { AuthPayload, LoginBody } from '../types/auth-payload.type';
 
 @Component({
   selector: 'app-login',
@@ -28,19 +27,22 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.authService.getLoggedInUser().subscribe(async (user) => {
-      if (user === null) {
-        return;
-      }
+    this.authService
+      .getLoggedInUser()
+      .pipe(first())
+      .subscribe(async (user) => {
+        if (user === null) {
+          return;
+        }
 
-      if (user?.profile?.isTutorialDone) {
-        this.router.navigate(['/dashboard/home']);
-      } else {
-        this.router.navigate(['/tutorial']);
-      }
+        if (user?.profile?.isTutorialDone) {
+          this.router.navigate(['/dashboard/home']);
+        } else {
+          this.router.navigate(['/tutorial']);
+        }
 
-      await this.toast('You are already logged in!');
-    });
+        await this.toast('You are already logged in!');
+      });
   }
 
   public async onSubmit(loginButton: IonButton): Promise<void> {
