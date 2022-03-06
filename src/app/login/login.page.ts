@@ -13,6 +13,7 @@ import { AuthPayload, LoginBody } from '../types/auth-payload.type';
 })
 export class LoginPage implements OnInit {
   public loginForm: FormGroup;
+  public isSubmitted: boolean;
 
   constructor(
     private router: Router,
@@ -28,6 +29,10 @@ export class LoginPage implements OnInit {
     });
 
     this.authService.getLoggedInUser().subscribe(async (user) => {
+      if (user === null) {
+        return;
+      }
+
       if (user?.profile?.isTutorialDone) {
         this.router.navigate(['/dashboard/home']);
       } else {
@@ -44,6 +49,7 @@ export class LoginPage implements OnInit {
       return;
     }
 
+    this.isSubmitted = true;
     loginButton.disabled = true;
 
     this.authService
@@ -60,6 +66,7 @@ export class LoginPage implements OnInit {
           await this.toast('Successfully logged in!');
         },
         async (error) => {
+          this.isSubmitted = false;
           loginButton.disabled = false;
           await this.toast(`Failed to login: ${error.message}`);
         },
