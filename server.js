@@ -1,9 +1,12 @@
 require('dotenv').config();
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const compression = require('compression');
 const express = require('express');
+
 const app = express();
 
+app.use(compression());
 app.use(
   createProxyMiddleware('/api/', {
     target: process.env.PROXY_URL,
@@ -11,7 +14,7 @@ app.use(
     pathRewrite: {
       '^/api': '',
     },
-  })
+  }),
 );
 
 app.use(express.static('./www'));
