@@ -118,7 +118,7 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
             await this.toast('Successfully submitted farmer report');
           },
           async (error) => {
-            await this.toast('Failed to upload image');
+            await this.toast('Failed to upload image: ' + error.message);
           },
         ),
     );
