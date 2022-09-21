@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "Anikultura",
+    "welcome_text": "Welcome to Anikultura"
+  },
+
+  "profile": {
+    "title": "Farmer Profile",
+    "changelang_title": "Change Language:"
+  },
+
+  "tutorial": {
+    "title": "Anikultura!",
+    "welcome_text": "Welcome to "
+  }
+}

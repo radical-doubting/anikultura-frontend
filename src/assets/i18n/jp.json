@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "アニクルトラ!",
+    "welcome_text": "アニクルトラへようこそ！"
+  },
+
+  "profile": {
+    "title": "農家プロフィール",
+    "changelang_title": "言語:"
+  },
+
+  "tutorial": {
+    "title": "アニクルトラへ!",
+    "welcome_text": "ようこそ "
+  }
+}
