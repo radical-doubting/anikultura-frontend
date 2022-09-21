@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SubmitReportModalPage } from './modal/submit-report-modal.page';
     ExploreContainerComponentModule,
     HomeRoutingModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   declarations: [HomePage, SubmitReportModalPage],
 })

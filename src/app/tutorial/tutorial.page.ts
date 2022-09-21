@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { FarmerService } from '../services/farmer.service';
+import { TranslateConfigService } from '../services/translate-config.service';
 import { User } from '../types/user.type';
 
 @Component({
@@ -20,7 +21,11 @@ export class TutorialPage implements OnInit, OnDestroy {
 
   private homeRoute = '/dashboard/home';
 
-  constructor(private router: Router, private farmerService: FarmerService) {}
+  constructor(
+    private router: Router,
+    private farmerService: FarmerService,
+    private translateConfigService: TranslateConfigService,
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "Anikultura",
+    "welcome_text": "Maligayang pagdating sa Anikultura!"
+  },
+
+  "profile": {
+    "title": "Profile ng Magsasaka",
+    "changelang_title": "Palitan ang Wika:"
+  },
+
+  "tutorial": {
+    "title": "Anikultura!",
+    "welcome_text": "Maligayang pagdating "
+  }
+}
