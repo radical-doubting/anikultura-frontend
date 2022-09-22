@@ -52,4 +52,8 @@ export class TutorialPage implements OnInit, OnDestroy {
   public resetTutorial() {
     this.router.navigate(['/tutorial']);
   }
+
+  changeLang(type: string) {
+    this.translateConfigService.changeLanguage(type);
+  }
 }

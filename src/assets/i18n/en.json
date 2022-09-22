@@ -1,16 +1,78 @@
 {
   "home": {
     "title": "Anikultura",
-    "welcome_text": "Welcome to Anikultura"
+    "welcome_text": "Welcome to Anikultura",
+    "report-button-header": "You can proceed if ",
+    "report-button-footer": "A photo must be taken before submitting a report",
+    "camera-button": "Take a photo of your proof",
+    "camera-footer": "This will open your camera",
+    "seed-confirmation": "What will you plant?",
+    "image-submission": "Your report will be reviewed by the admin",
+    "stage-1_title": "Start submitting a report",
+    "stage-1_button": "Received Starter Kit ",
+    "stage-2_title": "The Starter Kit has been Received",
+    "stage-2_button": "The seeds have been planted",
+    "stage-3_title": "The seeds have been planted",
+    "stage-3_button": "The seeds have been transplanted into the batch",
+    "stage-4_title": "The seeds have been transplanted into the batch",
+    "stage-4_button": "The plant will start to grow and soon yield results",
+    "stage-5_title": "The plant will start to grow and soon yield results",
+    "stage-5_button": "The plant blooms and gradually yields results",
+    "stage-6_title": "The plant blooms and gradually yields results",
+    "stage-6_button": "The crops have already bore fruit and are about to be harvested",
+    "stage-7_title": "The crops have already bore fruit and are about to be harvested",
+    "stage-7_button": "I have harvested my crops",
+    "stage-8_title": "I have harvested my crops",
+    "stage-8_button": "The crops can be sold!",
+    "pagtatapos": "Congratulations!",
+
+    "profit-header": "Expecting... ",
+    "bilang-na-araw": " days",
+    "profit-footer": "The time it takes for your crops to bear fruit",
+    "expected-profit": "Expected Profits: ",
+    "expected-yield": "Expected Yield: ",
+    "submitted-reports": "..."
+
   },
 
   "profile": {
     "title": "Farmer Profile",
-    "changelang_title": "Change Language:"
+    "changelang_title": "Palitan ang lingwahe:",
+    "date_joined": "Sumali nung ",
+    "affil_org": "Kabahaging Organisasyon",
+    "profile_training": "Sinalihang TESDA Training",
+    "profile_age": " taong gulang",
+
+    "button_back_1": "Bumalik sa Farmer Dashboard"
+
+
   },
 
   "tutorial": {
+    "org_name": "Anikultura",
     "title": "Anikultura!",
-    "welcome_text": "Welcome to "
+
+    "tutorial_text_1": "Welcome to ",
+    "tutorial_text_1-1": "Press the 'next' button or swipe the screen to turn to the next page",
+    "tutorial_title_2": "How to use Anikultura?",
+    "tutorial_text_2": "First, the local manager will provide the details to log in to Anikultura. Use your 'username' and 'password' to log in, never share and forget your account information.",
+    "tutorial_title_3": "What should you do after you log in?",
+    "tutorial_text_3": "After you enter or log in to Anikultura, it will take you to the page where you can submit your 'report' to the admin with just one click. At the bottom of the page, there is a button to go to your Profile or to Logout. See the photo on the next page.",
+    "tutorial_text_3-1": "Here you can see the green button that serves as a way to submit your planting progress. After pressing the button, a photo will pop up to confirm your submission before proceeding to the next stage.",
+    "tutorial_text_3-2": "This is what you will see below the page after you log in. You can now go to your Profile, Log out, or return to the Dashboard where you can see the details of the total number of your crops.",
+    "tutorial_title_4": "What else can I do besides submitting a report?",
+    "tutorial_text_4": "The expected profit and yield amount information will become available. ",
+    "tutorial_text_4-1": "While continuing to follow the stages expected by the admin, when your progress has reached the point where you have planted your crops in a batch, ",
+    "tutorial_text_4-2": " will provide an expected date to proceed to the next stage, expected profits, and expected yield amount.",
+    "tutorial_text_4-3": "This is an example photo where the expected income yield amount from planted fruits or vegetables can be seen. It also shows the admin's expected date before the farmer submits the report.",
+    "tutorial_title_5": "Are you ready to use Anikultura?",
+    "tutorial_text_5": "Press the ",
+    "tutorial_text_5-1": " button if you want to leave the tutorial, or press the ",
+    "tutorial_text_5-2": " button if you want to restart the tutorial.",
+
+    "button_next_1": "Next",
+    "button_next_2": "I am ready!",
+    "button_back_2": "Repeat",
+    "button_back_1": "Back"
   }
 }

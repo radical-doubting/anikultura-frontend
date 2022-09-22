@@ -13,8 +13,8 @@
         <div id="ani-cover"></div>
         <div id="ani-avatar"></div>
         <h1 style="text-align:center">{{ farmer.firstName }} {{ farmer.middleName }} {{ farmer.lastName }}</h1>
-        <p style="color: #a5a5a5; font-size: 12px; font-weight: normal;text-align: center; margin-top: -10px">
-          {{ farmer.name }} | Sumali nung {{ farmer.profile.joinedAt | date: 'MMMM dd, YYYY' }}
+        <p routerLink='/profile' translate style="color: #a5a5a5; font-size: 12px; font-weight: normal;text-align: center; margin-top: -10px">
+          {{ farmer.name }} | <p1 routerLink='/profile' translate style="color: #a5a5a5; font-size: 12px; font-weight: normal;text-align: center; margin-top: -10px">profile.date_joined</p1>{{ farmer.profile.joinedAt | date: 'MMMM dd, YYYY' }}
         </p>
         <ion-grid style="padding: 20px; margin-bottom: 10px">
           <ion-row>
@@ -25,7 +25,7 @@
               </ion-chip>
               <ion-chip color="tertiary">
                 <ion-icon name="happy-outline"></ion-icon>
-                <ion-label>{{ farmer.profile.age }} years old</ion-label>
+                <ion-label>{{ farmer.profile.age }} <ion-label routerLink='/profile' translate>profile.profile_age</ion-label></ion-label>
               </ion-chip>
               <ion-chip color="success">
                 <ion-icon name="person-outline"></ion-icon>
@@ -33,16 +33,16 @@
               </ion-chip>
             </ion-col>
             <ion-col style="text-align: right">
-              <p style="text-decoration: underline">Kabahaging Organisasyon</p>
+              <p style="text-decoration: underline" routerLink='/profile' translate>profile.affil_org</p>
               Jacob-Cummings
-              <p style="text-decoration: underline; margin-top: 10px">Sinalihang TESDA Training</p>
+              <p style="text-decoration: underline; margin-top: 10px" routerLink='/profile' translate>profile.profile_training</p>
               Bradtake and Sons
             </ion-col>
           </ion-row>
         </ion-grid>
         <div style="text-align: center; margin-bottom: 20px">
-          <button id="aniButton" (click)="onReturn()">
-            Bumalik sa farmer dashboard
+          <button id="aniButton" (click)="onReturn()" routerLink='/profile' translate>
+            profile.button_back_1
           </button>
         </div>
       </ion-card-content>
