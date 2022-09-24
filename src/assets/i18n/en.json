@@ -51,7 +51,7 @@
   "tutorial": {
     "org_name": "Anikultura",
     "title": "Anikultura!",
-
+    "tutorial_language_1": "Choose your preferred language, you can change it after this tutorial.",
     "tutorial_text_1": "Welcome to ",
     "tutorial_text_1-1": "Press the 'next' button or swipe the screen to turn to the next page",
     "tutorial_title_2": "How to use Anikultura?",

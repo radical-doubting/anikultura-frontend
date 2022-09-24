@@ -1,15 +1,39 @@
 <ion-content>
     <ion-slides class="ani-tutorial" #slides pager="true" [options]="slideOpts">
         <ion-slide>
+          <div class="ani-tutorial-container">
+            <div style="width: 80%; margin: auto auto; text-align: center">
+              <ion-list>
+                <ion-item style="font-size:12vw; text-align: center;">
+                  <ion-select
+                    placeholder="Language"
+                    (ionChange)="handleChange($event)"
+                  >
+                    <ion-select-option value="fil">Tagalog</ion-select-option>
+                    <ion-select-option value="jp">Cebuano</ion-select-option>
+                    <ion-select-option value="en">Ingles</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <br/>
+              <p routerLink='/tutorial' translate>tutorial.tutorial_language_1</p>
+            </div>
+            <br/>
+            <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
+              tutorial.button_next_1
+            </button>
+          </div>
+        </ion-slide>
+        <ion-slide>
             <div class="ani-tutorial-container">
-              <button (click)="changeLang('fil')">Filipino</button>
-              <button (click)="changeLang('jp')">Japonk</button>
-              <button (click)="changeLang('en')">English</button>
-                <h1 routerLink='/tutorial' translate>tutorial.tutorial_text_1<b routerLink='/tutorial' translate>tutorial.title</b></h1>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_1-1</p>
-                <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                  tutorial.button_next_1
-                </button>
+              <h1 routerLink='/tutorial' translate>tutorial.tutorial_text_1<b routerLink='/tutorial' translate>tutorial.title</b></h1>
+              <p routerLink='/tutorial' translate>tutorial.tutorial_text_1-1</p>
+              <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
+                tutorial.button_back_1
+              </button>&nbsp;&nbsp;
+              <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
+                tutorial.button_next_1
+              </button>
             </div>
         </ion-slide>
         <ion-slide>
