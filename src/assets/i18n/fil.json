@@ -31,7 +31,7 @@
       "profit-footer": "Ang aabutin bago mamunga ang iyong mga pananim",
       "expected-profit": "Maaring kitain: ",
       "expected-yield": "Maaring bunga: ",
-      "submitted-reports": "..."
+      "submitted-reports": "Naisumiteng report"
 
     },
 
@@ -42,7 +42,6 @@
       "affil_org": "Kabahaging Organisasyon",
       "profile_training": "Sinalihang TESDA Training",
       "profile_age": " taong gulang",
-
       "button_back_1": "Bumalik sa Farmer Dashboard"
 
 
@@ -74,5 +73,12 @@
       "button_next_2": "Handa na!",
       "button_back_2": "Ulitin",
       "button_back_1": "Bumalik"
+    },
+
+    "logout":{
+      "logout_header": "Gusto mo na ba mag log-out?",
+      "logout_body": "Kapag nag-logout ay kailangan muli mag log-in gamit ang username at password",
+      "logout_true": "Oo, logout na ako",
+      "logout_false": "Hindi muna"
     }
   }

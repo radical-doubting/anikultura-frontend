@@ -31,7 +31,7 @@
     "profit-footer": "The time it takes for your crops to bear fruit",
     "expected-profit": "Expected Profits: ",
     "expected-yield": "Expected Yield: ",
-    "submitted-reports": "..."
+    "submitted-reports": "Submitted Reports"
 
   },
 
@@ -74,5 +74,13 @@
     "button_next_2": "I am ready!",
     "button_back_2": "Repeat",
     "button_back_1": "Back"
+  },
+
+  "logout":{
+    "header": "Do you want to logout?",
+    "body": "You have to use your username and password again if you want to access the dashboard whenever yo logged out.",
+    "true": "Yes, I'm logging out",
+    "false": "Not yet"
   }
+
 }
