@@ -35,10 +35,7 @@ export class HomePage implements OnInit, OnDestroy {
   public estimatedProfit: number;
   public estimatedYieldAmount: number;
 
-  private farmlandSelectionSubscription: Subscription;
-  private farmlandHookSubscription: Subscription;
-  private farmerReportHookSubscription: Subscription;
-  private seedStageHookSubscriptions: Subscription;
+  private subscriptions = new Subscription();
 
   private hasLoadedSubject = new BehaviorSubject<boolean>(false);
 
@@ -54,6 +51,7 @@ export class HomePage implements OnInit, OnDestroy {
   ) {}
 
   public async ngOnInit(): Promise<void> {
+    this.setupLanguage();
     this.setupForm();
 
     await this.showLoadingDialog();
@@ -63,10 +61,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.farmlandSelectionSubscription?.unsubscribe();
-    this.farmlandHookSubscription?.unsubscribe();
-    this.farmerReportHookSubscription?.unsubscribe();
-    this.seedStageHookSubscriptions?.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   public async onBeginSubmitFarmerReport() {
@@ -126,32 +121,41 @@ export class HomePage implements OnInit, OnDestroy {
     return this.cropService.translateSeedStagePastTense(seedStage);
   }
 
+  private setupLanguage(): void {
+    this.subscriptions.add(
+      this.translateConfigService.getLanguagePreference().subscribe((data) => {
+        this.translateConfigService.changeLanguage(data.language);
+      }),
+    );
+  }
+
   private setupForm() {
     this.farmlandSelectionForm = this.formBuilder.group({
       farmland: ['', Validators.required],
     });
 
-    this.farmlandSelectionSubscription = this.farmlandSelectionForm
-      .get('farmland')
-      .valueChanges.subscribe(async (selectedFarmlandId) => {
-        const selectedFarmland = this.getFarmland(selectedFarmlandId);
-        this.currentFarmland = selectedFarmland;
+    this.subscriptions.add(
+      this.farmlandSelectionForm
+        .get('farmland')
+        .valueChanges.subscribe(async (selectedFarmlandId) => {
+          const selectedFarmland = this.getFarmland(selectedFarmlandId);
+          this.currentFarmland = selectedFarmland;
 
-        await this.showLoadingDialog();
+          await this.showLoadingDialog();
 
-        this.setupFarmerReportHooks(selectedFarmland);
-        this.retrieveSeedStage(selectedFarmland);
-      });
+          this.setupFarmerReportHooks(selectedFarmland);
+          this.retrieveSeedStage(selectedFarmland);
+        }),
+    );
   }
 
   private setupFarmlandHooks() {
-    if (this.farmlandHookSubscription) {
-      this.farmlandHookSubscription.unsubscribe();
-    }
+    // if (this.farmlandHookSubscription) {
+    //   this.farmlandHookSubscription.unsubscribe();
+    // }
 
-    this.farmlandHookSubscription = this.farmlandService
-      .getFarmlands()
-      .subscribe((farmlands) => {
+    this.subscriptions.add(
+      this.farmlandService.getFarmlands().subscribe((farmlands) => {
         this.farmlands = farmlands;
         const firstFarmland = farmlands[0];
 
@@ -165,33 +169,36 @@ export class HomePage implements OnInit, OnDestroy {
 
         this.setupFarmerReportHooks(this.currentFarmland);
         this.retrieveSeedStage(this.currentFarmland);
-      });
+      }),
+    );
   }
 
   private setupFarmerReportHooks(currentFarmland: Farmland) {
-    if (this.farmerReportHookSubscription) {
-      this.farmerReportHookSubscription.unsubscribe();
-    }
+    // if (this.farmerReportHookSubscription) {
+    //   this.farmerReportHookSubscription.unsubscribe();
+    // }
 
-    this.farmerReportHookSubscription = this.farmerReportService
-      .getFarmerReports(currentFarmland)
-      .subscribe((data) => {
-        this.submittedFarmerReports = data;
-        this.plantedFarmerReport = this.getPlantedFarmerReport(data);
+    this.subscriptions.add(
+      this.farmerReportService
+        .getFarmerReports(currentFarmland)
+        .subscribe((data) => {
+          this.submittedFarmerReports = data;
+          this.plantedFarmerReport = this.getPlantedFarmerReport(data);
 
-        this.computeEstimates();
-        this.hasLoadedSubject.next(true);
-      });
+          this.computeEstimates();
+          this.hasLoadedSubject.next(true);
+        }),
+    );
   }
 
   private retrieveSeedStage(farmland: Farmland) {
-    if (this.seedStageHookSubscriptions) {
-      this.seedStageHookSubscriptions.unsubscribe();
-    }
+    // if (this.seedStageHookSubscriptions) {
+    //   this.seedStageHookSubscriptions.unsubscribe();
+    // }
 
-    this.seedStageHookSubscriptions = new Subscription();
+    const seedStageHookSubscriptions = new Subscription();
 
-    this.seedStageHookSubscriptions.add(
+    seedStageHookSubscriptions.add(
       this.cropService.getCurrentSeedStage(farmland).subscribe(async (data) => {
         this.currentSeedStage = data;
         this.currentSeedStageImagePath =
@@ -199,11 +206,13 @@ export class HomePage implements OnInit, OnDestroy {
       }),
     );
 
-    this.seedStageHookSubscriptions.add(
+    seedStageHookSubscriptions.add(
       this.cropService.getNextSeedStage(farmland).subscribe((data) => {
         this.nextSeedStage = data;
       }),
     );
+
+    this.subscriptions.add(seedStageHookSubscriptions);
   }
 
   private computeEstimates(): void {
