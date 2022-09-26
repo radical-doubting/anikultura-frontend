@@ -96,29 +96,16 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     this.isSubmitted = true;
 
     this.subscriptions.add(
-      this.farmerReportService.submitFarmerReport(body).subscribe(
-        (data) => {
-          this.uploadPhoto(data);
-        },
-        async (error) => {
-          this.isSubmitted = false;
-          await this.toast('Failed to submit farmer report');
-        },
-      ),
-    );
-  }
-
-  public uploadPhoto(farmerReport: FarmerReport) {
-    this.subscriptions.add(
       this.farmerReportService
-        .uploadFarmerReportImage(farmerReport, this.currentPhoto)
+        .submitFarmerReport(body, this.currentPhoto)
         .subscribe(
           async (data) => {
             this.modalController.dismiss({ success: true });
             await this.toast('Successfully submitted farmer report');
           },
           async (error) => {
-            await this.toast('Failed to upload image: ' + error.message);
+            this.isSubmitted = false;
+            await this.toast('Failed to submit farmer report');
           },
         ),
     );

@@ -15,22 +15,17 @@ import { Farmland } from '../types/farmland.type';
 export class FarmerReportService {
   constructor(private http: HttpClient) {}
 
-  public submitFarmerReport(body: FarmerReportBody): Observable<FarmerReport> {
-    return this.http
-      .post<FarmerReport>('/api/farmer-reports', body)
-      .pipe(map((data) => data));
-  }
-
-  public uploadFarmerReportImage(
-    { id }: FarmerReport,
-    { dataUrl }: FarmerReportPhoto,
-  ): Observable<void> {
+  public submitFarmerReport(
+    body: FarmerReportBody,
+    photo: FarmerReportPhoto,
+  ): Observable<FarmerReport> {
     const formData = new FormData();
-    formData.append('image', this.dataURIToBlob(dataUrl));
+    formData.append('image', this.dataURIToBlob(photo.dataUrl));
+    formData.append('data', JSON.stringify(body.farmerReport));
 
     return this.http
-      .post<FarmerReport>(`/api/farmer-reports/${id}/upload`, formData)
-      .pipe(map((data) => {}));
+      .post<FarmerReport>('/api/farmer-reports', formData)
+      .pipe(map((data) => data));
   }
 
   public getFarmerReports({ id }: Farmland): Observable<FarmerReport[]> {
