@@ -63,10 +63,10 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.farmlandSelectionSubscription.unsubscribe();
-    this.farmlandHookSubscription.unsubscribe();
-    this.farmerReportHookSubscription.unsubscribe();
-    this.seedStageHookSubscriptions.unsubscribe();
+    this.farmlandSelectionSubscription?.unsubscribe();
+    this.farmlandHookSubscription?.unsubscribe();
+    this.farmerReportHookSubscription?.unsubscribe();
+    this.seedStageHookSubscriptions?.unsubscribe();
   }
 
   public async onBeginSubmitFarmerReport() {
