@@ -8,6 +8,7 @@
     "camera-button": "Take a photo of your proof",
     "camera-footer": "This will open your camera",
     "seed-confirmation": "What will you plant?",
+    "seed-missing": "You need to have allocated seeds. Please contact an admin or big brother.",
     "marketable-confirmation": "How much did you actually produce?",
     "submit-report": "Submit report",
     "submitting-report": " Submitting report",
