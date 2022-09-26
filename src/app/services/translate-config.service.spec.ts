@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -8,7 +9,7 @@ describe('TranslateConfigService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
     });
     service = TestBed.inject(TranslateConfigService);
   });

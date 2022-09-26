@@ -21,7 +21,6 @@ export function rootLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -25,11 +25,11 @@
               </ion-chip>
               <ion-chip color="tertiary">
                 <ion-icon name="happy-outline"></ion-icon>
-                <ion-label>{{ farmer.profile.age }} <ion-label routerLink='/profile' translate>profile.profile_age</ion-label></ion-label>
+                <ion-label>{{ getAge(farmer.profile.birthday) }} <ion-label routerLink='/profile' translate>profile.profile_age</ion-label></ion-label>
               </ion-chip>
               <ion-chip color="success">
                 <ion-icon name="person-outline"></ion-icon>
-                <ion-label>{{ getGender(farmer.profile.gender) }}</ion-label>
+                <ion-label>{{ farmer.profile.gender }}</ion-label>
               </ion-chip>
             </ion-col>
             <ion-col style="text-align: right">

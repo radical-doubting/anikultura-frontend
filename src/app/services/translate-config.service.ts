@@ -1,15 +1,35 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ApiResponse } from '../types/api.type';
+import { LanguagePreference, LanguageOption } from '../types/language.type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslateConfigService {
-  constructor(private translateService: TranslateService) {
-    this.translateService.use('fil'); //This is setting which is the default language
+  constructor(
+    private http: HttpClient,
+    private translateService: TranslateService,
+  ) {}
+
+  public getLanguagePreference(): Observable<LanguagePreference> {
+    return this.http
+      .get<ApiResponse<LanguagePreference>>('/api/farmers/language')
+      .pipe(map(({ data }) => data));
   }
 
-  changeLanguage(type: string) {
-    this.translateService.use(type);
+  public updateLanguagePreference(option: LanguageOption): Observable<void> {
+    const body = { language: option };
+
+    return this.http
+      .patch<any>('/api/farmers/language', body)
+      .pipe(map((data) => {}));
+  }
+
+  public changeLanguage(option: LanguageOption): void {
+    this.translateService.use(option);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { TranslateConfigService } from '../services/translate-config.service';
-import { User } from '../types/user.type';
+import { User, UserProfile } from '../types/user.type';
 
 @Component({
   selector: 'app-profile',
@@ -24,18 +24,12 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  public onReturn() {
-    this.router.navigate(['/dashboard/home']);
+  public getAge(birthday: string): number {
+    const timeDiff = Math.abs(Date.now() - new Date(birthday).getTime());
+    return Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
   }
 
-  public getGender(genderRaw: string): string {
-    switch (genderRaw) {
-      case '1':
-        return 'Male';
-      case '2':
-        return 'Female';
-      default:
-        return 'Unspecified';
-    }
+  public onReturn() {
+    this.router.navigate(['/dashboard/home']);
   }
 }

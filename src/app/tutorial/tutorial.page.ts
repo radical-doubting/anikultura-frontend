@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { FarmerService } from '../services/farmer.service';
 import { TranslateConfigService } from '../services/translate-config.service';
+import { LanguageOption } from '../types/language.type';
 import { User } from '../types/user.type';
 
 @Component({
@@ -22,6 +23,7 @@ export class TutorialPage implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   private homeRoute = '/dashboard/home';
+  private chosenLanguage: LanguageOption = 'fil_PH';
 
   constructor(
     private router: Router,
@@ -30,6 +32,8 @@ export class TutorialPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.translateConfigService.changeLanguage(this.chosenLanguage);
+
     this.subscriptions.add(
       this.farmerService.getTutorialState().subscribe((data) => {
         if (data) {
@@ -49,17 +53,24 @@ export class TutorialPage implements OnInit, OnDestroy {
         this.router.navigate([this.homeRoute]);
       }),
     );
+
+    this.subscriptions.add(
+      this.translateConfigService
+        .updateLanguagePreference(this.chosenLanguage)
+        .subscribe((data) => {}),
+    );
   }
 
-  public resetTutorial() {
+  public resetTutorial(): void {
     this.router.navigate(['/tutorial']);
   }
 
-  public pushLog(msg: string) {
+  public pushLog(msg: string): void {
     this.logs.unshift(msg);
   }
 
-  public handleChange(e) {
-    this.translateConfigService.changeLanguage(e.detail.value);
+  public handleChange(e): void {
+    this.chosenLanguage = e.detail.value;
+    this.translateConfigService.changeLanguage(this.chosenLanguage);
   }
 }

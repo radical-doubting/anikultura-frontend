@@ -22,8 +22,9 @@
           </ion-item>
         </form>
 
-        <h1 *ngIf="currentSeedStage; else noCurrentSeedStage" style="padding-top: 1em;">{{
-          translateSeedStage(currentSeedStage) }}</h1>
+        <h1 *ngIf="currentSeedStage; else noCurrentSeedStage" style="padding-top: 1em;" translate>
+          {{ translateSeedStage(currentSeedStage) }}
+        </h1>
         <ng-template #noCurrentSeedStage>
           <h1 style="padding-top: 1em;"routerLink='/home' translate>home.stage-1_title</h1>
         </ng-template>
@@ -37,7 +38,7 @@
 
         <p style="margin-bottom: 0.75em" routerLink='/home' translate>home.report-button-header</p>
 
-        <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()">
+        <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()" translate>
           {{ translateSeedStage(nextSeedStage) }}
         </button>
 

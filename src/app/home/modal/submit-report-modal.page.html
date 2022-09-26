@@ -1,15 +1,15 @@
 <ion-content style="border-radius: 50px">
   <div style="padding: 0.5em">
-    <h1>Magsumite ng report</h1>
+    <h1 translate>home.report-modal-header</h1>
     <ion-item-divider class="divider"></ion-item-divider>
 
     <div id="ani-wrapper">
-      <ion-button color="secondary" (click)="takePhoto()">
-        Kumuha ng litrato ng iyong patunay
+      <ion-button color="secondary" (click)="takePhoto()" translate>
+        home.camera-button
       </ion-button>
     </div>
 
-    <p class="helper">Bubuksan nito ang iyong camera</p>
+    <p class="helper" translate>home.camera-footer</p>
 
     <div *ngIf="hasPhoto()">
       <div id="ani-wrapper">
@@ -19,20 +19,28 @@
 
     <form [formGroup]="farmerReportForm" (submit)="submitReport()">
       <div *ngIf="isFirstTimeToReport() && hasPhoto()">
-        <ion-item lines="full">
-          <ion-label position="floating">Ano ang iyong itatanim?</ion-label>
-          <ion-select type="input" name="cropId" formControlName="cropId">
-            <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
-              {{ crop.name }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
+        <div *ngIf="hasCrops(); else missingSeeds">
+          <ion-item lines="full">
+            <ion-label position="floating" translate>
+              home.seed-confirmation
+            </ion-label>
+            <ion-select type="input" name="cropId" formControlName="cropId">
+              <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
+                {{ crop.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <ng-template #missingSeeds>
+          <p class="missing-seeds" translate>home.seed-missing</p>
+        </ng-template>
       </div>
 
       <div *ngIf="isMarketable() && hasPhoto()">
         <ion-item lines="full">
-          <ion-label position="floating"
-            >Ilan ang iyong aktwal na nakilong bunga?</ion-label
+          <ion-label position="floating" translate>
+            home.marketable-confirmation</ion-label
           >
           <ion-input
             type="text"
@@ -42,21 +50,24 @@
         </ion-item>
       </div>
 
-      <div *ngIf="hasPhoto()" style="margin-top: 1em">
+      <div *ngIf="hasPhoto() && hasCrops()" style="margin-top: 1em">
         <div id="ani-wrapper">
-          <ion-button [disabled]="isSubmitted" type="submit" color="secondary">
+          <ion-button
+            [disabled]="isSubmitted"
+            type="submit"
+            color="secondary"
+            translate
+          >
             <div *ngIf="!isSubmitted; then showSubmit else showLoading"></div>
 
-            <ng-template #showSubmit>Isumite ang report</ng-template>
+            <ng-template #showSubmit>home.submit-report</ng-template>
             <ng-template #showLoading>
-              Sinusumite ang report
+              home.submitting-report
               <ion-spinner name="dots"></ion-spinner>
             </ng-template>
           </ion-button>
         </div>
-        <p class="helper">
-          Ang iyong report ay susuriin pa ng iyong tagapamahala
-        </p>
+        <p class="helper" translate>home.image-submission</p>
       </div>
     </form>
   </div>

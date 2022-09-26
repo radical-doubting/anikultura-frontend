@@ -24,28 +24,26 @@ describe('HomePage', () => {
   let fixture: ComponentFixture<HomePage>;
   let httpMock: HttpTestingController;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [HomePage],
-        imports: [
-          IonicModule.forRoot(),
-          ExploreContainerComponentModule,
-          ReactiveFormsModule,
-          HttpClientTestingModule,
-          RouterTestingModule.withRoutes([]),
-          TranslateModule.forRoot(),
-        ],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [HomePage],
+      imports: [
+        IonicModule.forRoot(),
+        ExploreContainerComponentModule,
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
+      ],
+    }).compileComponents();
 
-      injector = getTestBed();
-      httpMock = injector.inject(HttpTestingController);
+    injector = getTestBed();
+    httpMock = injector.inject(HttpTestingController);
 
-      fixture = TestBed.createComponent(HomePage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    }),
-  );
+    fixture = TestBed.createComponent(HomePage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -83,6 +83,10 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     return this.currentCrop !== null;
   }
 
+  public hasCrops(): boolean {
+    return this.crops.length > 0;
+  }
+
   public async submitReport(): Promise<void> {
     const body: FarmerReportBody = {
       farmerReport: this.farmerReportForm.value,

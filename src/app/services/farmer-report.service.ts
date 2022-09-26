@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiResponse } from '../types/api.type';
 import {
   FarmerReport,
   FarmerReportBody,
@@ -24,14 +25,14 @@ export class FarmerReportService {
     formData.append('data', JSON.stringify(body.farmerReport));
 
     return this.http
-      .post<FarmerReport>('/api/farmer-reports', formData)
-      .pipe(map((data) => data));
+      .post<ApiResponse<FarmerReport>>('/api/farmer-reports', formData)
+      .pipe(map(({ data }) => data));
   }
 
   public getFarmerReports({ id }: Farmland): Observable<FarmerReport[]> {
     return this.http
-      .get<FarmerReport[]>(`/api/farmer-reports/${id}`)
-      .pipe(map((data) => data));
+      .get<ApiResponse<FarmerReport[]>>(`/api/farmer-reports/${id}`)
+      .pipe(map(({ data }) => data));
   }
 
   private dataURIToBlob(dataURI: string) {
