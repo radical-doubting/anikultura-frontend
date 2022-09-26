@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  public getAge(birthday: Date): number {
+  public getAge(birthday: string): number {
     const timeDiff = Math.abs(Date.now() - new Date(birthday).getTime());
     return Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
   }
