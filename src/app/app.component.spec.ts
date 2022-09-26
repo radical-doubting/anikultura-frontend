@@ -7,18 +7,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [AppComponent],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        imports: [
-          HttpClientTestingModule,
-          ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [
+        HttpClientTestingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+      ],
+    }).compileComponents();
+  }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

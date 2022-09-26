@@ -13,26 +13,24 @@ describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [LoginPage],
-        imports: [
-          IonicModule.forRoot(),
-          RouterTestingModule.withRoutes([
-            { path: 'tutorial', component: TutorialPage },
-            { path: 'dashboard/home', component: HomePage },
-          ]),
-          HttpClientModule,
-          ReactiveFormsModule,
-        ],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginPage],
+      imports: [
+        IonicModule.forRoot(),
+        RouterTestingModule.withRoutes([
+          { path: 'tutorial', component: TutorialPage },
+          { path: 'dashboard/home', component: HomePage },
+        ]),
+        HttpClientModule,
+        ReactiveFormsModule,
+      ],
+    }).compileComponents();
 
-      fixture = TestBed.createComponent(LoginPage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    }),
-  );
+    fixture = TestBed.createComponent(LoginPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
