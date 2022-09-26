@@ -12,20 +12,7 @@ import { User } from '../types/user.type';
   styleUrls: ['tutorial.page.scss'],
 })
 export class TutorialPage implements OnInit, OnDestroy {
-
   logs: string[] = [];
-
-  pushLog(msg) {
-    this.logs.unshift(msg);
-  }
-  
-  // changeLang(type: string) {
-    // this.translateConfigService.changeLanguage(type);
-  // }
-  
-  handleChange(e) {
-    this.translateConfigService.changeLanguage(e.detail.value);
-  }
 
   public slideOpts = {
     initialSlide: 0,
@@ -66,5 +53,13 @@ export class TutorialPage implements OnInit, OnDestroy {
 
   public resetTutorial() {
     this.router.navigate(['/tutorial']);
+  }
+
+  public pushLog(msg: string) {
+    this.logs.unshift(msg);
+  }
+
+  public handleChange(e) {
+    this.translateConfigService.changeLanguage(e.detail.value);
   }
 }

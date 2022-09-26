@@ -7,7 +7,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TabsPage } from './tabs.page';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule, TranslateModule],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    TabsPageRoutingModule,
+    TranslateModule,
+  ],
   declarations: [TabsPage],
 })
 export class TabsPageModule {}
