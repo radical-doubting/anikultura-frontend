@@ -1,187 +1,259 @@
 <ion-content>
-    <ion-slides class="ani-tutorial" #slides pager="true" [options]="slideOpts">
-        <ion-slide>
-          <div class="ani-tutorial-container">
-            <div style="width: 80%; margin: auto auto; text-align: center">
-              <ion-list>
-                <ion-item style="font-size:12vw; text-align: center;">
-                  <ion-select
-                    placeholder="Language"
-                    (ionChange)="handleChange($event)"
-                    value="fil_PH"
-                  >
-                    <ion-select-option value="fil_PH">Filipino</ion-select-option>
-                    <ion-select-option value="ceb">Cebuano</ion-select-option>
-                    <ion-select-option value="en">Ingles</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list>
-              <br/>
-              <p routerLink='/tutorial' translate>tutorial.tutorial_language_1</p>
-            </div>
-            <br/>
-            <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-              tutorial.button_next_1
-            </button>
-          </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-              <h1 routerLink='/tutorial' translate>tutorial.tutorial_text_1<b routerLink='/tutorial' translate>tutorial.title</b></h1>
-              <p routerLink='/tutorial' translate>tutorial.tutorial_text_1-1</p>
-              <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                tutorial.button_back_1
-              </button>&nbsp;&nbsp;
-              <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                tutorial.button_next_1
-              </button>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h1 style="color: #232224" routerLink='/tutorial' translate>tutorial.tutorial_title_2</h1>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                        tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_2</h2>
-                <img src="../assets/tutorial/login-tutorial.png" style="width: 380px"/>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_2</p>
-                    <div style="display:flex; justify-content: center;">
-                        <button  style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()"  routerLink='/tutorial' translate>
-                          tutorial.button_back_1
-                        </button>&nbsp;&nbsp;
-                        <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                          tutorial.button_next_1
-                        </button>
-                    </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h1 style="color: #232224" routerLink='/tutorial' translate>tutorial.tutorial_title_3</h1>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_3</h2>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_3</p>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_3</h2>
-                <img src="../assets/tutorial/farmer-submit-tutorial.png" style="width: 400px"/>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_3-1</p>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_3</h2>
-                <img src="../assets/tutorial/navbar-tutorial.png" style="width: 500px"/>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_3-2
-                </p>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h1 style="color: #232224" routerLink='/tutorial' translate>tutorial.tutorial_title_4</h1>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_4</h2>
-                <img src="../assets/tutorial/tanim-tutorial.png" style="width: 360px"/>
-                <p routerLink='/tutorial' translate><b translate>tutorial.tutorial_text_4</b>tutorial.tutorial_text_4-1<b translate>tutorial.org_name</b> tutorial.tutorial_text_4-2</p>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h2 routerLink='/tutorial' translate>tutorial.tutorial_title_4</h2>
-                <img src="../assets/tutorial/stats-tutorial.png" style="width: 360px"/>
-                <p routerLink='/tutorial' translate><b translate>tutorial.tutorial_text_4</b>tutorial.tutorial_text_4-3
-                </p>
-                <div style="display:flex; justify-content: center;">
-                    <button style="background-color: rgb(63, 113, 223)" id="aniButton" (click)="slides.slidePrev()" routerLink='/tutorial' translate>
-                      tutorial.button_back_1
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="slides.slideNext()" routerLink='/tutorial' translate>
-                      tutorial.button_next_1
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="ani-tutorial-container">
-                <h1 routerLink='/tutorial' translate>tutorial.tutorial_title_5</h1>
-                <img src="../assets/stages/stage8.png" style="width: 700px"/>
-                <p routerLink='/tutorial' translate>tutorial.tutorial_text_5<b translate>tutorial.button_next_2</b>tutorial.tutorial_text_5-1
-                  <b translate>tutorial.button_back_2</b>tutorial.tutorial_text_5-2</p>
-                <div style="display:flex; justify-content: center;">
-                    <button id="aniButton" style="background-color: rgb(209, 83, 83)" (click)="slides.slideTo(1, 500)" routerLink='/tutorial' translate>
-                      tutorial.button_back_2
-                    </button>&nbsp;&nbsp;
-                    <button id="aniButton" (click)="onFinish()" routerLink='/tutorial' translate>
-                      tutorial.button_next_2
-                    </button>
-                </div>
-            </div>
-        </ion-slide>
-    </ion-slides>
+  <ion-slides class="ani-tutorial" #slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <div style="width: 80%; margin: auto auto; text-align: center">
+          <ion-list>
+            <ion-item style="font-size: 12vw; text-align: center">
+              <ion-select
+                placeholder="Language"
+                (ionChange)="handleChange($event)"
+                value="fil_PH"
+              >
+                <ion-select-option value="fil_PH">Filipino</ion-select-option>
+                <ion-select-option value="ceb">Cebuano</ion-select-option>
+                <ion-select-option value="en">English</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br />
+          <p translate>tutorial.tutorial_language_1</p>
+        </div>
+        <br />
+        <button id="aniButton" (click)="slides.slideNext()" translate>
+          tutorial.button_next_1
+        </button>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h1 translate>
+          tutorial.tutorial_text_1<b translate>tutorial.title</b>
+        </h1>
+        <p translate>tutorial.tutorial_text_1-1</p>
+        <button
+          style="background-color: rgb(63, 113, 223)"
+          id="aniButton"
+          (click)="slides.slidePrev()"
+          translate
+        >
+          tutorial.button_back_1</button
+        >&nbsp;&nbsp;
+        <button id="aniButton" (click)="slides.slideNext()" translate>
+          tutorial.button_next_1
+        </button>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h1 style="color: #232224" translate>tutorial.tutorial_title_2</h1>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_2</h2>
+        <img src="../assets/tutorial/login-tutorial.png" style="width: 380px" />
+        <p translate>tutorial.tutorial_text_2</p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h1 style="color: #232224" translate>tutorial.tutorial_title_3</h1>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_3</h2>
+        <p translate>tutorial.tutorial_text_3</p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_3</h2>
+        <img
+          src="../assets/tutorial/farmer-submit-tutorial.png"
+          style="width: 400px"
+        />
+        <p translate>tutorial.tutorial_text_3-1</p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_3</h2>
+        <img
+          src="../assets/tutorial/navbar-tutorial.png"
+          style="width: 500px"
+        />
+        <p translate>tutorial.tutorial_text_3-2</p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h1 style="color: #232224" translate>tutorial.tutorial_title_4</h1>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_4</h2>
+        <img src="../assets/tutorial/tanim-tutorial.png" style="width: 360px" />
+        <p translate>
+          <b translate>tutorial.tutorial_text_4</b>tutorial.tutorial_text_4-1<b
+            translate
+            >tutorial.org_name</b
+          >
+          tutorial.tutorial_text_4-2
+        </p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h2 translate>tutorial.tutorial_title_4</h2>
+        <img src="../assets/tutorial/stats-tutorial.png" style="width: 360px" />
+        <p translate>
+          <b translate>tutorial.tutorial_text_4</b>tutorial.tutorial_text_4-3
+        </p>
+        <div style="display: flex; justify-content: center">
+          <button
+            style="background-color: rgb(63, 113, 223)"
+            id="aniButton"
+            (click)="slides.slidePrev()"
+            translate
+          >
+            tutorial.button_back_1</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="slides.slideNext()" translate>
+            tutorial.button_next_1
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ani-tutorial-container">
+        <h1 translate>tutorial.tutorial_title_5</h1>
+        <img src="../assets/stages/stage8.png" style="width: 700px" />
+        <p translate>
+          tutorial.tutorial_text_5<b translate>tutorial.button_next_2</b
+          >tutorial.tutorial_text_5-1
+          <b translate>tutorial.button_back_2</b>tutorial.tutorial_text_5-2
+        </p>
+        <div style="display: flex; justify-content: center">
+          <button
+            id="aniButton"
+            style="background-color: rgb(209, 83, 83)"
+            (click)="slides.slideTo(1, 500)"
+            translate
+          >
+            tutorial.button_back_2</button
+          >&nbsp;&nbsp;
+          <button id="aniButton" (click)="onFinish()" translate>
+            tutorial.button_next_2
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
