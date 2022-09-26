@@ -4,7 +4,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { TranslateConfigService } from '../services/translate-config.service';
 
 import { ProfilePage } from './profile.page';
 
@@ -21,6 +23,7 @@ describe('ProfilePage', () => {
           ExploreContainerComponentModule,
           RouterTestingModule,
           HttpClientTestingModule,
+          TranslateModule.forRoot(),
         ],
       }).compileComponents();
 

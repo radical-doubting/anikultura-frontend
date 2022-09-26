@@ -1,0 +1,83 @@
+{
+  "home": {
+    "title": "Anikultura",
+    "welcome_text": "Welcome sa Anikultura",
+    "report-button-header": "Mahimo nimong ipadayon kung ",
+    "report-button-footer": "Kinahanglang kuhaan og litrato sa dili pa mosumiter og report",
+    "camera-button": "Pagkuha og litrato sa imong pruweba",
+    "camera-footer": "Kini magbukas sa imong camera",
+    "seed-confirmation": "Unsa imong itanom?",
+    "image-submission": "Ang imong report susihon sa admin",
+    "stage-1_title": "Pagsugod sa pagsumite ug report",
+    "stage-1_button": "Nakadawat Starter Kit ",
+    "stage-2_title": "Nadawat na ang Starter Kit",
+    "stage-2_button": "Gitanom na ang mga liso",
+    "stage-3_title": "Gitanom na ang mga liso",
+    "stage-3_button": "Ang mga liso gitanom na sa yuta",
+    "stage-4_title": "Ang mga liso gitanom na sa yuta",
+    "stage-4_button": "Ang tanom motubo ug sa dili madugay mamunga",
+    "stage-5_title": "Ang tanom motubo ug sa dili madugay mamunga",
+    "stage-5_button": "Ang tanom mamulak ug anam-anam nga mamunga",
+    "stage-6_title": "Ang tanom mamulak ug anam-anam nga mamunga",
+    "stage-6_button": "Ang mga tanom namunga na ug hapit na anihon",
+    "stage-7_title": "Ang mga tanom namunga na ug hapit na anihon",
+    "stage-7_button": "Naani na nako ang akong mga pananom",
+    "stage-8_title": "Naani na nako ang akong mga pananom",
+    "stage-8_button": "Mahimong ibaligya ang mga tanum!",
+    "pagtatapos": "Congratulations, kanimo!",
+
+    "profit-header": "Gipaabot...",
+    "bilang-na-araw": "niadtong adlawa",
+    "profit-footer": "Ang panahon nga gikinahanglan aron mamunga ang imong mga tanom",
+    "expected-profit": "Mahimo kang mokita: ",
+    "expected-yield": "Posibleng mga resulta: ",
+    "submitted-reports": "Gisumite nga report"
+
+  },
+
+  "profile": {
+    "title": "Profile sa Mag-uuma",
+    "changelang_title": "Usba ang pinulongan:",
+    "date_joined": "Apil unya ",
+    "affil_org": "Nag-apil nga Organisasyon",
+    "profile_training": "Miapil sa TESDA Training",
+    "profile_age": " anyos",
+    "button_back_1": "Balik sa Dashboard sa Mag-uuma"
+
+  },
+
+  "tutorial": {
+    "org_name": "Anikultura",
+    "title": "Anikultura!",
+    "tutorial_language_1": "Pagpili og usa ka pinulongan, mahimo nimo kini usbon pagkahuman niini nga panudlo.",
+    "tutorial_text_1": "Welcome sa ",
+    "tutorial_text_1-1": "Pindota ang 'sunod' o i-swipe ang screen aron makaadto sa sunod nga panid.",
+    "tutorial_title_2": "Giunsa paggamit ang Anikultura?",
+    "tutorial_text_2": "Una, ang lokal nga manedyer mohatag sa mga detalye sa pagsulod sulod sa Anikultura. Gamita ug itago ang 'username' ug 'password' para maka-log in, ayaw pag-apod-apod ug kalimti kini.",
+    "tutorial_title_3": "Unsa ang buhaton pagkahuman sa pag-login?",
+    "tutorial_text_3": "Pagkahuman sa pagsulod o pag-log in sa Anikultura, dad-on ka sa panid diin sa usa lang ka pag-klik mahimo nimong isumite ang imong 'report' sa manager. Sa ubos mao ang buton aron makaadto sa imong Profile, o Logout. Tan-awa ang sunod nga litrato.",
+    "tutorial_text_3-1": "Dinhi imong makita ang berde nga buton nga nagsilbi nga paagi sa pagsumite sa pag-uswag sa pagtanum. Sa diha nga ang buton gipugos usa ka litrato ang giplano sa dili pa mopadayon sa sunod nga yugto.",
+    "tutorial_text_3-2": "Kini ang imong makita sa ubos pagkahuman sa imong pag-login. Mahimo kang moadto sa imong Profile, mag log out, o mobalik sa Dashboard diin imong makita ang mga detalye sa imong total nga ihap sa pagpananom.",
+    "tutorial_title_4": "Unsa pa ang akong mahimo gawas sa pagsumite sa usa ka taho?",
+    "tutorial_text_4": "Makita ang pagpaabot sa pagpananom.",
+    "tutorial_text_4-1": "Samtang nagpadayon sa pagsunod sa mga yugto nga gipaabot sa manedyer, kung ang imong pag-uswag makaabot sa punto diin imong gitanom ang imong mga tanum sa husto nga uma, ang",
+    "tutorial_text_4-2": " sa gipaabot nga adlaw sa pag-abante sa sunod nga yugto, gipaabot nga ganansya, ug gipaabot nga gidaghanon sa mga ani.",
+    "tutorial_text_4-3": "Kini usa ka pananglitan sa usa ka litrato diin makita ang gipaabot nga kita o gidaghanon sa mga ani gikan sa gitanom nga prutas o utanon. Gipakita usab niini ang gipaabot nga adlaw sa tagdumala sa dili pa isumite sa mag-uuma ang taho.",
+    "tutorial_title_5": "Andam ka ba sa paggamit sa Anikultura?",
+    "tutorial_text_5": "Iduso ang",
+    "tutorial_text_5-1": " kung gusto nga laktawan ang tutorial, o i-press ",
+    "tutorial_text_5-2": " kung gusto ka mubalik sa sinugdanan.",
+
+    "button_next_1": "Sunod",
+    "button_next_2": "Andam na!",
+    "button_back_2": "Balika",
+    "button_back_1": "Balik ka"
+  },
+
+  "logout":{
+    "logout_header": "Gusto ba nimong mag log out?",
+    "logout_body": "Kung mo-log out ka, kinahanglan ka nga mag-log in gamit ang username ug password",
+    "logout_true": "Oo, naka-log out ko",
+    "logout_false": "Dili una"
+  }
+}

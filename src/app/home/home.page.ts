@@ -7,6 +7,7 @@ import { CropService } from '../services/crop.service';
 import { FarmerReportService } from '../services/farmer-report.service';
 import { FarmlandService } from '../services/farmland.service';
 import { PhotoService } from '../services/photo.service';
+import { TranslateConfigService } from '../services/translate-config.service';
 import { Crop, SeedStage } from '../types/crop.type';
 import { FarmerReport } from '../types/farmer-report.type';
 import { Farmland } from '../types/farmland.type';
@@ -49,6 +50,7 @@ export class HomePage implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private modalController: ModalController,
     private loadingController: LoadingController,
+    private translateConfigService: TranslateConfigService,
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -61,10 +63,10 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.farmlandSelectionSubscription.unsubscribe();
-    this.farmlandHookSubscription.unsubscribe();
-    this.farmerReportHookSubscription.unsubscribe();
-    this.seedStageHookSubscriptions.unsubscribe();
+    this.farmlandSelectionSubscription?.unsubscribe();
+    this.farmlandHookSubscription?.unsubscribe();
+    this.farmerReportHookSubscription?.unsubscribe();
+    this.seedStageHookSubscriptions?.unsubscribe();
   }
 
   public async onBeginSubmitFarmerReport() {

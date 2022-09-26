@@ -1,0 +1,84 @@
+{
+    "home": {
+      "title": "Anikultura",
+      "welcome_text": "Maligayang pagdating sa ",
+      "report-button-header": "Maari kang magpatuloy kung",
+      "report-button-footer": "Kailangan kumuha ng litrato bago magsumite ng report",
+      "camera-button": "Kumuha ng litrato ng iyong patunay",
+      "camera-footer": "Bubuksan nito ang iyong kamera",
+      "seed-confirmation": "Ano ang iyong itatanim",
+      "image-submission": "Ang iyong report ay susuriin pa ng iyong tagapamahala",
+      "stage-1_title": "Simulan ang pagsumite ng report",
+      "stage-1_button": "Nakuha na ang Starter Kit",
+      "stage-2_title": "Nakuha na ang Starter Kit",
+      "stage-2_button": "Natanim na ang mga buto",
+      "stage-3_title": "Natanim na ang mga buto",
+      "stage-3_button": "Nailipat na ang mga buto sa lupang tataniman",
+      "stage-4_title": "Nailipat na ang mga buto sa lupang tataniman",
+      "stage-4_button": "Malalago at malapit na magbunga ang tanim",
+      "stage-5_title": "Malalago at malapit na magbunga ang tanim",
+      "stage-5_button": "Namumulaklak at unti-unting nagbubunga ang tanim",
+      "stage-6_title": "Namumulaklak at unti-unting nagbubunga ang tanim",
+      "stage-6_button": "Namunga na ang mga tanim at malapit na anihin",
+      "stage-7_title": "Namunga na ang mga tanim at malapit na anihin",
+      "stage-7_button": "Naani ko na ang aking mga tanim",
+      "stage-8_title": "Naani ko na ang aking mga tanim",
+      "stage-8_button": "Maaring ibenta ang mga pananim!",
+      "pagtatapos": "Maligaying bati, sa 'yo!",
+
+      "profit-header": "Inaasahang...",
+      "bilang-na-araw": "na araw",
+      "profit-footer": "Ang aabutin bago mamunga ang iyong mga pananim",
+      "expected-profit": "Maaring kitain: ",
+      "expected-yield": "Maaring bunga: ",
+      "submitted-reports": "Naisumiteng report"
+
+    },
+
+    "profile": {
+      "title": "Farmer Profile",
+      "changelang_title": "Palitan ang lingwahe:",
+      "date_joined": "Sumali nung ",
+      "affil_org": "Kabahaging Organisasyon",
+      "profile_training": "Sinalihang TESDA Training",
+      "profile_age": " taong gulang",
+      "button_back_1": "Bumalik sa Farmer Dashboard"
+
+
+    },
+
+    "tutorial": {
+      "org_name": "Anikultura",
+      "title": "Anikultura!",
+      "tutorial_language_1": "Pumili ng lengwahe, puwede mo ito maiba pagkatapos ng tutorial na ito.",
+      "tutorial_text_1": "Maligayang Pagdating sa ",
+      "tutorial_text_1-1": "Pindutin ang 'susunod' o i-swipe ang screen para pumunta sa sunod na pahina.",
+      "tutorial_title_2": "Paano magamit ang Anikultura?",
+      "tutorial_text_2": "Una, ibibigay ng lokal na tagapamahala ang mga detalye upang makapasok sa loob ng Anikultura. Gamitin at ingatan ang 'username' at 'password' upang makapag-login, huwag ipamahagi at kalimutan ito.",
+      "tutorial_title_3": "Ano gagawin pagkatapos mag-login?",
+      "tutorial_text_3": "Pagkatapos pumasok o mag-login sa Anikultura, dadalhin ka nito sa pahina kung saan sa isang pindot lamang ay mai-isumite mo na ang iyong 'report' sa tagapamahala. Sa ilalim ay may pindutan upang pumunta sa iyong Profile, o mag Logout. Tignan ang litrato sa susunod.",
+      "tutorial_text_3-1": "Makikita rito ang kulay green na pindutan na nagsisilbing paraan upang magsumite ng progreso sa pagtatanim. Kapag pinindot ang button ay may inaasahang litrato bago magpatuloy sa susunod na yugto.",
+      "tutorial_text_3-2": "Ito ang makikita sa ilalim pagkatapos mong mag-login. Maari ka na pumunta sa iyong Profile, mag-logout, o bumalik sa Dashboard kung saan makikita ang detalye ng kalahatang bilang ng iyong pagtatanim.",
+      "tutorial_title_4": "Ano pa ang kaya kong gawin maliban sa pagsumite ng report?",
+      "tutorial_text_4": "Makikita ang mga inaasahan sa pagtanim. ",
+      "tutorial_text_4-1": "Habang patuloy na sinusundan ang mga yugto na inaasahan ng tagapamahala, kapag ang yong progreso ay umabot na sa punto na naitanim mo na ang iyong mga pananim sa tamang taniman, magbibigay ang ",
+      "tutorial_text_4-2": " ng inaasahang araw upang umusad sa susunod na yugto, mga inaasahang kita, at inaasahang bilang ng maaani.",
+      "tutorial_text_4-3": "Ito ang halimbawa ng litrato kung saan makikita ang inaasahang kita o bilang ng maani sa tinanim na prutas o gulay. Nakikita rin dito ang inaasahang araw ng tagapamahala bago magsumite ang magsasaka ng report.",
+      "tutorial_title_5": "Handa ka na ba gamitin ang Anikultura?",
+      "tutorial_text_5": "Pindutin ang",
+      "tutorial_text_5-1": " kapag gusto na lumiban sa tutorial, o pindutin ang ",
+      "tutorial_text_5-2": " kung nais bumalik sa simula.",
+
+      "button_next_1": "Susunod",
+      "button_next_2": "Handa na!",
+      "button_back_2": "Ulitin",
+      "button_back_1": "Bumalik"
+    },
+
+    "logout":{
+      "logout_header": "Gusto mo na ba mag log-out?",
+      "logout_body": "Kapag nag-logout ay kailangan muli mag log-in gamit ang username at password",
+      "logout_true": "Oo, logout na ako",
+      "logout_false": "Hindi muna"
+    }
+  }
