@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { TranslateConfigService } from '../services/translate-config.service';
 import { User } from '../types/user.type';
 
 @Component({
@@ -11,7 +12,11 @@ import { User } from '../types/user.type';
 export class ProfilePage implements OnInit {
   public farmer: User;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private translateConfigService: TranslateConfigService,
+  ) {}
 
   ngOnInit(): void {
     this.authService.getLoggedInUser().subscribe((data) => {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { FarmerService } from '../services/farmer.service';
+import { TranslateConfigService } from '../services/translate-config.service';
 import { User } from '../types/user.type';
 
 @Component({
@@ -11,6 +12,8 @@ import { User } from '../types/user.type';
   styleUrls: ['tutorial.page.scss'],
 })
 export class TutorialPage implements OnInit, OnDestroy {
+  logs: string[] = [];
+
   public slideOpts = {
     initialSlide: 0,
     speed: 400,
@@ -20,7 +23,11 @@ export class TutorialPage implements OnInit, OnDestroy {
 
   private homeRoute = '/dashboard/home';
 
-  constructor(private router: Router, private farmerService: FarmerService) {}
+  constructor(
+    private router: Router,
+    private farmerService: FarmerService,
+    private translateConfigService: TranslateConfigService,
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -46,5 +53,13 @@ export class TutorialPage implements OnInit, OnDestroy {
 
   public resetTutorial() {
     this.router.navigate(['/tutorial']);
+  }
+
+  public pushLog(msg: string) {
+    this.logs.unshift(msg);
+  }
+
+  public handleChange(e) {
+    this.translateConfigService.changeLanguage(e.detail.value);
   }
 }

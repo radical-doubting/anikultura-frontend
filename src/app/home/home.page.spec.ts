@@ -14,6 +14,9 @@ import {
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { HomePage } from './home.page';
+import { TranslateConfigService } from '../services/translate-config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomePage', () => {
   let injector: TestBed;
@@ -30,6 +33,8 @@ describe('HomePage', () => {
           ExploreContainerComponentModule,
           ReactiveFormsModule,
           HttpClientTestingModule,
+          RouterTestingModule.withRoutes([]),
+          TranslateModule.forRoot(),
         ],
       }).compileComponents();
 
