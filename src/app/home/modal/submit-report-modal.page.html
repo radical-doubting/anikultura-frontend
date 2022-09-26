@@ -19,16 +19,22 @@
 
     <form [formGroup]="farmerReportForm" (submit)="submitReport()">
       <div *ngIf="isFirstTimeToReport() && hasPhoto()">
-        <ion-item lines="full">
-          <ion-label position="floating" translate>
-            home.seed-confirmation</ion-label
-          >
-          <ion-select type="input" name="cropId" formControlName="cropId">
-            <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
-              {{ crop.name }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
+        <div *ngIf="hasCrops(); else missingSeeds">
+          <ion-item lines="full">
+            <ion-label position="floating" translate>
+              home.seed-confirmation
+            </ion-label>
+            <ion-select type="input" name="cropId" formControlName="cropId">
+              <ion-select-option *ngFor="let crop of crops" [value]="crop.id">
+                {{ crop.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <ng-template #missingSeeds>
+          <p class="missing-seeds" translate>home.seed-missing</p>
+        </ng-template>
       </div>
 
       <div *ngIf="isMarketable() && hasPhoto()">
@@ -44,7 +50,7 @@
         </ion-item>
       </div>
 
-      <div *ngIf="hasPhoto()" style="margin-top: 1em">
+      <div *ngIf="hasPhoto() && hasCrops()" style="margin-top: 1em">
         <div id="ani-wrapper">
           <ion-button
             [disabled]="isSubmitted"
