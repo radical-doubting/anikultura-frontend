@@ -13,7 +13,9 @@ export class CropService {
   constructor(private http: HttpClient) {}
 
   public getCrops(): Observable<Crop[]> {
-    return this.http.get<Crop[]>('/api/crops').pipe(map((data) => data));
+    return this.http
+      .get<ApiResponse<Crop[]>>('/api/crops')
+      .pipe(map(({ data }) => data));
   }
 
   public getSeedAllocations(): Observable<SeedAllocation[]> {
