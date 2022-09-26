@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiResponse } from '../types/api.type';
 import { Crop, SeedAllocation, SeedStage } from '../types/crop.type';
 import { Farmland } from '../types/farmland.type';
 
@@ -17,21 +18,21 @@ export class CropService {
 
   public getSeedAllocations(): Observable<SeedAllocation[]> {
     return this.http
-      .get<SeedAllocation[]>('/api/crops/seed-allocation')
-      .pipe(map((data) => data));
+      .get<ApiResponse<SeedAllocation[]>>('/api/crops/seed-allocation')
+      .pipe(map(({ data }) => data));
   }
 
   public getCurrentSeedStage({ id }: Farmland): Observable<SeedStage> {
     const body = { farmlandId: id };
     return this.http
-      .post<SeedStage>('/api/crops/current-seed-stage', body)
+      .post<ApiResponse<SeedStage>>('/api/crops/current-seed-stage', body)
       .pipe(
-        map((data) => {
-          if (Object.keys(data).length === 0) {
+        map((response) => {
+          if (Object.keys(response).length === 0) {
             return null;
           }
 
-          return data;
+          return response.data;
         }),
       );
   }
@@ -39,15 +40,17 @@ export class CropService {
   public getNextSeedStage({ id }: Farmland): Observable<SeedStage> {
     const body = { farmlandId: id };
 
-    return this.http.post<SeedStage>('/api/crops/next-seed-stage', body).pipe(
-      map((data) => {
-        if (Object.keys(data).length === 0) {
-          return null;
-        }
+    return this.http
+      .post<ApiResponse<SeedStage>>('/api/crops/next-seed-stage', body)
+      .pipe(
+        map(({ data }) => {
+          if (Object.keys(data).length === 0) {
+            return null;
+          }
 
-        return data;
-      }),
-    );
+          return data;
+        }),
+      );
   }
 
   public translateSeedStagePastTense({ slug }: SeedStage): string {

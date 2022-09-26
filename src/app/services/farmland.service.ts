@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiResponse } from '../types/api.type';
 import { Farmland } from '../types/farmland.type';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class FarmlandService {
 
   public getFarmlands(): Observable<Farmland[]> {
     return this.http
-      .get<Farmland[]>('/api/farmlands')
-      .pipe(map((data) => data));
+      .get<ApiResponse<Farmland[]>>('/api/farmlands')
+      .pipe(map(({ data }) => data));
   }
 }
