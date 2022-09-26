@@ -118,7 +118,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public translateSeedStage(seedStage: SeedStage): string {
-    return this.cropService.translateSeedStagePastTense(seedStage);
+    return this.cropService.getSeedStageTranslationKey(seedStage);
   }
 
   private setupLanguage(): void {
