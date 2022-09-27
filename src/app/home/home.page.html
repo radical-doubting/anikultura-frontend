@@ -92,7 +92,7 @@
             <ion-col size="9" style="color:#202020;font-weight: bold;">
               <div *ngIf="farmerReport.isVerified; else unverified">
                 <span class="text"
-                  title="{{ 'Ang itong report ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}">
+                  title="{{ 'Ang itong report ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}" translate>
                   <!-- {{ i + 1 }}. -->
                   {{ translateSeedStage(farmerReport.seedStage) }}
                   <ion-icon name="checkmark-circle" color="primary"></ion-icon>
@@ -100,7 +100,7 @@
               </div>
 
               <ng-template #unverified>
-                <span class="text" title="Ang itong report ay hindi pa nasusuri">
+                <span class="text" title="Ang itong report ay hindi pa nasusuri" translate>
                   <!-- {{ i + 1 }}. -->
                   {{ translateSeedStage(farmerReport.seedStage) }}
                   <ion-icon title="unverified" name="checkmark-circle-outline" color="primary"></ion-icon>
