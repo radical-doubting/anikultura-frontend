@@ -55,7 +55,7 @@
         </ion-item-divider>
 
         <div class="ani-content" style="text-align: center; margin-bottom: 2em;">
-          <h1 style="font-size:50px; line-height: 50px; color:#242424" routerLink='/home' translate>{{ estimatedYieldDayEarliest }} - {{
+          <h1 style="font-size:50px; line-height: 50px; color:#242424" routerLink='/home'>{{ estimatedYieldDayEarliest }} - {{
             estimatedYieldDayLatest }} <h1 style="font-size:50px; line-height: 50px; color:#242424" translate>home.bilang-na-araw</h1></h1>
           <p routerLink='/home' translate>home.profit-footer</p>
         </div>
@@ -71,7 +71,7 @@
             <ion-col style="text-align: right">
               <ion-chip style="padding: 1.5em">
                 <ion-icon name="speedometer" color="primary"></ion-icon>
-                <ion-label routerLink='/home' translate>home.expected-yield<br>{{ estimatedYieldAmount | number:'1.0':'en-US' }} kg</ion-label>
+                <ion-label routerLink='/home' translate>home.expected-yield<br>{{ estimatedYieldAmount }} kg</ion-label>
               </ion-chip>
             </ion-col>
           </ion-row>
