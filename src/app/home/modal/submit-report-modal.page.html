@@ -50,7 +50,7 @@
         </ion-item>
       </div>
 
-      <div *ngIf="hasPhoto()" style="margin-top: 1em">
+      <div *ngIf="hasPhoto() && hasCrops()" style="margin-top: 1em">
         <div id="ani-wrapper">
           <ion-button
             [disabled]="isSubmitted"

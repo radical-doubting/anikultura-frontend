@@ -53,13 +53,11 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
       }),
     );
 
-    if (this.isFirstTimeToReport()) {
-      this.subscriptions.add(
-        this.cropService.getCrops().subscribe((data) => {
-          this.crops = data;
-        }),
-      );
-    }
+    this.subscriptions.add(
+      this.cropService.getCrops().subscribe((data) => {
+        this.crops = data;
+      }),
+    );
 
     this.farmerReportForm = this.formBuilder.group({
       cropId: [

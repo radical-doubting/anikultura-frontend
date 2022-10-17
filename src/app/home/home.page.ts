@@ -35,7 +35,11 @@ export class HomePage implements OnInit, OnDestroy {
   public estimatedProfit: number;
   public estimatedYieldAmount: number;
 
-  private subscriptions = new Subscription();
+  private translationSubscription: Subscription;
+  private farmlandSelectionSubscription: Subscription;
+  private farmlandHookSubscription: Subscription;
+  private farmerReportHookSubscription: Subscription;
+  private seedStageHookSubscriptions: Subscription;
 
   private hasLoadedSubject = new BehaviorSubject<boolean>(false);
 
@@ -61,13 +65,16 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.translationSubscription.unsubscribe();
+    this.farmlandSelectionSubscription.unsubscribe();
+    this.farmlandHookSubscription.unsubscribe();
+    this.farmerReportHookSubscription.unsubscribe();
+    this.seedStageHookSubscriptions.unsubscribe();
   }
 
-  public async onBeginSubmitFarmerReport() {
+  public async onBeginSubmitFarmerReport(): Promise<void> {
     const modal = await this.modalController.create({
       component: SubmitReportModalPage,
-      cssClass: 'my-custom-class',
       componentProps: {
         currentFarmland: this.currentFarmland,
         currentCrop: this.getExistingCrop(),
@@ -122,11 +129,11 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private setupLanguage(): void {
-    this.subscriptions.add(
-      this.translateConfigService.getLanguagePreference().subscribe((data) => {
+    this.translationSubscription = this.translateConfigService
+      .getLanguagePreference()
+      .subscribe((data) => {
         this.translateConfigService.changeLanguage(data.language);
-      }),
-    );
+      });
   }
 
   private setupForm() {
@@ -134,28 +141,27 @@ export class HomePage implements OnInit, OnDestroy {
       farmland: ['', Validators.required],
     });
 
-    this.subscriptions.add(
-      this.farmlandSelectionForm
-        .get('farmland')
-        .valueChanges.subscribe(async (selectedFarmlandId) => {
-          const selectedFarmland = this.getFarmland(selectedFarmlandId);
-          this.currentFarmland = selectedFarmland;
+    this.farmlandSelectionSubscription = this.farmlandSelectionForm
+      .get('farmland')
+      .valueChanges.subscribe(async (selectedFarmlandId) => {
+        const selectedFarmland = this.getFarmland(selectedFarmlandId);
+        this.currentFarmland = selectedFarmland;
 
-          await this.showLoadingDialog();
+        await this.showLoadingDialog();
 
-          this.setupFarmerReportHooks(selectedFarmland);
-          this.retrieveSeedStage(selectedFarmland);
-        }),
-    );
+        this.setupFarmerReportHooks(selectedFarmland);
+        this.retrieveSeedStage(selectedFarmland);
+      });
   }
 
   private setupFarmlandHooks() {
-    // if (this.farmlandHookSubscription) {
-    //   this.farmlandHookSubscription.unsubscribe();
-    // }
+    if (this.farmlandHookSubscription != null) {
+      this.farmlandHookSubscription.unsubscribe();
+    }
 
-    this.subscriptions.add(
-      this.farmlandService.getFarmlands().subscribe((farmlands) => {
+    this.farmlandHookSubscription = this.farmlandService
+      .getFarmlands()
+      .subscribe((farmlands) => {
         this.farmlands = farmlands;
         const firstFarmland = farmlands[0];
 
@@ -169,50 +175,45 @@ export class HomePage implements OnInit, OnDestroy {
 
         this.setupFarmerReportHooks(this.currentFarmland);
         this.retrieveSeedStage(this.currentFarmland);
-      }),
-    );
+      });
   }
 
   private setupFarmerReportHooks(currentFarmland: Farmland) {
-    // if (this.farmerReportHookSubscription) {
-    //   this.farmerReportHookSubscription.unsubscribe();
-    // }
+    if (this.farmerReportHookSubscription != null) {
+      this.farmerReportHookSubscription.unsubscribe();
+    }
 
-    this.subscriptions.add(
-      this.farmerReportService
-        .getFarmerReports(currentFarmland)
-        .subscribe((data) => {
-          this.submittedFarmerReports = data;
-          this.plantedFarmerReport = this.getPlantedFarmerReport(data);
+    this.farmerReportHookSubscription = this.farmerReportService
+      .getFarmerReports(currentFarmland)
+      .subscribe((data) => {
+        this.submittedFarmerReports = data;
+        this.plantedFarmerReport = this.getPlantedFarmerReport(data);
 
-          this.computeEstimates();
-          this.hasLoadedSubject.next(true);
-        }),
-    );
+        this.computeEstimates();
+        this.hasLoadedSubject.next(true);
+      });
   }
 
   private retrieveSeedStage(farmland: Farmland) {
-    // if (this.seedStageHookSubscriptions) {
-    //   this.seedStageHookSubscriptions.unsubscribe();
-    // }
+    if (this.seedStageHookSubscriptions != null) {
+      this.seedStageHookSubscriptions.unsubscribe();
+    }
 
-    const seedStageHookSubscriptions = new Subscription();
+    this.seedStageHookSubscriptions = new Subscription();
 
-    seedStageHookSubscriptions.add(
-      this.cropService.getCurrentSeedStage(farmland).subscribe(async (data) => {
+    this.seedStageHookSubscriptions.add(
+      this.cropService.getCurrentSeedStage(farmland).subscribe((data) => {
         this.currentSeedStage = data;
         this.currentSeedStageImagePath =
           this.cropService.getSeedStageImagePath(data);
       }),
     );
 
-    seedStageHookSubscriptions.add(
+    this.seedStageHookSubscriptions.add(
       this.cropService.getNextSeedStage(farmland).subscribe((data) => {
         this.nextSeedStage = data;
       }),
     );
-
-    this.subscriptions.add(seedStageHookSubscriptions);
   }
 
   private computeEstimates(): void {
