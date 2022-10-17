@@ -1,125 +1,249 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Anikultura
-    </ion-title>
+    <ion-title> Anikultura </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="ani-wrapper">
-    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px">
-      <ion-card-content style="padding: 10px; text-align: center;">
+    <ion-card
+      style="
+        width: 500px;
+        box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 30px;
+      "
+    >
+      <ion-card-content style="padding: 10px; text-align: center">
         <form [formGroup]="farmlandSelectionForm">
-
           <ion-item>
-            <ion-select type="input" name="farmland" formControlName="farmland"
-              style="color: #242424; font-size: 2rem; font-weight: bold;">
-              <ion-select-option *ngFor="let farmland of farmlands" [value]="farmland.id"
-                style="width: 100% !important;">{{ farmland.name }}
+            <ion-select
+              type="input"
+              name="farmland"
+              formControlName="farmland"
+              style="color: #242424; font-size: 2rem; font-weight: bold"
+            >
+              <ion-select-option
+                *ngFor="let farmland of farmlands"
+                [value]="farmland.id"
+                style="width: 100% !important"
+                >{{ farmland.name }}
               </ion-select-option>
             </ion-select>
           </ion-item>
         </form>
 
-        <h1 *ngIf="currentSeedStage; else noCurrentSeedStage" style="padding-top: 1em;" translate>{{
-          translateSeedStage(currentSeedStage) }}</h1>
+        <h1
+          *ngIf="currentSeedStage; else noCurrentSeedStage"
+          style="padding-top: 1em"
+          translate
+        >
+          {{ translateSeedStage(currentSeedStage) }}
+        </h1>
         <ng-template #noCurrentSeedStage>
-          <h1 style="padding-top: 1em;"routerLink='/home' translate>home.stage-1_title</h1>
+          <h1 style="padding-top: 1em" routerLink="/home" translate>
+            home.stage-1_title
+          </h1>
         </ng-template>
 
-        <p *ngIf="getExistingCrop()" style="margin-bottom: 2em; font-size: 16px;">
-          <ion-icon name="leaf" color="medium"></ion-icon> {{ getExistingCrop().name }}
+        <p
+          *ngIf="getExistingCrop()"
+          style="margin-bottom: 2em; font-size: 16px"
+        >
+          <ion-icon name="leaf" color="medium"></ion-icon> {{
+          getExistingCrop().name }}
         </p>
 
-        <img [src]="currentSeedStageImagePath"
-          style="max-height: 320px; padding-left: 2em; padding-right: 2em; padding-bottom: 1em;" />
+        <img
+          [src]="currentSeedStageImagePath"
+          style="
+            max-height: 320px;
+            padding-left: 2em;
+            padding-right: 2em;
+            padding-bottom: 1em;
+          "
+        />
 
-        <p style="margin-bottom: 0.75em" routerLink='/home' translate>home.report-button-header</p>
+        <p style="margin-bottom: 0.75em" routerLink="/home" translate>
+          home.report-button-header
+        </p>
 
-        <button *ngIf="nextSeedStage" id="aniButton" (click)="onBeginSubmitFarmerReport()" translate>
+        <button
+          *ngIf="nextSeedStage"
+          id="aniButton"
+          (click)="onBeginSubmitFarmerReport()"
+          translate
+        >
           {{ translateSeedStage(nextSeedStage) }}
         </button>
 
-        <p style="margin-bottom: 2em"  routerLink='/home' translate>home.report-button-footer</p>
+        <p style="margin-bottom: 2em" routerLink="/home" translate>
+          home.report-button-footer
+        </p>
       </ion-card-content>
     </ion-card>
   </div>
 
-  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasPlantedFarmerReport()">
-    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
+  <div
+    id="ani-wrapper"
+    style="margin-top: -10px"
+    *ngIf="hasPlantedFarmerReport()"
+  >
+    <ion-card
+      style="
+        width: 500px;
+        box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 30px;
+      "
+    >
       <ion-card-content style="padding: 10px">
-        <h1 routerLink='/home' translate>home.profit-header</h1>
-        <ion-item-divider style="margin-top: -25px; margin-bottom: 1em; background: rgba(0,0,0,0.0);">
+        <h1 routerLink="/home" translate>home.profit-header</h1>
+        <ion-item-divider
+          style="
+            margin-top: -25px;
+            margin-bottom: 1em;
+            background: rgba(0, 0, 0, 0);
+          "
+        >
         </ion-item-divider>
 
-        <div class="ani-content" style="text-align: center; margin-bottom: 2em;">
-          <h1 style="font-size:50px; line-height: 50px; color:#242424" routerLink='/home' translate>{{ estimatedYieldDayEarliest }} - {{
-            estimatedYieldDayLatest }} <h1 style="font-size:50px; line-height: 50px; color:#242424" translate>home.bilang-na-araw</h1></h1>
-          <p routerLink='/home' translate>home.profit-footer</p>
+        <div class="ani-content" style="text-align: center; margin-bottom: 2em">
+          <h1
+            style="font-size: 50px; line-height: 50px; color: #242424"
+            routerLink="/home"
+            translate
+          >
+            {{ estimatedYieldDayEarliest }} - {{ estimatedYieldDayLatest }}
+            <h1
+              style="font-size: 50px; line-height: 50px; color: #242424"
+              translate
+            >
+              home.bilang-na-araw
+            </h1>
+          </h1>
+          <p routerLink="/home" translate>home.profit-footer</p>
         </div>
 
-        <ion-grid style="background-color: #e9e9e9;border-radius: 50px;padding: 10px; margin-bottom: 10px">
+        <ion-grid
+          style="
+            background-color: #e9e9e9;
+            border-radius: 50px;
+            padding: 10px;
+            margin-bottom: 10px;
+          "
+        >
           <ion-row>
             <ion-col>
               <ion-chip style="padding: 1.5em">
                 <ion-icon name="cart" color="primary"></ion-icon>
-                <ion-label routerLink='/home' translate>home.expected-profit<br>{{ estimatedProfit | currency:'PHP '}}</ion-label>
+                <ion-label routerLink="/home" translate
+                  >home.expected-profit<br />{{ estimatedProfit | currency:'PHP
+                  '}}</ion-label
+                >
               </ion-chip>
             </ion-col>
             <ion-col style="text-align: right">
               <ion-chip style="padding: 1.5em">
                 <ion-icon name="speedometer" color="primary"></ion-icon>
-                <ion-label routerLink='/home' translate>home.expected-yield<br>{{ estimatedYieldAmount | number:'1.0':'en-US' }} kg</ion-label>
+                <ion-label routerLink="/home" translate
+                  >home.expected-yield<br />{{ estimatedYieldAmount |
+                  number:'1.0':'en-US' }} kg</ion-label
+                >
               </ion-chip>
             </ion-col>
           </ion-row>
         </ion-grid>
-
       </ion-card-content>
     </ion-card>
   </div>
 
-  <div id="ani-wrapper" style="margin-top:-10px" *ngIf="hasSubmittedReports()">
-    <ion-card style="width: 500px;box-shadow:0 0 4px 4px rgba(0,0,0,0.2); border-radius:30px;">
+  <div id="ani-wrapper" style="margin-top: -10px" *ngIf="hasSubmittedReports()">
+    <ion-card
+      style="
+        width: 500px;
+        box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 30px;
+      "
+    >
       <ion-card-content style="padding: 10px">
-        <h1 routerLink='/home' translate>home.submitted-reports</h1>
-        <ion-item-divider style="margin-top: -25px; background: rgba(0,0,0,0.0);"></ion-item-divider><br>
-        <ion-grid *ngFor="let farmerReport of submittedFarmerReports; let i = index">
-        <div *ngIf="farmerReport.isVerified; else unverified">
-          <ion-row style="background-color: #356649;padding:20px; margin-bottom: 5px; border-radius:50px">
-            <ion-col size="9" style="color:#ffffff;">
-              <div>
-                <span class="text" style="font-weight: bold;" translate>
-                  {{ translateSeedStage(farmerReport.seedStage) }}
-                </span>
-              </div>
-              <ion-chip style="margin-left: -5px; background-color: #468b62; color:white; margin-bottom: 0px;">{{ 'Ang report na ito ay nasuri na ni ' + farmerReport.verifier.firstName + ' ' + farmerReport.verifier.lastName }}</ion-chip>
-            </ion-col>
+        <h1 routerLink="/home" translate>home.submitted-reports</h1>
+        <ion-item-divider
+          style="margin-top: -25px; background: rgba(0, 0, 0, 0)"
+        ></ion-item-divider
+        ><br />
+        <ion-grid
+          *ngFor="let farmerReport of submittedFarmerReports; let i = index"
+        >
+          <div *ngIf="farmerReport.isVerified; else unverified">
+            <ion-row
+              style="
+                background-color: #356649;
+                padding: 20px;
+                margin-bottom: 5px;
+                border-radius: 50px;
+              "
+            >
+              <ion-col size="9" style="color: #ffffff">
+                <div>
+                  <span class="text" style="font-weight: bold" translate>
+                    {{ translateSeedStage(farmerReport.seedStage) }}
+                  </span>
+                </div>
+                <ion-chip
+                  style="
+                    margin-left: -5px;
+                    background-color: #468b62;
+                    color: white;
+                    margin-bottom: 0px;
+                  "
+                >
+                  {{ 'Ang report na ito ay nasuri na ni ' +
+                  farmerReport.verifier.firstName + ' ' +
+                  farmerReport.verifier.lastName }}</ion-chip
+                >
+              </ion-col>
 
-            <ion-col id="reportDate" size="3" style="color: #ffffff" title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}">
-              {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br>
-              <!-- {{ farmerReport.createdAt | date: 'hh:mm aa'}} -->
-            </ion-col>
-          </ion-row>
-        </div> 
-        <ng-template #unverified>
-          <ion-row style="background-color: #e9e9e9;padding:20px; margin-bottom: 5px; border-radius:50px">
-            <ion-col size="9" style="color:black">
-              <div>
-                <span class="text" style="font-weight: bold;" translate>
-                  {{ translateSeedStage(farmerReport.seedStage) }}
-                </span>
-              </div>
-              <ion-chip style="margin-left: -5px"color="danger">Ang itong report ay hindi pa nasusuri</ion-chip>
-            </ion-col>
+              <ion-col
+                id="reportDate"
+                size="3"
+                style="color: #ffffff"
+                title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}"
+              >
+                {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br />
+                <!-- {{ farmerReport.createdAt | date: 'hh:mm aa'}} -->
+              </ion-col>
+            </ion-row>
+          </div>
+          <ng-template #unverified>
+            <ion-row
+              style="
+                background-color: #e9e9e9;
+                padding: 20px;
+                margin-bottom: 5px;
+                border-radius: 50px;
+              "
+            >
+              <ion-col size="9" style="color: black">
+                <div>
+                  <span class="text" style="font-weight: bold" translate>
+                    {{ translateSeedStage(farmerReport.seedStage) }}
+                  </span>
+                </div>
+                <ion-chip style="margin-left: -5px" color="danger"
+                  >Ang itong report ay hindi pa nasusuri</ion-chip
+                >
+              </ion-col>
 
-            <ion-col id="reportDate" size="3" style="color:black" title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}">
-              {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br>
-              <!--  -->
-            </ion-col>
-          </ion-row>
-        </ng-template>
+              <ion-col
+                id="reportDate"
+                size="3"
+                style="color: black"
+                title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}"
+              >
+                {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br />
+                <!--  -->
+              </ion-col>
+            </ion-row>
+          </ng-template>
         </ion-grid>
       </ion-card-content>
     </ion-card>
