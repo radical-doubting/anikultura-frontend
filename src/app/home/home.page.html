@@ -35,9 +35,8 @@
         <h1
           *ngIf="currentSeedStage; else noCurrentSeedStage"
           style="padding-top: 1em"
-          translate
         >
-          {{ translateSeedStage(currentSeedStage) }}
+          {{ translateSeedStage(currentSeedStage) | translate }}
         </h1>
         <ng-template #noCurrentSeedStage>
           <h1 style="padding-top: 1em" routerLink="/home" translate>
@@ -71,9 +70,8 @@
           *ngIf="nextSeedStage"
           id="aniButton"
           (click)="onBeginSubmitFarmerReport()"
-          translate
         >
-          {{ translateSeedStage(nextSeedStage) }}
+          {{ translateSeedStage(nextSeedStage) | translate }}
         </button>
 
         <p style="margin-bottom: 2em" routerLink="/home" translate>
@@ -184,8 +182,8 @@
             >
               <ion-col size="9" style="color: #ffffff">
                 <div>
-                  <span class="text" style="font-weight: bold" translate>
-                    {{ translateSeedStage(farmerReport.seedStage) }}
+                  <span class="text" style="font-weight: bold">
+                    {{ translateSeedStage(farmerReport.seedStage) | translate }}
                   </span>
                 </div>
                 <ion-chip
@@ -209,7 +207,6 @@
                 title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}"
               >
                 {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br />
-                <!-- {{ farmerReport.createdAt | date: 'hh:mm aa'}} -->
               </ion-col>
             </ion-row>
           </div>
@@ -225,7 +222,7 @@
               <ion-col size="9" style="color: black">
                 <div>
                   <span class="text" style="font-weight: bold" translate>
-                    {{ translateSeedStage(farmerReport.seedStage) }}
+                    {{ translateSeedStage(farmerReport.seedStage) | translate }}
                   </span>
                 </div>
                 <ion-chip style="margin-left: -5px" color="danger"
@@ -240,7 +237,6 @@
                 title="{{ farmerReport.createdAt | date: 'hh:mm aa'}}"
               >
                 {{ farmerReport.createdAt | date: 'dd MMM yyyy'}}<br />
-                <!--  -->
               </ion-col>
             </ion-row>
           </ng-template>
