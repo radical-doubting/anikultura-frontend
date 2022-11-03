@@ -12,6 +12,8 @@ import { Crop, SeedStage } from '../types/crop.type';
 import { FarmerReport } from '../types/farmer-report.type';
 import { Farmland } from '../types/farmland.type';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -52,8 +54,18 @@ export class HomePage implements OnInit, OnDestroy {
     private modalController: ModalController,
     private loadingController: LoadingController,
     private translateConfigService: TranslateConfigService,
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
+  isModalOpen = false;
+  isModalClosed = false;
+  canDismiss = false;
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+  
   public async ngOnInit(): Promise<void> {
     this.setupLanguage();
     this.setupForm();
@@ -168,7 +180,11 @@ export class HomePage implements OnInit, OnDestroy {
         if (!this.currentFarmland) {
           this.currentFarmland = firstFarmland;
         }
-
+        if(this.currentFarmland === undefined){
+          this.isModalOpen = true;
+          this.loadingController.dismiss();
+          return;
+        }
         this.farmlandSelectionForm.patchValue({
           farmland: this.currentFarmland.id,
         });
@@ -270,4 +286,14 @@ export class HomePage implements OnInit, OnDestroy {
   private getExistingDialog(): Promise<HTMLIonLoadingElement> {
     return this.loadingController.getTop();
   }
+
+  public async errorLogout(){
+    this.canDismiss = true;
+    this.isModalOpen = false
+    this.authService.logout().subscribe((data) => {
+      this.router.navigate(['/']);
+    });
+    this.modalController.dismiss();
+  }
+  
 }
