@@ -87,6 +87,14 @@
     "body": "You have to use your username and password again if you want to access the dashboard whenever yo logged out.",
     "true": "Yes, I'm logging out",
     "false": "Not yet"
+  },
+
+  "error":{
+    "title": "Reminder",
+    "header": "You can't proceed to Anikultura",
+    "body": "We would like to inform you that no farmland has been assigned to you. Report this to the managing 'Big Brother' or administrator in your area. Can't continue with Anikultura due to this missing detail.",
+    "footer": "We will redirect you to the login page",
+    "button": "Understood." 
   }
 
 }

@@ -248,25 +248,35 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Paalala</ion-title>
+          <ion-title 
+            routerLink="/error" 
+            translate> 
+            error.title 
+          </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding" style="text-align: center">
-        <h1> Hindi maaring magpatuloy </h1>
+        <h1 
+          routerLink="/error" 
+          translate> 
+            error.header 
+        </h1>
         <img 
           src="assets/images/farmland-error.png" 
         />
-        <p>
-          Nais naming ipaalam sa iyo na wala pang itinakdang lupang tataniman o (farmland) sa iyo. Ipaalam ito sa
-          namamahalang 'Big Brother' o tagapangasiwa sa inyong lugar. Hindi maaring magpatuloy sa Anikultura
-          dahil sa kakulangan na detalye na ito. <br><br>
-          Ibabalik ka namin sa simulang pahina.
+        <p 
+          routerLink="/error" 
+          translate>
+            error.body <br><br>
+            error.footer
         </p>
         <button
           id="aniButton"
           (click)="errorLogout();"
+          routerLink="/error" 
+          translate
         >
-        Naiintindihan.
+          error.button
         </button>
       </ion-content>
     </ng-template>
