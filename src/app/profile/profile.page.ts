@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TranslateConfigService } from '../services/translate-config.service';
+import { LanguageOption } from '../types/language.type';
 import { User, UserProfile } from '../types/user.type';
 
 @Component({
@@ -11,6 +13,9 @@ import { User, UserProfile } from '../types/user.type';
 })
 export class ProfilePage implements OnInit {
   public farmer: User;
+
+  private subscriptions = new Subscription();
+  private chosenLanguage: LanguageOption = 'fil_PH';
 
   constructor(
     private router: Router,
@@ -31,5 +36,15 @@ export class ProfilePage implements OnInit {
 
   public onReturn() {
     this.router.navigate(['/dashboard/home']);
+  }
+
+  public handleChange(e): void {
+    this.chosenLanguage = e.detail.value;
+    this.translateConfigService.changeLanguage(this.chosenLanguage);
+    this.subscriptions.add(
+      this.translateConfigService
+        .updateLanguagePreference(this.chosenLanguage)
+        .subscribe((data) => {}),
+    );
   }
 }

@@ -44,6 +44,18 @@
           <button id="aniButton" (click)="onReturn()" routerLink='/profile' translate>
             profile.button_back_1
           </button>
+          <ion-list style="width: 50%; margin: auto auto">
+            <ion-item style="text-align: center">
+              <ion-select
+                placeholder="Language | Lengwahe"
+                (ionChange)="handleChange($event)"
+              >
+                <ion-select-option value="fil_PH">Filipino</ion-select-option>
+                <ion-select-option value="ceb">Cebuano</ion-select-option>
+                <ion-select-option value="en">English</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
         </div>
       </ion-card-content>
     </ion-card>
