@@ -65,7 +65,6 @@ export class HomePage implements OnInit, OnDestroy {
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
-  
   public async ngOnInit(): Promise<void> {
     this.setupLanguage();
     this.setupForm();
@@ -140,6 +139,15 @@ export class HomePage implements OnInit, OnDestroy {
     return this.cropService.getSeedStageTranslationKey(seedStage);
   }
 
+  public async errorLogout() {
+    this.canDismiss = true;
+    this.isModalOpen = false
+    this.authService.logout().subscribe((data) => {
+      this.router.navigate(['/']);
+    })
+    this.modalController.dismiss();
+  }
+
   private setupLanguage(): void {
     this.translationSubscription = this.translateConfigService
       .getLanguagePreference()
@@ -180,7 +188,7 @@ export class HomePage implements OnInit, OnDestroy {
         if (!this.currentFarmland) {
           this.currentFarmland = firstFarmland;
         }
-        if(this.currentFarmland === undefined){
+        if (this.currentFarmland === undefined) {
           this.isModalOpen = true;
           this.loadingController.dismiss();
           return;
@@ -286,14 +294,4 @@ export class HomePage implements OnInit, OnDestroy {
   private getExistingDialog(): Promise<HTMLIonLoadingElement> {
     return this.loadingController.getTop();
   }
-
-  public async errorLogout(){
-    this.canDismiss = true;
-    this.isModalOpen = false
-    this.authService.logout().subscribe((data) => {
-      this.router.navigate(['/']);
-    });
-    this.modalController.dismiss();
-  }
-  
 }
