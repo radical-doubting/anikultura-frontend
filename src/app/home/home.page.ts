@@ -37,6 +37,10 @@ export class HomePage implements OnInit, OnDestroy {
   public estimatedProfit: number;
   public estimatedYieldAmount: number;
 
+  public isModalOpen = false;
+  public isModalClosed = false;
+  public canDismiss = false;
+
   private translationSubscription: Subscription;
   private farmlandSelectionSubscription: Subscription;
   private farmlandHookSubscription: Subscription;
@@ -57,10 +61,6 @@ export class HomePage implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
   ) {}
-
-  isModalOpen = false;
-  isModalClosed = false;
-  canDismiss = false;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -141,10 +141,10 @@ export class HomePage implements OnInit, OnDestroy {
 
   public async errorLogout() {
     this.canDismiss = true;
-    this.isModalOpen = false
+    this.isModalOpen = false;
     this.authService.logout().subscribe((data) => {
       this.router.navigate(['/']);
-    })
+    });
     this.modalController.dismiss();
   }
 
