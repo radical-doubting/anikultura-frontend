@@ -86,5 +86,13 @@
       "logout_body": "Kapag nag-logout ay kailangan muli mag log-in gamit ang username at password",
       "logout_true": "Oo, logout na ako",
       "logout_false": "Hindi muna"
+    },
+
+    "error":{
+      "title": "Paalala",
+      "header": "Hindi maaring magpatuloy",
+      "body": "Nais naming ipaalam sa iyo na wala pang itinakdang lupang tataniman o (farmland) sa iyo. Ipaalam ito sa namamahalang 'Big Brother' o tagapangasiwa sa inyong lugar. Hindi maaring magpatuloy sa Anikultura dahil sa kakulangan na detalye na ito.",
+      "footer": "Ibabalik ka namin sa simulang pahina.",
+      "button": "Naiintindihan." 
     }
   }

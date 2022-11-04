@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
@@ -10,9 +11,10 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public isSubmitted: boolean;
+  public subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -27,7 +29,7 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.authService
+    const subscription = this.authService
       .getLoggedInUser()
       .pipe(first())
       .subscribe(async (user) => {
@@ -43,6 +45,12 @@ export class LoginPage implements OnInit {
 
         await this.toast('You are already logged in!');
       });
+
+    this.subscriptions.add(subscription);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   public async onSubmit(): Promise<void> {
@@ -51,26 +59,28 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    this.isSubmitted = true;
-
-    this.authService
+    const subscription = this.authService
       .login(this.loginForm.value)
       .pipe(first())
       .subscribe(
         async (data) => {
-          if (data.profile.isTutorialDone) {
-            this.router.navigate(['/dashboard/home']);
-          } else {
-            this.router.navigate(['/tutorial']);
-          }
+          this.isSubmitted = true;
 
           await this.toast('Successfully logged in!');
+
+          if (data.profile.isTutorialDone) {
+            await this.router.navigate(['/dashboard/home']);
+          } else {
+            await this.router.navigate(['/tutorial']);
+          }
         },
         async (error) => {
           this.isSubmitted = false;
           await this.toast(`Failed to login: ${error.message}`);
         },
       );
+
+    this.subscriptions.add(subscription);
   }
 
   private async toast(message: string, duration = 2000): Promise<void> {

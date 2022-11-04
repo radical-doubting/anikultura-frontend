@@ -85,5 +85,13 @@
     "logout_body": "Kung mo-log out ka, kinahanglan ka nga mag-log in gamit ang username ug password",
     "logout_true": "Oo, naka-log out ko",
     "logout_false": "Dili una"
+  },
+
+  "error": {
+    "title": "Pahinumdom",
+    "header": "Dili makapadayon",
+    "body": "Gusto namo nga ipahibalo kanimo nga walay umahan nga na-assign kanimo. I-report kini sa nagdumala nga 'Big Brother' o administrador sa imong lugar. Dili makapadayon sa Anikultura tungod sa nawala nga detalye.",
+    "footer": "Ibalik ka namo sa sinugdanan nga panid.",
+    "button": "Masabot." 
   }
 }

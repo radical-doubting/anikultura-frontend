@@ -12,6 +12,9 @@ import { Crop, SeedStage } from '../types/crop.type';
 import { FarmerReport } from '../types/farmer-report.type';
 import { Farmland } from '../types/farmland.type';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { FarmlandErrorModalPage } from './modal/farmland-error-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +55,8 @@ export class HomePage implements OnInit, OnDestroy {
     private modalController: ModalController,
     private loadingController: LoadingController,
     private translateConfigService: TranslateConfigService,
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -65,11 +70,11 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.translationSubscription.unsubscribe();
-    this.farmlandSelectionSubscription.unsubscribe();
-    this.farmlandHookSubscription.unsubscribe();
-    this.farmerReportHookSubscription.unsubscribe();
-    this.seedStageHookSubscriptions.unsubscribe();
+    this.translationSubscription?.unsubscribe();
+    this.farmlandSelectionSubscription?.unsubscribe();
+    this.farmlandHookSubscription?.unsubscribe();
+    this.farmerReportHookSubscription?.unsubscribe();
+    this.seedStageHookSubscriptions?.unsubscribe();
   }
 
   public async onBeginSubmitFarmerReport(): Promise<void> {
@@ -161,12 +166,29 @@ export class HomePage implements OnInit, OnDestroy {
 
     this.farmlandHookSubscription = this.farmlandService
       .getFarmlands()
-      .subscribe((farmlands) => {
+      .subscribe(async (farmlands) => {
         this.farmlands = farmlands;
         const firstFarmland = farmlands[0];
 
         if (!this.currentFarmland) {
           this.currentFarmland = firstFarmland;
+        }
+
+        if (this.currentFarmland === undefined) {
+          await this.loadingController.dismiss();
+
+          const modal = await this.modalController.create({
+            component: FarmlandErrorModalPage,
+          });
+
+          modal.onDidDismiss().then((modalData) => {
+            this.authService.logout().subscribe(async (data) => {
+              await this.router.navigate(['/']);
+              window.location.reload();
+            });
+          });
+
+          return await modal.present();
         }
 
         this.farmlandSelectionForm.patchValue({
