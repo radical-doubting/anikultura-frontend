@@ -34,9 +34,9 @@
             </ion-col>
             <ion-col style="text-align: right">
               <p style="text-decoration: underline" routerLink='/profile' translate>profile.affil_org</p>
-              Jacob-Cummings
+              {{ farmer.profile.affiliatedOrganization }}
               <p style="text-decoration: underline; margin-top: 10px" routerLink='/profile' translate>profile.profile_training</p>
-              Bradtake and Sons
+              {{ farmer.profile.tesdaTrainingJoined }}
             </ion-col>
           </ion-row>
         </ion-grid>
