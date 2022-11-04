@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { HomeRoutingModule } from './home-routing.module';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { FarmlandErrorModalPage } from './modal/farmland-error-modal.page';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     TranslateModule,
   ],
-  declarations: [HomePage, SubmitReportModalPage],
+  declarations: [HomePage, SubmitReportModalPage, FarmlandErrorModalPage],
 })
 export class HomeModule {}
