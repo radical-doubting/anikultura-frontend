@@ -62,7 +62,7 @@
           "
         />
 
-        <p style="margin-bottom: 0.75em" routerLink="/home" translate>
+        <p *ngIf="nextSeedStage" style="margin-bottom: 0.75em" routerLink="/home" translate>
           home.report-button-header
         </p>
 
@@ -74,7 +74,7 @@
           {{ translateSeedStage(nextSeedStage) | translate }}
         </button>
 
-        <p style="margin-bottom: 2em" routerLink="/home" translate>
+        <p *ngIf="nextSeedStage" style="margin-bottom: 2em" routerLink="/home" translate>
           home.report-button-footer
         </p>
       </ion-card-content>

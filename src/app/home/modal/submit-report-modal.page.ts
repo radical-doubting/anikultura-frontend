@@ -117,9 +117,9 @@ export class SubmitReportModalPage implements OnInit, OnDestroy {
     return !this.hasCurrentSeedStage();
   }
 
-  public isMarketable(): boolean {
+  public isHarvested(): boolean {
     if (this.hasCurrentSeedStage()) {
-      return this.currentSeedStage.slug === 'marketable';
+      return this.currentSeedStage.slug === 'crops-harvested';
     } else {
       return false;
     }
