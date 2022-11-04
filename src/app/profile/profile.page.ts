@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SegmentChangeEventDetail } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TranslateConfigService } from '../services/translate-config.service';
@@ -13,9 +14,7 @@ import { User, UserProfile } from '../types/user.type';
 })
 export class ProfilePage implements OnInit {
   public farmer: User;
-
   private subscriptions = new Subscription();
-  private chosenLanguage: LanguageOption = 'fil_PH';
 
   constructor(
     private router: Router,
@@ -46,12 +45,14 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/dashboard/home']);
   }
 
-  public handleChange(e): void {
-    this.chosenLanguage = e.detail.value;
-    this.translateConfigService.changeLanguage(this.chosenLanguage);
+  public handleChange(event: CustomEvent<SegmentChangeEventDetail>): void {
+    const chosenLanguage = event.detail.value as LanguageOption;
+
+    this.translateConfigService.changeLanguage(chosenLanguage);
+
     this.subscriptions.add(
       this.translateConfigService
-        .updateLanguagePreference(this.chosenLanguage)
+        .updateLanguagePreference(chosenLanguage)
         .subscribe((data) => {}),
     );
   }
