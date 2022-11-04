@@ -37,6 +37,7 @@ export class TabsPage {
             handler: () => {
               this.authService.logout().subscribe((data) => {
                 this.router.navigate(['/']);
+                window.location.reload();
                 this.toast('Nakapag logged out ka na!');
               });
             },

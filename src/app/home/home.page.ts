@@ -70,11 +70,11 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.translationSubscription.unsubscribe();
-    this.farmlandSelectionSubscription.unsubscribe();
-    this.farmlandHookSubscription.unsubscribe();
-    this.farmerReportHookSubscription.unsubscribe();
-    this.seedStageHookSubscriptions.unsubscribe();
+    this.translationSubscription?.unsubscribe();
+    this.farmlandSelectionSubscription?.unsubscribe();
+    this.farmlandHookSubscription?.unsubscribe();
+    this.farmerReportHookSubscription?.unsubscribe();
+    this.seedStageHookSubscriptions?.unsubscribe();
   }
 
   public async onBeginSubmitFarmerReport(): Promise<void> {
@@ -182,8 +182,9 @@ export class HomePage implements OnInit, OnDestroy {
           });
 
           modal.onDidDismiss().then((modalData) => {
-            this.authService.logout().subscribe((data) => {
-              this.router.navigate(['/']);
+            this.authService.logout().subscribe(async (data) => {
+              await this.router.navigate(['/']);
+              window.location.reload();
             });
           });
 
