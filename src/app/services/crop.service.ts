@@ -24,7 +24,7 @@ export class CropService {
       .pipe(map(({ data }) => data));
   }
 
-  public getCurrentSeedStage({ id }: Farmland): Observable<SeedStage> {
+  public getCurrentSeedStage({ id }: Farmland): Observable<SeedStage | null> {
     const body = { farmlandId: id };
     return this.http
       .post<ApiResponse<SeedStage>>('/api/crops/current-seed-stage', body)
@@ -39,18 +39,18 @@ export class CropService {
       );
   }
 
-  public getNextSeedStage({ id }: Farmland): Observable<SeedStage> {
+  public getNextSeedStage({ id }: Farmland): Observable<SeedStage | null> {
     const body = { farmlandId: id };
 
     return this.http
       .post<ApiResponse<SeedStage>>('/api/crops/next-seed-stage', body)
       .pipe(
-        map(({ data }) => {
-          if (Object.keys(data).length === 0) {
+        map((response) => {
+          if (Object.keys(response).length === 0) {
             return null;
           }
 
-          return data;
+          return response.data;
         }),
       );
   }
