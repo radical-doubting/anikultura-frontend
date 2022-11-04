@@ -14,6 +14,7 @@ import { Farmland } from '../types/farmland.type';
 import { SubmitReportModalPage } from './modal/submit-report-modal.page';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { FarmlandErrorModalPage } from './modal/farmland-error-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -37,10 +38,6 @@ export class HomePage implements OnInit, OnDestroy {
   public estimatedProfit: number;
   public estimatedYieldAmount: number;
 
-  public isModalOpen = false;
-  public isModalClosed = false;
-  public canDismiss = false;
-
   private translationSubscription: Subscription;
   private farmlandSelectionSubscription: Subscription;
   private farmlandHookSubscription: Subscription;
@@ -62,9 +59,6 @@ export class HomePage implements OnInit, OnDestroy {
     private authService: AuthService,
   ) {}
 
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
   public async ngOnInit(): Promise<void> {
     this.setupLanguage();
     this.setupForm();
@@ -139,15 +133,6 @@ export class HomePage implements OnInit, OnDestroy {
     return this.cropService.getSeedStageTranslationKey(seedStage);
   }
 
-  public async errorLogout() {
-    this.canDismiss = true;
-    this.isModalOpen = false;
-    this.authService.logout().subscribe((data) => {
-      this.router.navigate(['/']);
-    });
-    this.modalController.dismiss();
-  }
-
   private setupLanguage(): void {
     this.translationSubscription = this.translateConfigService
       .getLanguagePreference()
@@ -181,18 +166,30 @@ export class HomePage implements OnInit, OnDestroy {
 
     this.farmlandHookSubscription = this.farmlandService
       .getFarmlands()
-      .subscribe((farmlands) => {
+      .subscribe(async (farmlands) => {
         this.farmlands = farmlands;
         const firstFarmland = farmlands[0];
 
         if (!this.currentFarmland) {
           this.currentFarmland = firstFarmland;
         }
+
         if (this.currentFarmland === undefined) {
-          this.isModalOpen = true;
-          this.loadingController.dismiss();
-          return;
+          await this.loadingController.dismiss();
+
+          const modal = await this.modalController.create({
+            component: FarmlandErrorModalPage,
+          });
+
+          modal.onDidDismiss().then((modalData) => {
+            this.authService.logout().subscribe((data) => {
+              this.router.navigate(['/']);
+            });
+          });
+
+          return await modal.present();
         }
+
         this.farmlandSelectionForm.patchValue({
           farmland: this.currentFarmland.id,
         });
