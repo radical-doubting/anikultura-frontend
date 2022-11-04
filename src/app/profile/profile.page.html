@@ -34,9 +34,9 @@
             </ion-col>
             <ion-col style="text-align: right">
               <p style="text-decoration: underline" routerLink='/profile' translate>profile.affil_org</p>
-              Jacob-Cummings
+              {{ farmer.profile.affiliatedOrganization }}
               <p style="text-decoration: underline; margin-top: 10px" routerLink='/profile' translate>profile.profile_training</p>
-              Bradtake and Sons
+              {{ farmer.profile.tesdaTrainingJoined }}
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -44,6 +44,18 @@
           <button id="aniButton" (click)="onReturn()" routerLink='/profile' translate>
             profile.button_back_1
           </button>
+          <ion-list style="width: 50%; margin: auto auto">
+            <ion-item style="text-align: center">
+              <ion-select
+                placeholder="Language | Lengwahe"
+                (ionChange)="handleChange($event)"
+              >
+                <ion-select-option value="fil_PH">Filipino</ion-select-option>
+                <ion-select-option value="ceb">Cebuano</ion-select-option>
+                <ion-select-option value="en">English</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
         </div>
       </ion-card-content>
     </ion-card>
