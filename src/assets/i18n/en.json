@@ -43,13 +43,12 @@
 
   "profile": {
     "title": "Farmer Profile",
-    "changelang_title": "Palitan ang lingwahe:",
-    "date_joined": "Sumali nung ",
-    "affil_org": "Kabahaging Organisasyon",
-    "profile_training": "Sinalihang TESDA Training",
-    "profile_age": " taong gulang",
-
-    "button_back_1": "Bumalik sa Farmer Dashboard"
+    "changelang_title": "Change your preferred language:",
+    "date_joined": "Joined at ",
+    "affil_org": "Partnered Organization",
+    "profile_training": "Joined TESDA Training",
+    "profile_age": " years old",
+    "button_back_1": "Back to Farmer Dashboard"
 
 
   },

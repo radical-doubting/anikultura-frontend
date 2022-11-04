@@ -108,7 +108,6 @@
           <h1
             style="font-size: 50px; line-height: 50px; color: #242424"
             routerLink="/home"
-            translate
           >
             {{ estimatedYieldDayEarliest }} - {{ estimatedYieldDayLatest }}
             <h1
@@ -142,9 +141,9 @@
             <ion-col style="text-align: right">
               <ion-chip style="padding: 1.5em">
                 <ion-icon name="speedometer" color="primary"></ion-icon>
-                <ion-label routerLink="/home" translate
-                  >home.expected-yield<br />{{ estimatedYieldAmount |
-                  number:'1.0':'en-US' }} kg</ion-label
+                <ion-label routerLink="/home"
+                  ><span translate>home.expected-yield</span><br />{{
+                  estimatedYieldAmount | number:'1.0':'en-US' }} kg</ion-label
                 >
               </ion-chip>
             </ion-col>
@@ -221,12 +220,12 @@
             >
               <ion-col size="9" style="color: black">
                 <div>
-                  <span class="text" style="font-weight: bold" translate>
+                  <span class="text" style="font-weight: bold">
                     {{ translateSeedStage(farmerReport.seedStage) | translate }}
                   </span>
                 </div>
-                <ion-chip style="margin-left: -5px" color="danger"
-                translate>home.submitted-review-status</ion-chip
+                <ion-chip style="margin-left: -5px" color="danger" translate
+                  >home.submitted-review-status</ion-chip
                 >
               </ion-col>
 
