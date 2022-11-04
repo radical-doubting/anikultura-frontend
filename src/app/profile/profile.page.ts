@@ -24,9 +24,17 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getLoggedInUser().subscribe((data) => {
-      this.farmer = data;
-    });
+    this.subscriptions.add(
+      this.authService.getLoggedInUser().subscribe((data) => {
+        this.farmer = data;
+      }),
+    );
+
+    this.subscriptions.add(
+      this.translateConfigService.getLanguagePreference().subscribe((data) => {
+        this.translateConfigService.changeLanguage(data.language);
+      }),
+    );
   }
 
   public getAge(birthday: string): number {
