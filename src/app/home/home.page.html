@@ -247,33 +247,17 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title 
-            routerLink="/error" 
-            translate> 
-            error.title 
-          </ion-title>
+          <ion-title routerLink="/error" translate> error.title </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding" style="text-align: center">
-        <h1 
-          routerLink="/error" 
-          translate> 
-            error.header 
-        </h1>
-        <img 
-          src="assets/images/farmland-error.png" 
-        />
-        <p 
-          routerLink="/error" 
-          translate>
-            error.body <br><br>
-            error.footer
+        <h1 routerLink="/error" translate>error.header</h1>
+        <img src="assets/images/farmland-error.png" width="348" />
+        <p routerLink="/error" translate>
+          error.body <br /><br />
+          error.footer
         </p>
-        <button
-          id="aniButton"
-          (click)="errorLogout();"
-          translate
-        >
+        <button id="aniButton" (click)="errorLogout();" translate>
           error.button
         </button>
       </ion-content>
