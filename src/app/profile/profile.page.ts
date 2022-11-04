@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SegmentChangeEventDetail } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { TranslateConfigService } from '../services/translate-config.service';
@@ -45,8 +44,9 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/dashboard/home']);
   }
 
-  public handleChange(event: CustomEvent<SegmentChangeEventDetail>): void {
-    const chosenLanguage = event.detail.value as LanguageOption;
+  public handleChange(event: Event): void {
+    const customEvent = event as CustomEvent;
+    const chosenLanguage = customEvent.detail.value as LanguageOption;
 
     this.translateConfigService.changeLanguage(chosenLanguage);
 
